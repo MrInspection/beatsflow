@@ -15,7 +15,7 @@ export function MusicPlaylists() {
                 <div className={"space-y-1"}>
                     <h1 className={"text-2xl font-semibold tracking-tight"}>BeatsFlōw Enjoy</h1>
                     <p className={"text-muted-foreground text-sm"}>
-                        Listen to a Lofi beat music and start working
+                        Some random music added by ProjectUltron
                     </p>
                 </div>
                 <Separator className="my-4"/>
