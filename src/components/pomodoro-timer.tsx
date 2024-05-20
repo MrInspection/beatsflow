@@ -37,11 +37,27 @@ export function PomodoroTimer() {
         setIsActive(true);
         startSoundRef.current?.play(); // Play start sound
     };
+
     const pauseTimer = () => setIsActive(false);
+
     const resetTimer = () => {
         setIsActive(false);
         setTime(sessionDuration * 60);
         setIsBreak(false);
+    };
+
+    const handleSessionChange = ([value]: number[]) => {
+        setSessionDuration(value);
+        if (!isActive && !isBreak) {
+            setTime(value * 60);
+        }
+    };
+
+    const handleBreakChange = ([value]: number[]) => {
+        setBreakDuration(value);
+        if (!isActive && isBreak) {
+            setTime(value * 60);
+        }
     };
 
     const formatTime = (time: number) => {
@@ -56,7 +72,7 @@ export function PomodoroTimer() {
             <audio ref={endSoundRef} src="/sounds/cyclops/engine-down.wav" />
 
             <span className={"bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-xl px-2.5 py-0.5 text-white max-w-fit text-sm font-semibold flex items-center"}>
-               <p>New Feature</p>
+                Flōw Productivity
             </span>
             <div className={"flex flex-col items-center justify-center my-14"}>
                 <p className={"max-md:text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 text-center"}>
@@ -81,7 +97,7 @@ export function PomodoroTimer() {
                                         max={60}
                                         step={1}
                                         disabled={isActive}
-                                        onValueChange={([value]) => setSessionDuration(value)}
+                                        onValueChange={handleSessionChange}
                                         className={"w-60"}
                                     />
                                 </section>
@@ -93,7 +109,7 @@ export function PomodoroTimer() {
                                         max={60}
                                         step={1}
                                         disabled={isActive}
-                                        onValueChange={([value]) => setBreakDuration(value)}
+                                        onValueChange={handleBreakChange}
                                     />
                                 </section>
                                 <section className={"flex gap-1.5 w-full mt-1.5"}>
