@@ -13,9 +13,6 @@ export function PomodoroTimer() {
     const [breakDuration, setBreakDuration] = useState(5);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-    const startSoundRef = useRef<HTMLAudioElement>(null);
-    const endSoundRef = useRef<HTMLAudioElement>(null);
-
     useEffect(() => {
         if (isActive && time > 0) {
             timerRef.current = setTimeout(() => {
@@ -28,15 +25,11 @@ export function PomodoroTimer() {
                 setTime(breakDuration * 60);
             }
             setIsBreak(!isBreak);
-            endSoundRef.current?.play(); // Play end sound
         }
         return () => clearTimeout(timerRef.current!);
     }, [isActive, time, isBreak, sessionDuration, breakDuration]);
 
-    const startTimer = () => {
-        setIsActive(true);
-        startSoundRef.current?.play(); // Play start sound
-    };
+    const startTimer = () => setIsActive(true);
 
     const pauseTimer = () => setIsActive(false);
 
@@ -68,9 +61,6 @@ export function PomodoroTimer() {
 
     return (
         <section className={"bg-muted h-full rounded-3xl p-10"}>
-            <audio ref={startSoundRef} src="/sounds/cyclops/engine-up.wav" />
-            <audio ref={endSoundRef} src="/sounds/cyclops/engine-down.wav" />
-
             <span className={"bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-xl px-2.5 py-0.5 text-white max-w-fit text-sm font-semibold flex items-center"}>
                 Flōw Productivity
             </span>
