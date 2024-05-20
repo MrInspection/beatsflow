@@ -8,7 +8,7 @@ import SiteFooter from "@/components/site-footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ProjectUltron BeatsFlōw",
+  title: "BeatsFlōw - ProjectUltron",
   description: "Motion & Emotion in Music",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
         <body className={inter.className}>
         <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
         >

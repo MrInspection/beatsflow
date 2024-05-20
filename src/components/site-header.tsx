@@ -6,7 +6,6 @@ import {buttonVariants} from "@/components/ui/button";
 import {
     AlertDialog,
     AlertDialogAction,
-    AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
     AlertDialogFooter,
@@ -67,7 +66,7 @@ export default function SiteHeader() {
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
-                        <ModeToggle/>
+                       <ModeToggle />
                     </nav>
                 </div>
             </div>

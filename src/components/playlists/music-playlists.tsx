@@ -20,7 +20,7 @@ export function MusicPlaylists() {
                 </div>
                 <Separator className="my-4"/>
                 <ScrollArea className={"w-full h-fit"}>
-                    <div className={"flex space-x-5 pb-6"}>
+                    <div className={"flex space-x-5 pb-4"}>
                         {tracksData.map((track, index) => (
                             <TrackPlayer
                                 key={index}

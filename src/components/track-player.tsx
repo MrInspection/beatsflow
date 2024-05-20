@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useRef, useEffect } from 'react';
+import {useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from "@/lib/utils";
-import { Pause, Play } from "lucide-react";
+import {Disc3, Pause, Play} from "lucide-react";
 
 interface AudioPlayerProps {
     image_cover: string;
@@ -46,15 +46,15 @@ const TrackPlayer: React.FC<AudioPlayerProps> = ({ image_cover, audio_path, titl
                         unoptimized={true}
                     />
                     <div className="absolute inset-0 flex justify-center items-center">
-                        <button onClick={togglePlayPause} className="rounded-2xl px-6 py-3 bg-primary/70 hidden group-hover:block">
-                            {isPlaying ? <Pause className="h-10 w-10 text-secondary" /> : <Play className="h-10 w-10 text-secondary" />}
+                        <button onClick={togglePlayPause} className="rounded-2xl px-6 py-3 bg-white hidden group-hover:block">
+                            {isPlaying ? <Pause className="h-10 w-10 text-black" /> : <Play className="h-10 w-10 text-black" />}
                         </button>
                     </div>
                 </div>
             </div>
             <div className="mt-3 text-sm space-y-1">
-                <h3 className={cn("font-medium leading-none", { 'text-green-500': isPlaying })}>
-                    {title}
+                <h3 className={cn("font-medium leading-none flex items-center", { 'text-green-500': isPlaying })}>
+                    {isPlaying ? <Disc3 className={"h-4 w-4 mr-1.5 animate-spin"} /> : "" } {title}
                 </h3>
                 <p className="text-xs text-muted-foreground">{subtitle}</p>
             </div>

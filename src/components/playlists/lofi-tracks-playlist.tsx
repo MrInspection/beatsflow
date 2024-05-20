@@ -22,7 +22,7 @@ export function LofiTracksPlaylist() {
                 </div>
                 <Separator className="my-4"/>
                 <ScrollArea className={"w-full h-fit"}>
-                    <div className={"flex space-x-5 pb-6"}>
+                    <div className={"flex space-x-5 pb-4"}>
                         {lofiTracksData.map((track, index) => (
                             <TrackPlayer
                                 key={index}
