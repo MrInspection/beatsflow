@@ -9,7 +9,7 @@ export default function Home() {
         <>
             <div className={"container my-10 space-y-6 mb-20"}>
                 <PomodoroTimer />
-                <div className={"pt-10 space-y-4"}>
+                <div className={"pt-10 space-y-6"}>
                     <Tabs defaultValue="lofi">
                         <TabsList className={"mb-4"}>
                             <TabsTrigger value="lofi">Focus</TabsTrigger>
