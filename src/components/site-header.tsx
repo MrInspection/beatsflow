@@ -28,7 +28,7 @@ export default function SiteHeader() {
                     <Link href={"/"} className={"flex"}>
                         <AudioLines className={"h-7 w-7 mr-2"}/>
                         <h1 className={"font-bold text-lg"}>
-                            <span className={"max-sm:hidden"}>ProjectUltron</span>  BeatsFlōw
+                            <span className={"max-sm:hidden"}>Spectrōn</span>  BeatsFlōw
                         </h1>
                     </Link>
                 </div>
