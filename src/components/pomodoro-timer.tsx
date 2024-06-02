@@ -60,26 +60,26 @@ export function PomodoroTimer() {
     };
 
     return (
-        <section className={"bg-muted h-full rounded-3xl p-10"}>
-            <span className={"bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-xl px-2.5 py-0.5 text-white max-w-fit text-sm font-semibold flex items-center"}>
-                Flōw Productivity
-            </span>
+        <section className={"bg-muted/40 border-2 h-full rounded-2xl p-10"}>
             <div className={"flex flex-col items-center justify-center my-14"}>
-                <p className={"max-md:text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 text-center"}>
+                <p className={"max-md:text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 text-center inline-block bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 bg-clip-text text-transparent"}>
                     Pomodoro Timer
                 </p>
                 <p className={"max-w-2xl text-center text-balance max-md:text-sm"}>
-                    The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. It uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. This approach can help improve focus and productivity by encouraging dedicated work sessions and regular rest periods.
+                    The Pomodoro Technique is a time management method developed by Francesco Cirillo in the
+                    late 1980s. It uses a timer to break work into intervals, traditionally 25 minutes in length,
+                    separated by short breaks. This approach can help improve focus and productivity by encouraging
+                    dedicated work sessions and regular rest periods.
                 </p>
                 <section className={"mt-10"}>
                     <div className={"flex max-md:flex-col flex-row max-md:space-y-8 md:space-x-12 items-center"}>
-                        <section className={"flex flex-col gap-1.5 items-center justify-center bg-black rounded-full h-52 w-52 px-5 py-5 text-white"}>
-                            <p className={"font-medium"}>{isBreak ? 'Break' : 'Session'}</p>
-                            <p className={"font-extrabold text-4xl"}>{formatTime(time)}</p>
+                        <section className={"flex flex-col gap-1.5 items-center justify-center bg-primary rounded-full h-52 w-52 px-5 py-5 text-white"}>
+                            <p className={"font-medium text-secondary"}>{isBreak ? 'Break' : 'Session'}</p>
+                            <p className={"font-extrabold text-4xl text-secondary"}>{formatTime(time)}</p>
                         </section>
                         <section>
                             <div className={"grid gap-5"}>
-                                <section className={"space-y-1.5"}>
+                                <section className={"space-y-2"}>
                                     <p>Session Duration <span className="font-semibold">({sessionDuration} min)</span></p>
                                     <Slider
                                         defaultValue={[sessionDuration]}
@@ -91,7 +91,7 @@ export function PomodoroTimer() {
                                         className={"w-60"}
                                     />
                                 </section>
-                                <section className={"space-y-1.5"}>
+                                <section className={"space-y-2"}>
                                     <p>Break Duration <span className="font-semibold">({breakDuration} min)</span></p>
                                     <Slider
                                         defaultValue={[breakDuration]}
@@ -112,7 +112,8 @@ export function PomodoroTimer() {
                                             <Pause className={"h-4 w-4 mr-2"} /> Pause
                                         </Button>
                                     )}
-                                    <Button size={"icon"} variant={"destructive"} onClick={resetTimer}>
+
+                                    <Button onClick={resetTimer}>
                                         <TimerReset className={"h-4 w-4"} />
                                     </Button>
                                 </section>
