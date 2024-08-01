@@ -9,7 +9,7 @@ A small music app  with a collection of relaxing tracks and ambient effects to u
 ### Development Stack
 ![](/public/Flowchart.jpg)
 
-### Features
+## Features
 - **Pomodoro Timer** : Time-management method to improve focus and productivity
 - **Track Library** : Enjoy a collection of Lofi Tracks, perfect for studying, working, or relaxing.
 - **Ambient Sounds** : Short ambient effects like piano, fire crackling, and more...
