@@ -8,7 +8,7 @@ import SiteFooter from "@/components/site-footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BeatsFlōw - ProjectUltron",
+  title: "Spectron BeatsFlōw",
   description: "Motion & Emotion in Music",
 };
 
