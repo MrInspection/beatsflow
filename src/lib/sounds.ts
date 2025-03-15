@@ -15,7 +15,7 @@ const audioCache: Record<string, HTMLAudioElement> = {}
  * @param soundType The type of sound to play
  * @param volume Volume level (0-1)
  */
-export function playSound(soundType: SoundType, volume = 0.5): void {
+export function playSound(soundType: SoundType, volume = 0.7): void {
   try {
     let audio = audioCache[soundType]
 
