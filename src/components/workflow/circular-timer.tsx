@@ -1,13 +1,26 @@
 "use client"
-import { useEffect } from "react"
-import { useTimerStore } from "@/stores/use-timer"
-import { useWorkflowStore } from "@/stores/use-workflow"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { RotateCcw, X, Flame, Coffee, Brain, Trophy, Play, Pause, ListChecks, Volume2, VolumeX } from "lucide-react"
-import { usePanelStore } from "@/stores/use-side-panel"
-import { playSound, preloadSounds } from "@/lib/sounds"
-import { useState } from "react"
+
+import {useEffect} from "react"
+import {useTimerStore} from "@/stores/use-timer"
+import {useWorkflowStore} from "@/stores/use-workflow"
+import {cn} from "@/lib/utils"
+import {Button} from "@/components/ui/button"
+import {
+  RotateCcw,
+  Flame,
+  Coffee,
+  Brain,
+  Trophy,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Frown,
+  Smile, Workflow
+} from "lucide-react"
+import {usePanelStore} from "@/stores/use-side-panel"
+import {playSound, preloadSounds} from "@/lib/sounds"
+import {useState} from "react"
 import {AnimatedCircularProgressBar} from "@/components/workflow/animated-circular-progress-bar";
 
 interface CircularTimerProps {
@@ -15,7 +28,7 @@ interface CircularTimerProps {
   onComplete?: () => void
 }
 
-export function CircularTimer({ className, onComplete }: CircularTimerProps) {
+export function CircularTimer({className, onComplete}: CircularTimerProps) {
   const {
     isRunning,
     timeLeft,
@@ -24,16 +37,14 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
     icon,
     pauseTimer,
     resumeTimer,
-    stopTimer,
     resetTimer,
     tick,
   } = useTimerStore()
 
-  const { isExecuting, blocks, startExecution, hasEndBlock } = useWorkflowStore()
-  const { setOpenPanel } = usePanelStore()
+  const {isExecuting, blocks, startExecution, hasEndBlock} = useWorkflowStore()
+  const {setOpenPanel} = usePanelStore()
   const [soundEnabled, setSoundEnabled] = useState(true)
 
-  // Preload sounds when component mounts
   useEffect(() => {
     preloadSounds()
   }, [])
@@ -72,8 +83,8 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
   const getColors = () => {
     if (!isExecuting) {
       return {
-        primary: "#d4d4d8", // text-muted-foreground/30
-        secondary: "#f4f4f5", // very light gray
+        primary: "#d4d4d8",
+        secondary: "#f4f4f5",
       }
     }
 
@@ -113,19 +124,18 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
 
     switch (icon) {
       case "flame":
-        return <Flame className="size-6 text-red-500" />
+        return <Flame className="size-6 text-red-500"/>
       case "coffee":
-        return <Coffee className="size-6 text-green-500" />
+        return <Coffee className="size-6 text-green-500"/>
       case "brain":
-        return <Brain className="size-6 text-violet-500" />
+        return <Brain className="size-6 text-violet-500"/>
       case "trophy":
-        return <Trophy className="size-6 text-yellow-500" />
+        return <Trophy className="size-6 text-yellow-500"/>
       default:
         return null
     }
   }
 
-  // Check if workflow can be executed
   const canExecuteWorkflow = blocks.length >= 2 && hasEndBlock()
 
   // Handle workflow start with sound
@@ -150,11 +160,13 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
   const renderTimerCenter = () => {
     if (isExecuting) {
       return (
-        <div className="flex flex-col items-center justify-center">
-          <div className="text-6xl font-mono font-semibold mb-1">{formattedTime}</div>
-          <div className="flex items-center gap-2 text-base font-medium">
-            {getIconComponent()}
-            <span>{label || "Timer"}</span>
+        <div className="border flex items-center justify-center size-84 p-4 rounded-full shadow-sm bg-background">
+          <div className="flex flex-col items-center justify-center">
+            <div className="flex items-center gap-2 text-base font-medium ">
+              {getIconComponent()}
+              <span>{label || "Timer"}</span>
+            </div>
+            <div className="text-7xl font-mono font-semibold mt-2">{formattedTime}</div>
           </div>
         </div>
       )
@@ -162,49 +174,54 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
 
     if (blocks.length === 0) {
       return (
-        <div className="text-center">
-          <p className="text-base font-medium text-muted-foreground mb-2">No Workflow</p>
-          <Button
-            onClick={() => setOpenPanel("workflow")}
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-2"
-          >
-            <ListChecks className="size-4" />
-            Create Workflow
-          </Button>
+        <div className="border flex items-center justify-center size-84 p-4 rounded-full shadow-sm bg-background">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Workflow className="size-8 text-muted-foreground mb-2"/>
+            <p className="font-medium">No Workflow</p>
+            <p className="text-muted-foreground text-sm text-center max-w-prose">
+              Create your work session by adding time blocks to your workflow.
+            </p>
+            <Button
+              onClick={() => setOpenPanel("workflow")}
+              className="flex items-center gap-2 rounded-full mt-2.5"
+            >
+              Create Workflow
+            </Button>
+          </div>
         </div>
       )
     }
 
     // Has workflow but not executing
     return (
-      <div className="text-center">
-        <p className="text-base font-medium text-muted-foreground mb-2">Ready</p>
-        <Button
-          onClick={handleStartWorkflow}
-          variant="outline"
-          size="sm"
-          className="flex items-center gap-2"
-          disabled={!canExecuteWorkflow}
-        >
-          {canExecuteWorkflow ? (
-            <>
-              <Play className="size-4" />
-              Start Workflow
-            </>
-          ) : (
-            <>
-              <ListChecks className="size-4" />
-              Edit Workflow
-            </>
-          )}
-        </Button>
-        {!canExecuteWorkflow && blocks.length > 0 && (
-          <p className="text-xs text-muted-foreground mt-2">
-            {blocks.length < 2 ? "Need at least 2 steps" : !hasEndBlock() ? "Need an End block" : ""}
+      <div className="border flex items-center justify-center size-84 p-4 rounded-full shadow-sm bg-background">
+        <div className="flex flex-col items-center justify-center gap-2">
+          {!canExecuteWorkflow ?
+            <Frown className="size-8 text-muted-foreground mb-2"/> :
+            <Smile className="size-8 text-muted-foreground mb-2"/>
+          }
+          <p className="font-medium">
+            {!canExecuteWorkflow ? "You're not ready" : "Let's get started"}
           </p>
-        )}
+          <p className="text-muted-foreground text-sm text-center max-w-[80%]">
+            {!canExecuteWorkflow ?
+              "Craft your work session by adding time blocks to your workflow." :
+              "You have created your work session, let the real work begin!"
+            }
+          </p>
+          <Button
+            onClick={handleStartWorkflow}
+            className={cn("flex items-center gap-2 rounded-full mt-2")}
+            disabled={!canExecuteWorkflow}
+          >
+            <Play className="size-4 fill-background"/> Start Workflow
+          </Button>
+          {!canExecuteWorkflow && blocks.length > 0 && (
+            <p className="text-xs text-muted-foreground mt-2">
+              {blocks.length < 2 ? "Need at least 2 steps" : !hasEndBlock() ? "An End block is required" : ""}
+            </p>
+          )}
+        </div>
       </div>
     )
   }
@@ -214,30 +231,27 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
     if (!isExecuting) return null
 
     return (
-      <div className="flex gap-2 mt-6">
+      <div className="flex gap-2 mt-8 border rounded-full p-2 bg-background z-20 shadow-sm">
         {isRunning ? (
-          <Button onClick={pauseTimer} variant="outline" size="sm">
-            <Pause className="size-4 mr-2" /> Pause
+          <Button onClick={pauseTimer} variant="default" className="rounded-4xl" size="lg">
+            <Pause className="size-4 fill-background"/> Pause
           </Button>
         ) : (
-          <Button onClick={resumeTimer} variant="outline" size="sm">
-            <Play className="size-4 mr-2" /> Resume
+          <Button onClick={resumeTimer} variant="default" className="rounded-4xl" size="lg">
+            <Play className="size-4 fill-background"/> Resume
           </Button>
         )}
-        <Button onClick={resetTimer} variant="outline" size="sm">
-          <RotateCcw className="size-4 mr-2" /> Reset
-        </Button>
-        <Button onClick={stopTimer} variant="outline" size="sm">
-          <X className="size-4 mr-2" /> Stop
+        <Button onClick={resetTimer} variant="outline" className="rounded-4xl" size="lg">
+          <RotateCcw className="size-4"/>
         </Button>
         <Button
           onClick={() => setSoundEnabled(!soundEnabled)}
           variant="outline"
-          size="icon"
-          className="ml-2"
+          className="rounded-full"
           title={soundEnabled ? "Mute sounds" : "Enable sounds"}
+          size="lg"
         >
-          {soundEnabled ? <Volume2 className="size-4" /> : <VolumeX className="size-4" />}
+          {soundEnabled ? <Volume2 className="size-4"/> : <VolumeX className="size-4"/>}
         </Button>
       </div>
     )
@@ -251,7 +265,7 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
         value={getProgressValue()}
         gaugePrimaryColor={colors.primary}
         gaugeSecondaryColor={colors.secondary}
-        className={cn("size-[420px]", className)}
+        className={cn("size-[500px]", className)}
       >
         {renderTimerCenter()}
       </AnimatedCircularProgressBar>

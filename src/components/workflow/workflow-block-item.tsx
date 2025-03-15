@@ -65,7 +65,7 @@ export function WorkflowBlockItem({ block, isSelected, isLast }: WorkflowBlockIt
         <div
           className={cn(
             "border-2 px-6 py-2 rounded-full inline-flex items-center gap-2 text-muted-foreground shadow-md cursor-pointer",
-            isSelected && "border-3 border-blue-500 bg-blue-50 transition duration-100 ease-in-out",
+            isSelected && "border-3 dark:border-blue-700 border-blue-500 bg-blue-50 dark:bg-blue-700/25 transition",
           )}
           onClick={() => selectBlock(block.id)}
         >
@@ -83,7 +83,7 @@ export function WorkflowBlockItem({ block, isSelected, isLast }: WorkflowBlockIt
         <div
           className={cn(
             "border-2 px-4 py-2 rounded-4xl inline-flex items-center justify-center gap-2 shadow-sm text-sm cursor-pointer",
-            isSelected && "border-3 border-blue-500 bg-blue-50",
+            isSelected && "border-3 dark:border-blue-700 border-blue-500 bg-blue-50 dark:bg-blue-700/25 transition",
           )}
           onClick={() => selectBlock(block.id)}
         >
@@ -102,7 +102,7 @@ export function WorkflowBlockItem({ block, isSelected, isLast }: WorkflowBlockIt
         className={cn(
           "border-2 p-4 w-[85%] rounded-4xl border-b-6",
           getBlockColor(block.type),
-          isSelected && "border-3 border-b-6 border-blue-500 bg-blue-50 transition duration-100 ease-in-out",
+          isSelected && "border-3 dark:border-blue-700 border-b-6 border-blue-500 bg-blue-50 dark:bg-blue-700/25 transition",
           "cursor-pointer",
         )}
         onClick={() => selectBlock(block.id)}
