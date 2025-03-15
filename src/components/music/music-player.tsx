@@ -2,7 +2,7 @@
 
 import {cn} from "@/lib/utils"
 import {useEffect, useRef} from "react"
-import {Play, Pause, SkipBack, SkipForward, Repeat, Shuffle, Music} from "lucide-react"
+import {Play, Pause, SkipBack, SkipForward, Repeat, Shuffle} from "lucide-react"
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip"
 import {useMusicStore} from "@/stores/use-music"
 

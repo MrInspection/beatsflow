@@ -4,34 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="feat(music): add beatsflow music">
-      <change afterPath="$PROJECT_DIR$/public/music/gims_yolo.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/placeholder.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sounds/featured/crescent-moon.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sounds/featured/ghostrifter-official-celestia.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sounds/featured/lost-and-found.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sounds/featured/otjan-bird.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sounds/featured/silent-wood.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/3.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/4.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/5.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/anime-chill.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/anime-lofi.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/cat-thinking-about-you.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/lofi-girl-lofi.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/retrowave-synthwave.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/thumbnails/walking-anime.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/side-panel/help-panel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/side-panel/side-panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/side-panel/side-panel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/site-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/site-header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/dropdown-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/dropdown-menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/use-side-panel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/use-side-panel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/use-workflow.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/use-workflow.ts" afterDir="false" />
+    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="refactor: minor changes">
+      <change beforePath="$PROJECT_DIR$/src/components/music/music-player.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/music/music-player.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/music/track-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/music/track-list.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +155,7 @@
       <workItem from="1741934033648" duration="10362000" />
       <workItem from="1741949421704" duration="12724000" />
       <workItem from="1741972385509" duration="31792000" />
-      <workItem from="1742029462631" duration="19539000" />
+      <workItem from="1742029462631" duration="19855000" />
     </task>
     <task id="LOCAL-00001" summary="chore: upgraded project to Next.js 15">
       <option name="closed" value="true" />
@@ -222,7 +197,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742053147601</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="chore: add project assets">
+      <option name="closed" value="true" />
+      <created>1742053286202</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742053286202</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refactor: minor changes">
+      <option name="closed" value="true" />
+      <created>1742053331923</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742053331923</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +235,9 @@
     <MESSAGE value="refactor(chatbot): remove chatbot feature" />
     <MESSAGE value="feat(dark-mode): add dark-mode support" />
     <MESSAGE value="feat(music): add beatsflow music" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(music): add beatsflow music" />
+    <MESSAGE value="chore: add project assets" />
+    <MESSAGE value="refactor: minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: minor changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

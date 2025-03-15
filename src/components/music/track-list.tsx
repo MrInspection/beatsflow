@@ -1,17 +1,11 @@
 "use client"
 
-import { Play, Pause, Clock } from "lucide-react"
+import { Play, Pause } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useMusicStore } from "@/stores/use-music"
 
 export function TrackList() {
   const { tracks, setCurrentTrack, currentTrack, isPlaying, togglePlay } = useMusicStore()
-
-  const formatDuration = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = Math.floor(seconds % 60)
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`
-  }
 
   return (
     <div className="space-y-3">
