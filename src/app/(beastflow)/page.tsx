@@ -3,6 +3,7 @@
 import { CircularTimer } from "@/components/workflow/circular-timer"
 import { useWorkflowStore } from "@/stores/use-workflow"
 import { playSound } from "@/lib/sounds"
+import {BackgroundLines} from "@/components/ui/background-lines";
 
 export default function HomePage() {
   const { blocks, isExecuting, nextBlock, currentBlockIndex, stopExecution } = useWorkflowStore()
@@ -16,18 +17,19 @@ export default function HomePage() {
         stopExecution()
         return
       }
-
       nextBlock()
     }
   }
 
   return (
-    <main className="container mx-auto px-4 py-8">
-      <div className="flex flex-col items-center justify-center min-h-[80vh]">
-        <h1 className="text-3xl font-bold mb-8 text-center">BeatsFlōw</h1>
-        <CircularTimer onComplete={handleTimerComplete} />
-      </div>
+    <BackgroundLines className="rounded-2xl">
+    <main className="container mx-auto px-4 py-8 relative">
+
+        <div className="flex flex-col items-center justify-center min-h-[85vh]">
+          <CircularTimer onComplete={handleTimerComplete} />
+        </div>
+
     </main>
+    </BackgroundLines>
   )
 }
-
