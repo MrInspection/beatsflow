@@ -1,6 +1,6 @@
 import { create } from "zustand/react";
 
-type PanelType = "chatbot" | "music" | "workflow" | "help" | null;
+type PanelType = "music" | "workflow" | "help" | null;
 
 interface PanelStore {
   openPanel: PanelType;
