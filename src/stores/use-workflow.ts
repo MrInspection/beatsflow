@@ -1,7 +1,7 @@
 "use client"
 
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import {create} from "zustand"
+import {persist} from "zustand/middleware"
 
 export type WorkflowBlockType = "focus" | "break" | "deep-work" | "end"
 
@@ -39,7 +39,7 @@ export const useWorkflowStore = create<WorkflowState>()(
       currentBlockIndex: 0,
 
       addBlock: (type) => {
-        const { blocks } = get()
+        const {blocks} = get()
 
         // Check if we already have an end block
         if (!get().canAddMoreBlocks()) {
@@ -48,19 +48,16 @@ export const useWorkflowStore = create<WorkflowState>()(
 
         // Default values based on block type
         let defaultDuration = 0
-        let defaultIntensity = undefined
 
         switch (type) {
           case "focus":
             defaultDuration = 25
-            defaultIntensity = 50
             break
           case "break":
             defaultDuration = 5
             break
           case "deep-work":
             defaultDuration = 90
-            defaultIntensity = 70
             break
           case "end":
             defaultDuration = 0
@@ -90,7 +87,7 @@ export const useWorkflowStore = create<WorkflowState>()(
       },
 
       updateBlock: (id, updates) => {
-        const { blocks } = get()
+        const {blocks} = get()
         const blockIndex = blocks.findIndex((block) => block.id === id)
 
         if (blockIndex === -1) return
@@ -98,7 +95,7 @@ export const useWorkflowStore = create<WorkflowState>()(
         const block = blocks[blockIndex]
 
         // Validate updates based on block type
-        const validatedUpdates = { ...updates }
+        const validatedUpdates = {...updates}
 
         if (block.type === "focus") {
           if (updates.duration !== undefined) {
@@ -115,12 +112,12 @@ export const useWorkflowStore = create<WorkflowState>()(
         }
 
         set({
-          blocks: blocks.map((block) => (block.id === id ? { ...block, ...validatedUpdates } : block)),
+          blocks: blocks.map((block) => (block.id === id ? {...block, ...validatedUpdates} : block)),
         })
       },
 
       deleteBlock: (id) => {
-        const { blocks, selectedBlockId } = get()
+        const {blocks, selectedBlockId} = get()
         const newBlocks = blocks.filter((block) => block.id !== id)
 
         // Reorder positions after deletion
@@ -136,7 +133,7 @@ export const useWorkflowStore = create<WorkflowState>()(
       },
 
       moveBlock: (fromIndex, toIndex) => {
-        const { blocks } = get()
+        const {blocks} = get()
 
         // Don't allow moving end blocks
         if (blocks[fromIndex]?.type === "end") return
@@ -160,11 +157,11 @@ export const useWorkflowStore = create<WorkflowState>()(
           position: idx,
         }))
 
-        set({ blocks: reorderedBlocks })
+        set({blocks: reorderedBlocks})
       },
 
       selectBlock: (id) => {
-        set({ selectedBlockId: id })
+        set({selectedBlockId: id})
       },
 
       startExecution: () => {
@@ -175,13 +172,13 @@ export const useWorkflowStore = create<WorkflowState>()(
       },
 
       stopExecution: () => {
-        set({ isExecuting: false })
+        set({isExecuting: false})
       },
 
       nextBlock: () => {
-        const { currentBlockIndex, blocks } = get()
+        const {currentBlockIndex, blocks} = get()
         if (currentBlockIndex < blocks.length - 1) {
-          set({ currentBlockIndex: currentBlockIndex + 1 })
+          set({currentBlockIndex: currentBlockIndex + 1})
         }
       },
 
@@ -197,7 +194,7 @@ export const useWorkflowStore = create<WorkflowState>()(
       },
 
       hasEndBlock: () => {
-        const { blocks } = get()
+        const {blocks} = get()
         return blocks.some((block) => block.type === "end")
       },
     }),

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,10 +8,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { WorkflowBlockItem } from "@/components/workflow/workflow-block-item";
-import { cn } from "@/lib/utils";
-import { usePanelStore } from "@/stores/use-side-panel";
-import { useWorkflowStore } from "@/stores/use-workflow";
+import {WorkflowBlockItem} from "@/components/workflow/workflow-block-item";
+import {cn} from "@/lib/utils";
+import {usePanelStore} from "@/stores/use-side-panel";
+import {useWorkflowStore} from "@/stores/use-workflow";
 import {
   closestCenter,
   DndContext,
@@ -23,28 +23,26 @@ import {
   type DragEndEvent,
   type DragStartEvent,
 } from "@dnd-kit/core";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import {restrictToVerticalAxis} from "@dnd-kit/modifiers";
 import {
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import {
-  Brain, BrainCircuit,
+  BrainCircuit,
   Coffee,
   Flag,
-  Flame,
   Pause,
   Play,
   Plus, Timer,
   Trophy,
-  Workflow,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import {useState} from "react";
 
 export function WorkflowPanel() {
-  const { openPanel, setOpenPanel } = usePanelStore();
+  const {openPanel, setOpenPanel} = usePanelStore();
   const {
     blocks,
     selectedBlockId,
@@ -75,13 +73,13 @@ export function WorkflowPanel() {
 
   // Handle drag start
   const handleDragStart = (event: DragStartEvent) => {
-    const { active } = event;
+    const {active} = event;
     setActiveId(active.id as string);
   };
 
   // Handle drag end
   const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+    const {active, over} = event;
 
     if (over && active.id !== over.id) {
       const activeIndex = blocks.findIndex((block) => block.id === active.id);
@@ -115,8 +113,10 @@ export function WorkflowPanel() {
           openPanel === "workflow" ? "lg:w-1/5 md:w-2/5 w-full" : "hidden"
         )}
       >
-        <div className="border-2 shadow-md bg-background rounded-t-3xl max-sm:rounded-b-3xl h-full w-full overflow-hidden flex flex-col">
-          <div className="flex items-center justify-between px-4 py-3 border-b-2 sticky top-0 bg-background z-10 shrink-0">
+        <div
+          className="border-2 shadow-md bg-background rounded-t-3xl max-sm:rounded-b-3xl h-full w-full overflow-hidden flex flex-col">
+          <div
+            className="flex items-center justify-between px-4 py-3 border-b-2 sticky top-0 bg-background z-10 shrink-0">
             <h1 className="font-semibold tracking-tight text-muted-foreground">
               BeatsFlōw Workflow
             </h1>
@@ -125,7 +125,7 @@ export function WorkflowPanel() {
               onClick={() => setOpenPanel("workflow")}
               title="Close"
             >
-              <X className="text-muted-foreground size-5 group-hover:text-destructive" />
+              <X className="text-muted-foreground size-5 group-hover:text-destructive"/>
             </button>
           </div>
           <div className="border-b p-4 sticky top-12 bg-background z-10">
@@ -137,12 +137,12 @@ export function WorkflowPanel() {
             >
               {isExecuting ? (
                 <>
-                  <Pause className="size-4 fill-background" />
+                  <Pause className="size-4 fill-background"/>
                   <span>Stop Workflow</span>
                 </>
               ) : (
                 <>
-                  <Play className="size-4 fill-background" />
+                  <Play className="size-4 fill-background"/>
                   <span>Start Workflow</span>
                 </>
               )}
@@ -152,12 +152,13 @@ export function WorkflowPanel() {
           {/* Workflow Builder */}
           <div className="flex-1 overflow-y-auto p-8">
             <div className="flex flex-col items-center">
-              <div className="border-2 px-6 py-2 rounded-3xl inline-flex items-center gap-2 shadow-sm text-muted-foreground">
-                <Flag className="size-4 fill-muted-foreground stroke-muted-foreground" />
+              <div
+                className="border-2 px-6 py-2 rounded-3xl inline-flex items-center gap-2 shadow-sm text-muted-foreground">
+                <Flag className="size-4 fill-muted-foreground stroke-muted-foreground"/>
                 <span>Start</span>
               </div>
 
-              <div className="w-px h-6 border" />
+              <div className="w-px h-6 border"/>
 
               <div className="w-full">
                 {blocks.length > 0 && (
@@ -185,7 +186,7 @@ export function WorkflowPanel() {
                               isExecuting={isExecuting}
                             />
                             {index < blocks.length - 1 && (
-                              <div className="w-px h-6 border" />
+                              <div className="w-px h-6 border"/>
                             )}
                           </div>
                         ))}
@@ -210,7 +211,7 @@ export function WorkflowPanel() {
               {canAddMoreBlocks() && !isExecuting && (
                 <>
                   {blocks.length > 0 && (
-                    <div className="w-px h-6 border" />
+                    <div className="w-px h-6 border"/>
                   )}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -218,7 +219,7 @@ export function WorkflowPanel() {
                         className="rounded-full"
                         disabled={isExecuting}
                       >
-                        <Plus className="size-4" />
+                        <Plus className="size-4"/>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="rounded-2xl mt-1">
@@ -226,23 +227,23 @@ export function WorkflowPanel() {
                         onClick={() => addBlock("focus")}
                         className="rounded-t-xl"
                       >
-                        <Timer className="size-4" />
+                        <Timer className="size-4"/>
                         Focus Session
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => addBlock("break")}>
-                        <Coffee className="size-4" />
+                        <Coffee className="size-4"/>
                         Break Session
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => addBlock("deep-work")}>
-                        <BrainCircuit className="size-4" />
+                        <BrainCircuit className="size-4"/>
                         Deep Work Session
                       </DropdownMenuItem>
-                      <DropdownMenuSeparator />
+                      <DropdownMenuSeparator/>
                       <DropdownMenuItem
                         onClick={() => addBlock("end")}
                         className="rounded-b-xl"
                       >
-                        <Trophy className="size-4" />
+                        <Trophy className="size-4"/>
                         End Workflow
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -253,10 +254,10 @@ export function WorkflowPanel() {
           </div>
         </div>
       </div>
-      {isExecuting && <WorkflowExecutor />}
+      {isExecuting && <WorkflowExecutor/>}
     </>
   );
 }
 
 // Import this component at the top of the file
-import { WorkflowExecutor } from "@/components/workflow/workflow-executor";
+import {WorkflowExecutor} from "@/components/workflow/workflow-executor";
