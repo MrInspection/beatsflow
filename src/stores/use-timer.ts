@@ -92,4 +92,3 @@ export const useTimerStore = create<TimerState>()((set, get) => ({
     return newTimeLeft <= 0
   },
 }))
-

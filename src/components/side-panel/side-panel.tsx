@@ -1,10 +1,10 @@
 "use client"
 
 import {Button} from "@/components/ui/button";
-import {CircleHelp, Disc3, Workflow} from "lucide-react";
+import {CircleHelp, Disc3, GitBranch} from "lucide-react";
 import {usePanelStore} from "@/stores/use-side-panel";
-import {MusicPanel} from "@/components/music/music-panel";
-import {WorkflowPanel} from "@/components/workflow/workflow-panel";
+import {MusicPanel} from "@/components/side-panel/music-panel";
+import {WorkflowPanel} from "@/components/side-panel/workflow-panel";
 import {HelpPanel} from "@/components/side-panel/help-panel";
 import {ThemeToggle} from "@/components/theme-toggle";
 
@@ -30,7 +30,7 @@ export default function SidePanel() {
             onClick={() => setOpenPanel("workflow")}
             title="BeatsFlōw Workflow"
           >
-            <Workflow className="size-5"/>
+            <GitBranch className="size-5"/>
           </Button>
           <Button
             size="icon" variant="ghost" className="rounded-xl"

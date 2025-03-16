@@ -16,7 +16,7 @@ import {
   Volume2,
   VolumeX,
   Frown,
-  Smile, Workflow
+  Smile, GitBranch
 } from "lucide-react"
 import {usePanelStore} from "@/stores/use-side-panel"
 import {playSound, preloadSounds} from "@/lib/sounds"
@@ -176,7 +176,7 @@ export function CircularTimer({className, onComplete}: CircularTimerProps) {
       return (
         <div className="border flex items-center justify-center size-84 p-4 rounded-full shadow-sm bg-background">
           <div className="flex flex-col items-center justify-center gap-2">
-            <Workflow className="size-8 text-muted-foreground mb-2"/>
+            <GitBranch className="size-8 text-muted-foreground mb-2"/>
             <p className="font-medium">No Workflow</p>
             <p className="text-muted-foreground text-sm text-center max-w-prose">
               Create your work session by adding time blocks to your workflow.
