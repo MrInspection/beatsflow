@@ -10,7 +10,7 @@ export function HelpPanel() {
   const {openPanel, setOpenPanel} = usePanelStore();
 
   return (
-    <section className={cn(openPanel === "help" ? "lg:w-1/5 " : "hidden")}>
+    <section className={cn(openPanel === "help" ? "lg:w-1/5 md:w-1/3 w-full" : "hidden")}>
       <div className="border-2 shadow-md bg-background rounded-t-3xl max-sm:rounded-b-3xl h-full">
         <div className="flex items-center justify-between px-4 py-3 border-b-2">
           <h1 className="font-semibold tracking-tight text-muted-foreground inline-flex items-center gap-1.5">
