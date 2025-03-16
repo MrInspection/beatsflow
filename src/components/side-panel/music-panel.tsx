@@ -12,7 +12,7 @@ export function MusicPanel() {
 
   return (
     <>
-      <section className={cn(openPanel === "music" ? "lg:w-1/5" : "hidden")}>
+      <section className={cn(openPanel === "music" ? "lg:w-1/5 md:w-1/3 w-full" : "hidden")}>
         <div className="border-2 shadow-md bg-background rounded-t-3xl max-sm:rounded-b-3xl h-full w-full overflow-hidden flex flex-col">
           <div className="flex items-center justify-between px-4 py-3 border-b-2">
             <h1 className="font-semibold tracking-tight text-muted-foreground flex items-center gap-2">
@@ -35,8 +35,6 @@ export function MusicPanel() {
               <TrackList />
             </div>
           </div>
-
-
         </div>
       </section>
     </>
