@@ -59,7 +59,7 @@ export function WorkflowButton() {
 
       <AlertDialog open={isStopDialogOpen} onOpenChange={setIsStopDialogOpen}>
         <AlertDialogContent className="p-0 rounded-3xl gap-0">
-          <AlertDialogHeader className="p-6 border-b">
+          <AlertDialogHeader className="p-6 border-b text-left">
             <AlertDialogTitle>Stop Workflow</AlertDialogTitle>
             <AlertDialogDescription>
               Hold on! You’re on a roll and making solid progress. Are you sure you want to stop your productivity

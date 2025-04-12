@@ -137,7 +137,7 @@ export function WorkflowHelpButton() {
               </Button>
             </div>
             <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
-              <p className="font-medium text-muted-foreground">
+              <p className="font-medium text-muted-foreground line-clamp-1">
                 Workflow Completion Sound
               </p>
               <Button
@@ -151,8 +151,8 @@ export function WorkflowHelpButton() {
           </section>
         </div>
         <DialogFooter className="px-6 py-4 border-t">
-          <DialogClose>
-            <Button>Understood</Button>
+          <DialogClose className="w-full">
+            <Button className="w-full">Understood</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
