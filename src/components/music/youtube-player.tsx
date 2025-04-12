@@ -6,7 +6,7 @@ import YouTube from "react-youtube";
 
 export function YouTubePlayer() {
   const { currentTrack, isPlaying } = useMusicStore();
-  // @eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const playerRef = useRef<any>(null);
 
   useEffect(() => {

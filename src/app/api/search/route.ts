@@ -37,6 +37,7 @@ export async function GET(request: Request) {
       );
     }
 
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     const tracks: Track[] = data.items.map((item: any) => ({
       id: `youtube-${item.id.videoId}`,
       title: item.snippet.title,

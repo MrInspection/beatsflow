@@ -20,13 +20,10 @@ export function SidePanel() {
         <Workflow className="size-4"/>
         <p className="[writing-mode:vertical-lr]">Workflōw</p>
       </Button>
-
       <Button className="flex flex-col h-auto" variant="ghost" onClick={() => setOpenPanel("music")}>
         <Disc3 className="size-4"/>
         <p className="[writing-mode:vertical-lr]">Music</p>
       </Button>
-
-
       <Link
         href="https://github.com/MrInspection/beatsflow"
         target="_blank" className={cn(buttonVariants({ variant: "ghost", className: "flex flex-col h-auto" }))}
@@ -34,10 +31,6 @@ export function SidePanel() {
         <GitHubLogoIcon className="size-4"/>
         <p className="[writing-mode:vertical-lr]">Star on GitHub</p>
       </Link>
-
-
-
-
     </section>
   )
 }
