@@ -1,13 +1,13 @@
-import { create } from "zustand/react";
+import { create } from "zustand";
 
-type PanelType = "music" | "workflow" | "help" | null;
+export type PanelType = "music" | "workflow" | "beatsAI";
 
-interface PanelStore {
-  openPanel: PanelType;
-  setOpenPanel: (panel: PanelType) => void;
+interface PanelState {
+  openPanel: PanelType | null;
+  setOpenPanel: (panel: PanelType | null) => void;
 }
 
-export const usePanelStore = create<PanelStore>((set) => ({
+export const usePanelStore = create<PanelState>((set) => ({
   openPanel: null,
-  setOpenPanel: (panel) => set((state) => ({ openPanel: state.openPanel === panel ? null : panel })),
+  setOpenPanel: (panel) => set({ openPanel: panel }),
 }));
