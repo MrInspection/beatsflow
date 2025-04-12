@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import YouTube from "react-youtube";
 
 export function YouTubePlayer() {
-  const { currentTrack, isPlaying } = useMusicStore();
+  const { currentTrack, isPlaying, isLooping } = useMusicStore();
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const playerRef = useRef<any>(null);
 
@@ -33,6 +33,8 @@ export function YouTubePlayer() {
           playerVars: {
             autoplay: isPlaying ? 1 : 0,
             controls: 0,
+            loop: isLooping ? 1 : 0,
+            playlist: videoId,
           },
         }}
         onReady={(event) => {
