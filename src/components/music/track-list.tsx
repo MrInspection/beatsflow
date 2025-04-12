@@ -3,6 +3,7 @@
 import { Play, Pause } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useMusicStore } from "@/stores/use-music"
+import Image from "next/image";
 
 export function TrackList() {
   const { tracks, setCurrentTrack, currentTrack, isPlaying, togglePlay } = useMusicStore()
@@ -22,10 +23,12 @@ export function TrackList() {
             )}
           >
             <div className="relative size-11 flex-shrink-0">
-              <img
-                src={track.cover || "/placeholder.svg?height=80&width=80"}
+              <Image
+                src={track.cover || "/placeholder.svg"}
                 alt={track.title}
                 className="w-full h-full rounded object-cover"
+                height={80}
+                width={80}
               />
               <button
                 onClick={() => {
