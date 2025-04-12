@@ -98,7 +98,7 @@ export function WorkflowBlockItem({block, isSelected, isExecuting, isDragOverlay
         <ContextMenu>
           <ContextMenuTrigger asChild>
             <div className={cn(
-              "border-2 px-6 py-4 rounded-3xl inline-flex items-center gap-3 shadow-sm cursor-pointer w-full",
+              "border-2 px-6 py-4 rounded-3xl inline-flex items-center gap-3 shadow-sm cursor-pointer w-full bg-background",
               isSelected && "border-blue-500 dark:border-blue-700 border-4",
             )}
                  onClick={() => selectBlock(block.id)}
