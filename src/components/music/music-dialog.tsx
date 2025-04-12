@@ -158,7 +158,7 @@ export function MusicDialog() {
         open={openPanel === "music"}
         onOpenChange={(open) => setOpenPanel(open ? "music" : null)}
       >
-        <DialogTrigger asChild>
+        <DialogTrigger asChild className="sm:hidden">
           <button className={cn(buttonVariants({ variant: "ghost" }))}>
             <Disc3 className="size-4" />
             <p className="sr-only">Music</p>

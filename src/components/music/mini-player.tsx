@@ -14,7 +14,7 @@ export function MiniPlayer({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-3 p-2 rounded-2xl bg-background border shadow-sm w-60",
+        "flex items-center gap-3 p-2 rounded-2xl bg-background border shadow-sm w-full sm:w-80",
         className
       )}
     >
@@ -28,8 +28,13 @@ export function MiniPlayer({ className }: { className?: string }) {
         />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="font-medium truncate text-xs">{currentTrack.title}</h3>
-        <p className="text-[10px] text-muted-foreground truncate">
+        <h3
+          className="font-medium text-xs line-clamp-1"
+          title={currentTrack.title}
+        >
+          {currentTrack.title}
+        </h3>
+        <p className="text-[10px] text-muted-foreground truncate line-clamp-1">
           {currentTrack.artist}
         </p>
       </div>

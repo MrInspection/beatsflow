@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="fix: eslint deployment errors">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="style: update information dialogs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,23 +61,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mouss/WebstormProjects/beatsflow/src/app&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\mouss\\WebstormProjects\\beatsflow\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/mouss/WebstormProjects/beatsflow/.cursorrules",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\mouss\\WebstormProjects\\beatsflow\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -91,11 +89,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mouss\WebstormProjects\beatsflow\.cursorrules" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\src\app" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public\thumbnails" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public\sounds\featured" />
-      <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public\music" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\src\components" />
@@ -419,7 +417,39 @@
       <option name="project" value="LOCAL" />
       <updated>1744470726488</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="fix(workflow): timer resetting after the sheet is closed on smaller screens">
+      <option name="closed" value="true" />
+      <created>1744476139220</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1744476139220</updated>
+    </task>
+    <task id="LOCAL-00033" summary="refactor: reformat code">
+      <option name="closed" value="true" />
+      <created>1744476739965</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1744476739965</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fix(music): youtube audio not looped">
+      <option name="closed" value="true" />
+      <created>1744477192647</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1744477192647</updated>
+    </task>
+    <task id="LOCAL-00035" summary="style: update information dialogs">
+      <option name="closed" value="true" />
+      <created>1744477605422</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1744477605422</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,10 +467,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: add project assets" />
-    <MESSAGE value="refactor: minor changes" />
-    <MESSAGE value="chore(eslint): code cleanup" />
-    <MESSAGE value="chore: updated README.md" />
     <MESSAGE value="feat(seo): added opengraph &amp; twitter images" />
     <MESSAGE value="chore: added ui components" />
     <MESSAGE value="refactor: moved panels to side-panel directory" />
@@ -462,6 +488,22 @@
     <MESSAGE value="chore(deps): bump next.js + eslint-config-next to 15.3.0 &amp; add react-youtube" />
     <MESSAGE value="style: update globals.css" />
     <MESSAGE value="fix: eslint deployment errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: eslint deployment errors" />
+    <MESSAGE value="fix(workflow): timer resetting after the sheet is closed on smaller screens" />
+    <MESSAGE value="refactor: reformat code" />
+    <MESSAGE value="fix(music): youtube audio not looped" />
+    <MESSAGE value="style: update information dialogs" />
+    <option name="LAST_COMMIT_MESSAGE" value="style: update information dialogs" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/stores/use-music.ts</url>
+          <line>103</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
