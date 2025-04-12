@@ -1,21 +1,29 @@
-"use client"
+"use client";
 
-import {Play, Workflow} from "lucide-react";
-import {WorkflowButton} from "@/components/workflow/workflow-button";
-import {WorkflowEditor} from "@/components/workflow/workflow-editor";
-import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet"
-import {Button} from "@/components/ui/button";
-import {QuestionMarkIcon} from "@radix-ui/react-icons";
+import { Button } from "@/components/ui/button";
 import {
-  Dialog, DialogClose,
+  Dialog,
+  DialogClose,
   DialogContent,
-  DialogDescription, DialogFooter,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog";
-import {playSound} from "@/lib/sounds";
-import {usePanelStore} from "@/stores/use-side-panel";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { WorkflowButton } from "@/components/workflow/workflow-button";
+import { WorkflowEditor } from "@/components/workflow/workflow-editor";
+import { playSound } from "@/lib/sounds";
+import { usePanelStore } from "@/stores/use-side-panel";
+import { QuestionMarkIcon } from "@radix-ui/react-icons";
+import { Play, Workflow } from "lucide-react";
 
 export function WorkflowPanel() {
   return (
@@ -31,23 +39,28 @@ export function WorkflowPanel() {
         <WorkflowEditor />
       </div>
     </section>
-  )
+  );
 }
 
 export function WorkflowPanelMobile() {
-  const {openPanel, setOpenPanel} = usePanelStore()
+  const { openPanel, setOpenPanel } = usePanelStore();
 
   return (
-    <Sheet open={openPanel === "workflow"} onOpenChange={(open) => setOpenPanel(open ? "workflow" : null)}>
-      <SheetTrigger className="sm:hidden">
-        <Button className="px-0" variant="ghost" size="icon">
-          <Workflow className="size-4"/>
+    <Sheet
+      open={openPanel === "workflow"}
+      onOpenChange={(open) => setOpenPanel(open ? "workflow" : null)}
+    >
+      <SheetTrigger asChild>
+        <Button className="sm:hidden px-0" variant="ghost" size="icon">
+          <Workflow className="size-4" />
           <span className="sr-only">Workflow Editor</span>
         </Button>
       </SheetTrigger>
       <SheetContent className="p-0 max-sm:w-full md:max-w-[500px] overflow-hidden gap-0">
         <SheetHeader className="p-6">
-          <SheetTitle className="text-lg mb-2 tracking-tight">Workflōw Editor</SheetTitle>
+          <SheetTitle className="text-lg mb-2 tracking-tight">
+            Workflōw Editor
+          </SheetTitle>
           <WorkflowButton />
         </SheetHeader>
         <section className="border-t overflow-y-auto px-8">
@@ -55,7 +68,7 @@ export function WorkflowPanelMobile() {
         </section>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
 
 export function WorkflowHelpButton() {
@@ -64,50 +77,74 @@ export function WorkflowHelpButton() {
       <DialogTrigger>
         <section className="absolute bottom-4 right-5">
           <div className="flex flex-col gap-2 relative">
-            <Button className="rounded-full relative" variant="outline" size="icon">
-              <QuestionMarkIcon className="size-3.75"/>
+            <Button
+              className="rounded-full relative"
+              variant="outline"
+              size="icon"
+            >
+              <QuestionMarkIcon className="size-3.75" />
             </Button>
           </div>
         </section>
       </DialogTrigger>
       <DialogContent className="p-0 gap-0 rounded-3xl">
         <DialogHeader className="p-8 text-left">
-          <DialogTitle className="text-lg tracking-tight">What is a BeatsFlōw Workflow?</DialogTitle>
+          <DialogTitle className="text-lg tracking-tight">
+            What is a BeatsFlōw Workflow?
+          </DialogTitle>
           <DialogDescription className="mt-0.5">
-            Workflows are a set of structured focus sessions and breaks designed to enhance productivity. Users can customize durations to create an efficient and balanced work routine.
+            Workflows are a set of structured focus sessions and breaks designed
+            to enhance productivity. Users can customize durations to create an
+            efficient and balanced work routine.
           </DialogDescription>
         </DialogHeader>
         <div className="p-6 border-t">
           <section className="grid gap-2">
             <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
-              <p className="font-medium text-muted-foreground">Workflow Starting Sound</p>
+              <p className="font-medium text-muted-foreground">
+                Workflow Starting Sound
+              </p>
               <Button
                 variant="outline"
-                onClick={() => playSound("workflowStart")} className="rounded-4xl">
+                onClick={() => playSound("workflowStart")}
+                className="rounded-4xl"
+              >
                 <Play className="size-4 fill-black" /> Play Sound
               </Button>
             </div>
             <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
-              <p className="font-medium text-muted-foreground">Timer Starting Sound</p>
+              <p className="font-medium text-muted-foreground">
+                Timer Starting Sound
+              </p>
               <Button
                 variant="outline"
-                onClick={() => playSound("sessionStart")} className="rounded-4xl">
+                onClick={() => playSound("sessionStart")}
+                className="rounded-4xl"
+              >
                 <Play className="size-4 fill-black" /> Play Sound
               </Button>
             </div>
             <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
-              <p className="font-medium text-muted-foreground">Timer Completion Sound</p>
+              <p className="font-medium text-muted-foreground">
+                Timer Completion Sound
+              </p>
               <Button
                 variant="outline"
-                onClick={() => playSound("sessionEnd")} className="rounded-4xl">
+                onClick={() => playSound("sessionEnd")}
+                className="rounded-4xl"
+              >
                 <Play className="size-4 fill-black" /> Play Sound
               </Button>
             </div>
             <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
-              <p className="font-medium text-muted-foreground">Workflow Completion Sound</p>
+              <p className="font-medium text-muted-foreground">
+                Workflow Completion Sound
+              </p>
               <Button
                 variant="outline"
-                onClick={() => playSound("workflowEnd")} className="rounded-4xl">
+                onClick={() => playSound("workflowEnd")}
+                className="rounded-4xl"
+              >
                 <Play className="size-4 fill-black" /> Play Sound
               </Button>
             </div>
@@ -120,5 +157,5 @@ export function WorkflowHelpButton() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

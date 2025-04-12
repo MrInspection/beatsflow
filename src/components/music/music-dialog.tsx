@@ -15,12 +15,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { searchMusic } from "@/lib/music-services";
 import { cn } from "@/lib/utils";
 import { useMusicStore } from "@/stores/use-music";
+import { usePanelStore } from "@/stores/use-side-panel";
 import { Disc3, Play, Search, Youtube } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { MiniPlayer } from "./mini-player";
 import { YouTubePlayer } from "./youtube-player";
-import {usePanelStore} from "@/stores/use-side-panel";
 
 export function AudioElement() {
   const { currentTrack, isPlaying, isLooping, nextTrack } = useMusicStore();
@@ -120,7 +120,8 @@ function SearchResults() {
 
 export function MusicDialog() {
   const { openPanel, setOpenPanel } = usePanelStore();
-  const { setSearchQuery, searchQuery, setSearchResults, setIsLoading } = useMusicStore();
+  const { setSearchQuery, searchQuery, setSearchResults, setIsLoading } =
+    useMusicStore();
   const [activeTab, setActiveTab] = useState<"playlist" | "search">("playlist");
   const searchTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -153,12 +154,15 @@ export function MusicDialog() {
     <>
       <AudioElement />
       <YouTubePlayer />
-      <Dialog open={openPanel === "music"} onOpenChange={(open) => setOpenPanel(open ? "music" : null)}>
-        <DialogTrigger className="sm:hidden">
-          <div className={cn(buttonVariants({variant: "ghost"}))}>
+      <Dialog
+        open={openPanel === "music"}
+        onOpenChange={(open) => setOpenPanel(open ? "music" : null)}
+      >
+        <DialogTrigger asChild>
+          <button className={cn(buttonVariants({ variant: "ghost" }))}>
             <Disc3 className="size-4" />
             <p className="sr-only">Music</p>
-          </div>
+          </button>
         </DialogTrigger>
         <DialogContent className="p-0 gap-0 rounded-3xl">
           <DialogHeader className="p-6 pb-0 text-left">
