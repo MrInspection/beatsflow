@@ -4,32 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="style(theme-toggle): update icons size">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/2.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/3.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/4.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/5.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/anime-chill.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/anime-lofi.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/cat-thinking-about-you.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/crescent-moon.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/ghostrifter-official-celestia.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/gims_yolo.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/lofi-girl-lofi.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/lost-and-found.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/otjan-bird.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/retrowave-synthwave.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/silent-wood.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/walking-anime.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="fix: eslint deployment errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/site-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/site-header.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +169,7 @@
       <workItem from="1743941256200" duration="1873000" />
       <workItem from="1744004712030" duration="1475000" />
       <workItem from="1744015193504" duration="1081000" />
-      <workItem from="1744442645015" duration="27559000" />
+      <workItem from="1744442645015" duration="28918000" />
     </task>
     <task id="LOCAL-00001" summary="chore: upgraded project to Next.js 15">
       <option name="closed" value="true" />
@@ -403,7 +379,47 @@
       <option name="project" value="LOCAL" />
       <updated>1744470355028</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="chore: update next config for external images">
+      <option name="closed" value="true" />
+      <created>1744470410392</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1744470410392</updated>
+    </task>
+    <task id="LOCAL-00028" summary="feat(components/ui): add sheet &amp; skeleton component">
+      <option name="closed" value="true" />
+      <created>1744470436706</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1744470436706</updated>
+    </task>
+    <task id="LOCAL-00029" summary="chore(deps): bump next.js + eslint-config-next to 15.3.0 &amp; add react-youtube">
+      <option name="closed" value="true" />
+      <created>1744470496009</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1744470496009</updated>
+    </task>
+    <task id="LOCAL-00030" summary="style: update globals.css">
+      <option name="closed" value="true" />
+      <created>1744470558646</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1744470558646</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix: eslint deployment errors">
+      <option name="closed" value="true" />
+      <created>1744470726488</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1744470726488</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,10 +437,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: upgraded project to Next.js 15" />
-    <MESSAGE value="refactor(chatbot): remove chatbot feature" />
-    <MESSAGE value="feat(dark-mode): add dark-mode support" />
-    <MESSAGE value="feat(music): add beatsflow music" />
     <MESSAGE value="chore: add project assets" />
     <MESSAGE value="refactor: minor changes" />
     <MESSAGE value="chore(eslint): code cleanup" />
@@ -445,6 +457,11 @@
     <MESSAGE value="feat(side-panel): update zustand store" />
     <MESSAGE value="feat(side-panel): add side-panel component" />
     <MESSAGE value="style(theme-toggle): update icons size" />
-    <option name="LAST_COMMIT_MESSAGE" value="style(theme-toggle): update icons size" />
+    <MESSAGE value="chore: update next config for external images" />
+    <MESSAGE value="feat(components/ui): add sheet &amp; skeleton component" />
+    <MESSAGE value="chore(deps): bump next.js + eslint-config-next to 15.3.0 &amp; add react-youtube" />
+    <MESSAGE value="style: update globals.css" />
+    <MESSAGE value="fix: eslint deployment errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: eslint deployment errors" />
   </component>
 </project>

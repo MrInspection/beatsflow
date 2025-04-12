@@ -10,19 +10,33 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "BeatsFlōw",
   description: "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
+  keywords: [
+    "Moussax",
+    "MrInspection"
+  ],
+  creator: "MrInspection",
   openGraph: {
-    url: "https://moussax.vercel.app",
+    url: "https://beatsflow.vercel.app",
+    type: "website",
     title: "BeatsFlōw",
     description: "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
+    siteName: "BeatsFlōw",
     images: [
       {
-        url: "https://beatsflow.vercel.app/beatsflow.png",
+        url: "https://beatsflow.vercel.app/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "BeatsFlōw",
       },
     ],
-  }
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BeatsFlōw",
+    description: "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
+    images: ["https://beatsflow.vercel.app/opengraph-image.png"],
+    creator: "@MrInspection",
+  },
 };
 
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
