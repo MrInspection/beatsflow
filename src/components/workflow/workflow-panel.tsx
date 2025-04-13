@@ -27,7 +27,7 @@ import { Play, Workflow } from "lucide-react";
 
 export function WorkflowPanel() {
   return (
-    <section className="max-xl:hidden w-[500px] overflow-hidden h-screen flex flex-col">
+    <section className="max-xl:hidden w-[500px] overflow-hidden h-screen flex flex-col bg-muted/30 dark:bg-muted/15">
       <div className="border-b inline-flex items-center justify-between z-20 w-full px-6 py-3">
         <div className="inline-flex items-center gap-2">
           <Workflow className="size-5 text-muted-foreground" />
@@ -63,7 +63,7 @@ export function WorkflowPanelMobile() {
           </SheetTitle>
           <WorkflowButton />
         </SheetHeader>
-        <section className="border-t overflow-y-auto px-8">
+        <section className="border-t overflow-y-auto md:px-8">
           <WorkflowEditor />
         </section>
       </SheetContent>

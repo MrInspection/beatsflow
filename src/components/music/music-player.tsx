@@ -63,8 +63,8 @@ export function MusicPlayer({ className }: { className?: string }) {
                   <button
                     onClick={toggleShuffle}
                     className={cn(
-                      "p-1.5 rounded-full hover:bg-muted",
-                      isShuffling ? "text-emerald-700" : "text-muted-foreground"
+                      "p-1.5 rounded-full hover:bg-muted cursor-pointer",
+                      isShuffling ? "text-cyan-600 dark:text-cyan-400" : "text-muted-foreground"
                     )}
                   >
                     <Shuffle className="size-4" />
@@ -77,7 +77,7 @@ export function MusicPlayer({ className }: { className?: string }) {
                 <TooltipTrigger asChild>
                   <button
                     onClick={previousTrack}
-                    className="p-1.5 rounded-full hover:bg-muted text-muted-foreground group hover:text-foreground"
+                    className="p-1.5 rounded-full hover:bg-muted text-muted-foreground group hover:text-foreground cursor-pointer"
                     disabled={!currentTrack}
                   >
                     <SkipBack className="size-4 fill-muted-foreground group-hover:fill-foreground" />
@@ -90,7 +90,7 @@ export function MusicPlayer({ className }: { className?: string }) {
                   <button
                     onClick={togglePlay}
                     className={cn(
-                      "p-2 rounded-full",
+                      "p-2 rounded-full cursor-pointer",
                       currentTrack
                         ? "bg-primary text-primary-foreground hover:bg-primary/90"
                         : "bg-muted text-muted-foreground fill-muted-foreground"
@@ -109,7 +109,7 @@ export function MusicPlayer({ className }: { className?: string }) {
                 <TooltipTrigger asChild>
                   <button
                     onClick={nextTrack}
-                    className="p-1.5 rounded-full hover:bg-muted text-muted-foreground group hover:text-foreground"
+                    className="p-1.5 rounded-full hover:bg-muted text-muted-foreground group hover:text-foreground cursor-pointer"
                     disabled={!currentTrack}
                   >
                     <SkipForward className="size-4 fill-muted-foreground group-hover:fill-foreground" />
@@ -122,8 +122,8 @@ export function MusicPlayer({ className }: { className?: string }) {
                   <button
                     onClick={toggleLoop}
                     className={cn(
-                      "p-1.5 rounded-full hover:bg-muted",
-                      isLooping ? "text-emerald-700" : "text-muted-foreground"
+                      "p-1.5 rounded-full hover:bg-muted cursor-pointer",
+                      isLooping ? "text-cyan-600 dark:text-cyan-400" : "text-muted-foreground"
                     )}
                   >
                     <Repeat className="size-4" />

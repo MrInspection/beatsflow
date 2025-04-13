@@ -9,6 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from "@/components/ui/alert-dialog";
+import {playSound} from "@/lib/sounds";
 
 export function WorkflowButton() {
   const {
@@ -27,6 +28,7 @@ export function WorkflowButton() {
 
   const confirmStopExecution = () => {
     stopExecution();
+    playSound("workflowCancel")
     setIsStopDialogOpen(false);
   };
 

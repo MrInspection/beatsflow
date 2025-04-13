@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="style: update information dialogs" />
+    <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="feat(sounds): add cancel sound &amp; update session sound">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sounds/workflow_end.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/public/sounds/workflow_end.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/music/music-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/music/music-dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/music/music-player.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/music/music-player.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/site-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/site-header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workflow/circular-timer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/circular-timer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workflow/workflow-block-item.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/workflow-block-item.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workflow/workflow-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/workflow-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workflow/workflow-panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/workflow-panel.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +77,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/mouss/WebstormProjects/beatsflow/.cursorrules",
+    "last_opened_file_path": "C:/Users/mouss/WebstormProjects/beatsflow/public/sounds",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,11 +100,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public\sounds" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\.cursorrules" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\src\app" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public" />
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public\thumbnails" />
-      <recent name="C:\Users\mouss\WebstormProjects\beatsflow\public\sounds\featured" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\src\components" />
@@ -168,6 +179,10 @@
       <workItem from="1744004712030" duration="1475000" />
       <workItem from="1744015193504" duration="1081000" />
       <workItem from="1744442645015" duration="28918000" />
+      <workItem from="1744478476334" duration="1193000" />
+      <workItem from="1744480663251" duration="623000" />
+      <workItem from="1744540462782" duration="960000" />
+      <workItem from="1744570983526" duration="6020000" />
     </task>
     <task id="LOCAL-00001" summary="chore: upgraded project to Next.js 15">
       <option name="closed" value="true" />
@@ -449,7 +464,39 @@
       <option name="project" value="LOCAL" />
       <updated>1744477605422</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="fix(music-player): client-side error on deployment (youtube)">
+      <option name="closed" value="true" />
+      <created>1744479438506</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1744479438506</updated>
+    </task>
+    <task id="LOCAL-00037" summary="style(theme-toggle): add icons">
+      <option name="closed" value="true" />
+      <created>1744479455799</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1744479455799</updated>
+    </task>
+    <task id="LOCAL-00038" summary="refactor(theme-toggle): remove unused icon">
+      <option name="closed" value="true" />
+      <created>1744479667735</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1744479667735</updated>
+    </task>
+    <task id="LOCAL-00039" summary="feat(sounds): add cancel sound &amp; update session sound">
+      <option name="closed" value="true" />
+      <created>1744577054438</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1744577054438</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -467,10 +514,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(seo): added opengraph &amp; twitter images" />
-    <MESSAGE value="chore: added ui components" />
-    <MESSAGE value="refactor: moved panels to side-panel directory" />
-    <MESSAGE value="feat(workflow): add drag-n-drop feature&#10;&#10;- Added context menu on click action&#10;- Updated workflow block ui&#10;- Removed old block properties" />
     <MESSAGE value="refactor: remove unused component" />
     <MESSAGE value="style: minor ui tweaks" />
     <MESSAGE value="fix(deps): fix deployment error" />
@@ -492,7 +535,11 @@
     <MESSAGE value="refactor: reformat code" />
     <MESSAGE value="fix(music): youtube audio not looped" />
     <MESSAGE value="style: update information dialogs" />
-    <option name="LAST_COMMIT_MESSAGE" value="style: update information dialogs" />
+    <MESSAGE value="fix(music-player): client-side error on deployment (youtube)" />
+    <MESSAGE value="style(theme-toggle): add icons" />
+    <MESSAGE value="refactor(theme-toggle): remove unused icon" />
+    <MESSAGE value="feat(sounds): add cancel sound &amp; update session sound" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(sounds): add cancel sound &amp; update session sound" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -500,7 +547,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/stores/use-music.ts</url>
           <line>103</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -130,8 +130,8 @@ export function WorkflowBlockItem({
           <ContextMenuTrigger asChild>
             <div
               className={cn(
-                "border-2 px-6 py-4 rounded-3xl inline-flex items-center gap-3 shadow-sm cursor-pointer w-full bg-background",
-                isSelected && "border-blue-500 dark:border-blue-700 border-4"
+                "border-2 px-6 py-4 rounded-3xl inline-flex items-center gap-3 shadow-sm cursor-pointer w-full bg-background select-none",
+                isSelected && "border-cyan-500 dark:border-cyan-700 border-4"
               )}
               onClick={() => selectBlock(block.id)}
             >
@@ -144,11 +144,11 @@ export function WorkflowBlockItem({
               </div>
             </div>
           </ContextMenuTrigger>
-          <ContextMenuContent className="rounded-2xl">
+          <ContextMenuContent className="rounded-xl">
             <ContextMenuItem
               onClick={handleDelete}
               disabled={isExecuting}
-              className="rounded-xl"
+              className="rounded-lg cursor-pointer"
             >
               <Trash2 className="size-4" /> Delete
             </ContextMenuItem>
@@ -168,8 +168,8 @@ export function WorkflowBlockItem({
         <ContextMenuTrigger asChild>
           <div
             className={cn(
-              "border-2 px-3 py-4 rounded-3xl shadow-sm cursor-pointer bg-background",
-              isSelected && "border-blue-500 dark:border-blue-700 border-4",
+              "border-2 px-3 py-4 rounded-3xl shadow-sm cursor-pointer bg-background select-none",
+              isSelected && "border-cyan-500 dark:border-cyan-700 border-4",
               isExecuting && "px-6"
             )}
             onClick={() => selectBlock(block.id)}
@@ -196,8 +196,8 @@ export function WorkflowBlockItem({
                         {getBlockDescription(block.type)}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1 text-xs px-2 py-0.5 bg-muted rounded-full">
-                      {block.duration}m
+                    <div className="flex items-center gap-1 text-xs px-2 py-0.5 bg-cyan-100/80 text-cyan-900 dark:bg-cyan-700/15 dark:text-cyan-400 rounded-full">
+                      {block.duration}min
                     </div>
                   </div>
                 </div>
@@ -205,11 +205,11 @@ export function WorkflowBlockItem({
             </div>
           </div>
         </ContextMenuTrigger>
-        <ContextMenuContent className="rounded-2xl">
+        <ContextMenuContent className="rounded-xl">
           <ContextMenuItem
             onClick={handleEdit}
             disabled={isExecuting}
-            className="rounded-t-xl text-sm"
+            className="rounded-t-lg text-sm curosr-pointer"
           >
             <Edit3 className="size-4" />
             Edit Block
@@ -218,7 +218,7 @@ export function WorkflowBlockItem({
           <ContextMenuItem
             onClick={handleDelete}
             disabled={isExecuting}
-            className="rounded-b-xl text-sm"
+            className="rounded-b-lg text-sm curosr-pointer"
           >
             <Trash2 className="size-4" />
             Delete
@@ -310,7 +310,7 @@ export function WorkflowBlockItem({
                         htmlFor={`r${option.value}`}
                         className={`flex items-center gap-2.5 rounded-2xl border-2 py-4 px-6 cursor-pointer transition-all hover:bg-accent ${
                           String(block.duration) === String(option.value)
-                            ? "border-violet-500 bg-violet-500/10 dark:border-violet-700 dark:bg-violet-700/20"
+                            ? "border-cyan-500 bg-cyan-50/80 dark:border-cyan-400 dark:bg-cyan-700/20"
                             : "hover:bg-muted/40"
                         }`}
                       >
