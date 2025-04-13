@@ -1,4 +1,4 @@
-export type SoundType = "workflowStart" | "workflowEnd" | "sessionStart" | "sessionEnd"
+export type SoundType = "workflowStart" | "workflowEnd" | "sessionStart" | "sessionEnd" | "workflowCancel"
 
 // Map of sound URLs
 const soundMap: Record<SoundType, string> = {
@@ -6,6 +6,7 @@ const soundMap: Record<SoundType, string> = {
   workflowEnd: "/sounds/workflow_end.ogg",
   sessionStart: "/sounds/session_start.ogg",
   sessionEnd: "/sounds/session_end.ogg",
+  workflowCancel: "/sounds/workflow_cancelled.ogg",
 }
 
 const audioCache: Record<string, HTMLAudioElement> = {}
