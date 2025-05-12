@@ -4,12 +4,12 @@ import {MusicPlayer} from "@/components/music/music-player";
 import {TrackList} from "@/components/music/track-list";
 import {buttonVariants} from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+  ResponsiveDialogHeader,
+  ResponsiveDialogTitle,
+  ResponsiveDialogTrigger,
+} from "@/components/ui/responsive-dialog";
 import {Input} from "@/components/ui/input";
 import {Skeleton} from "@/components/ui/skeleton";
 import {searchMusic} from "@/lib/music-services";
@@ -152,21 +152,21 @@ export function MusicDialog() {
     <>
       <AudioElement/>
       <YouTubePlayer/>
-      <Dialog
+      <ResponsiveDialog
         open={openPanel === "music"}
         onOpenChange={(open) => setOpenPanel(open ? "music" : null)}
       >
-        <DialogTrigger asChild className="sm:hidden">
+        <ResponsiveDialogTrigger asChild className="sm:hidden">
           <button className={cn(buttonVariants({variant: "ghost"}))}>
             <Disc3 className="size-4"/>
             <p className="sr-only">Music</p>
           </button>
-        </DialogTrigger>
-        <DialogContent className="p-0 gap-0 rounded-3xl">
-          <DialogHeader className="p-6 pb-0 text-left">
-            <DialogTitle className="text-lg tracking-tight mb-2">
+        </ResponsiveDialogTrigger>
+        <ResponsiveDialogContent className="p-0 gap-0 max-sm:rounded-t-3xl sm:rounded-3xl">
+          <ResponsiveDialogHeader className="p-6 pb-0 text-left">
+            <ResponsiveDialogTitle className="text-lg tracking-tight mb-2">
               BeatsFlōw Music
-            </DialogTitle>
+            </ResponsiveDialogTitle>
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground"/>
               <Input
@@ -206,15 +206,15 @@ export function MusicDialog() {
                 )}
               </button>
             </div>
-          </DialogHeader>
+          </ResponsiveDialogHeader>
           <div className="p-2 py-0 border-t">
             <MusicPlayer/>
           </div>
           <div className="p-6 border-t max-h-[400px] overflow-y-auto">
             {activeTab === "playlist" ? <TrackList/> : <SearchResults/>}
           </div>
-        </DialogContent>
-      </Dialog>
+        </ResponsiveDialogContent>
+      </ResponsiveDialog>
     </>
   );
 }
