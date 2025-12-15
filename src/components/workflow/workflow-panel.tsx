@@ -1,5 +1,7 @@
 "use client";
 
+import { QuestionMarkIcon } from "@radix-ui/react-icons";
+import { Play, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,20 +24,18 @@ import { WorkflowButton } from "@/components/workflow/workflow-button";
 import { WorkflowEditor } from "@/components/workflow/workflow-editor";
 import { playSound } from "@/lib/sounds";
 import { usePanelStore } from "@/stores/use-side-panel";
-import { QuestionMarkIcon } from "@radix-ui/react-icons";
-import { Play, Workflow } from "lucide-react";
 
 export function WorkflowPanel() {
   return (
-    <section className="max-xl:hidden w-[500px] overflow-hidden h-screen flex flex-col bg-muted/30 dark:bg-muted/15">
-      <div className="border-b inline-flex items-center justify-between z-20 w-full px-6 py-3">
+    <section className="flex h-screen w-[500px] flex-col overflow-hidden bg-muted/30 max-xl:hidden dark:bg-muted/15">
+      <div className="z-20 inline-flex w-full items-center justify-between border-b px-6 py-3">
         <div className="inline-flex items-center gap-2">
           <Workflow className="size-5 text-muted-foreground" />
           <h3 className="font-semibold tracking-tight">Workflōw Editor</h3>
         </div>
         <WorkflowButton />
       </div>
-      <div className="overflow-y-auto mb-16 flex-1 px-8 relative">
+      <div className="relative mb-16 flex-1 overflow-y-auto px-8">
         <WorkflowEditor />
       </div>
     </section>
@@ -51,19 +51,19 @@ export function WorkflowPanelMobile() {
       onOpenChange={(open) => setOpenPanel(open ? "workflow" : null)}
     >
       <SheetTrigger asChild>
-        <Button className="sm:hidden px-0" variant="ghost" size="icon">
+        <Button className="px-0 sm:hidden" variant="ghost" size="icon">
           <Workflow className="size-4" />
           <span className="sr-only">Workflow Editor</span>
         </Button>
       </SheetTrigger>
-      <SheetContent className="p-0 max-sm:w-full md:max-w-[500px] overflow-hidden gap-0">
+      <SheetContent className="gap-0 overflow-hidden p-0 max-sm:w-full md:max-w-[500px]">
         <SheetHeader className="p-6">
-          <SheetTitle className="text-lg mb-2 tracking-tight">
+          <SheetTitle className="mb-2 text-lg tracking-tight">
             Workflōw Editor
           </SheetTitle>
           <WorkflowButton />
         </SheetHeader>
-        <section className="border-t overflow-y-auto md:px-8">
+        <section className="overflow-y-auto border-t md:px-8">
           <WorkflowEditor />
         </section>
       </SheetContent>
@@ -75,10 +75,10 @@ export function WorkflowHelpButton() {
   return (
     <Dialog>
       <DialogTrigger>
-        <section className="absolute bottom-4 right-5">
-          <div className="flex flex-col gap-2 relative">
+        <section className="absolute right-5 bottom-4">
+          <div className="relative flex flex-col gap-2">
             <Button
-              className="rounded-full relative"
+              className="relative rounded-full"
               variant="outline"
               size="icon"
             >
@@ -87,7 +87,7 @@ export function WorkflowHelpButton() {
           </div>
         </section>
       </DialogTrigger>
-      <DialogContent className="p-0 gap-0 rounded-3xl">
+      <DialogContent className="gap-0 rounded-3xl p-0">
         <DialogHeader className="p-8 text-left">
           <DialogTitle className="text-lg tracking-tight">
             What is a BeatsFlōw Workflow?
@@ -98,9 +98,9 @@ export function WorkflowHelpButton() {
             efficient and balanced work routine.
           </DialogDescription>
         </DialogHeader>
-        <div className="p-6 border-t">
+        <div className="border-t p-6">
           <section className="grid gap-2">
-            <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
+            <div className="flex items-center justify-between rounded-full border p-2 pl-4">
               <p className="font-medium text-muted-foreground">
                 Workflow Starting Sound
               </p>
@@ -112,7 +112,7 @@ export function WorkflowHelpButton() {
                 <Play className="size-4 fill-black" /> Play Sound
               </Button>
             </div>
-            <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
+            <div className="flex items-center justify-between rounded-full border p-2 pl-4">
               <p className="font-medium text-muted-foreground">
                 Timer Starting Sound
               </p>
@@ -124,7 +124,7 @@ export function WorkflowHelpButton() {
                 <Play className="size-4 fill-black" /> Play Sound
               </Button>
             </div>
-            <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
+            <div className="flex items-center justify-between rounded-full border p-2 pl-4">
               <p className="font-medium text-muted-foreground">
                 Timer Completion Sound
               </p>
@@ -136,8 +136,8 @@ export function WorkflowHelpButton() {
                 <Play className="size-4 fill-black" /> Play Sound
               </Button>
             </div>
-            <div className="border flex items-center justify-between p-2 pl-4 rounded-full">
-              <p className="font-medium text-muted-foreground line-clamp-1">
+            <div className="flex items-center justify-between rounded-full border p-2 pl-4">
+              <p className="line-clamp-1 font-medium text-muted-foreground">
                 Workflow Completion Sound
               </p>
               <Button
@@ -150,7 +150,7 @@ export function WorkflowHelpButton() {
             </div>
           </section>
         </div>
-        <DialogFooter className="px-6 py-4 border-t">
+        <DialogFooter className="border-t px-6 py-4">
           <DialogClose className="w-full">
             <Button className="w-full">Understood</Button>
           </DialogClose>

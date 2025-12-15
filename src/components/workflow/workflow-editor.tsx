@@ -1,5 +1,24 @@
 "use client";
 
+import {
+  closestCenter,
+  DndContext,
+  type DragEndEvent,
+  DragOverlay,
+  type DragStartEvent,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { BrainCircuit, Coffee, Flag, Plus, Timer, Trophy } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,25 +30,6 @@ import {
 import { WorkflowBlockItem } from "@/components/workflow/workflow-block-item";
 import { WorkflowHelpButton } from "@/components/workflow/workflow-panel";
 import { useWorkflowStore } from "@/stores/use-workflow";
-import {
-  closestCenter,
-  DndContext,
-  DragOverlay,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  type DragEndEvent,
-  type DragStartEvent,
-} from "@dnd-kit/core";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import {
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { BrainCircuit, Coffee, Flag, Plus, Timer, Trophy } from "lucide-react";
-import { useState } from "react";
 
 export function WorkflowEditor() {
   const {
@@ -51,7 +51,7 @@ export function WorkflowEditor() {
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   const handleDragStart = (event: DragStartEvent) => {
@@ -90,12 +90,12 @@ export function WorkflowEditor() {
     <>
       <section className="flex-1 overflow-y-auto p-8">
         <div className="flex flex-col items-center">
-          <div className="border-2 px-6 py-2 rounded-3xl inline-flex items-center gap-2 shadow-sm bg-background">
+          <div className="inline-flex items-center gap-2 rounded-3xl border-2 bg-background px-6 py-2 shadow-sm">
             <Flag className="size-4 fill-muted-foreground stroke-muted-foreground" />
             <span>Start</span>
           </div>
 
-          <div className="w-px h-6 border" />
+          <div className="h-6 w-px border" />
 
           <div className="w-full">
             {blocks.length > 0 && (
@@ -114,7 +114,7 @@ export function WorkflowEditor() {
                     {blocks.map((block, index) => (
                       <div
                         key={block.id}
-                        className="w-full flex flex-col items-center"
+                        className="flex w-full flex-col items-center"
                       >
                         <WorkflowBlockItem
                           block={block}
@@ -123,7 +123,7 @@ export function WorkflowEditor() {
                           isExecuting={isExecuting}
                         />
                         {index < blocks.length - 1 && (
-                          <div className="w-px h-6 border" />
+                          <div className="h-6 w-px border" />
                         )}
                       </div>
                     ))}
@@ -147,14 +147,14 @@ export function WorkflowEditor() {
           </div>
           {canAddMoreBlocks() && !isExecuting && (
             <>
-              {blocks.length > 0 && <div className="w-px h-6 border" />}
+              {blocks.length > 0 && <div className="h-6 w-px border" />}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button className="rounded-full" disabled={isExecuting}>
                     <Plus className="size-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="rounded-2xl mt-1">
+                <DropdownMenuContent className="mt-1 rounded-2xl">
                   <DropdownMenuItem
                     onClick={() => addBlock("focus")}
                     className="rounded-t-xl"

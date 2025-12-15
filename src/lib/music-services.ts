@@ -1,4 +1,4 @@
-import { Track } from "@/stores/use-music";
+import type { Track } from "@/stores/use-music";
 
 export async function searchMusic(query: string): Promise<Track[]> {
   try {

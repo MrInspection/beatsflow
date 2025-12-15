@@ -1,4 +1,4 @@
-import {Track} from "@/stores/use-music";
+import type { Track } from "@/stores/use-music";
 
 export const playlist: Track[] = [
   {
@@ -35,5 +35,5 @@ export const playlist: Track[] = [
     artist: "Nature Sounds",
     cover: "/thumbnails/retrowave-synthwave.gif",
     url: "/sounds/featured/silent-wood.mp3",
-  }
-]
+  },
+];

@@ -1,24 +1,7 @@
 "use client";
 
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
-import {
-  useWorkflowStore,
-  type WorkflowBlock,
-  type WorkflowBlockType,
-} from "@/stores/use-workflow";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import {
   BrainCircuit,
   Clock1,
@@ -32,13 +15,29 @@ import {
   Trophy,
 } from "lucide-react";
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { cn } from "@/lib/utils";
+import {
+  useWorkflowStore,
+  type WorkflowBlock,
+  type WorkflowBlockType,
+} from "@/stores/use-workflow";
 
 interface WorkflowBlockItemProps {
   block: WorkflowBlock;
@@ -130,15 +129,15 @@ export function WorkflowBlockItem({
           <ContextMenuTrigger asChild>
             <div
               className={cn(
-                "border-2 px-6 py-4 rounded-3xl inline-flex items-center gap-3 shadow-sm cursor-pointer w-full bg-background select-none",
-                isSelected && "border-cyan-500 dark:border-cyan-700 border-4"
+                "inline-flex w-full cursor-pointer select-none items-center gap-3 rounded-3xl border-2 bg-background px-6 py-4 shadow-sm",
+                isSelected && "border-4 border-cyan-500 dark:border-cyan-700",
               )}
               onClick={() => selectBlock(block.id)}
             >
               <Trophy className="size-7 shrink-0" />
               <div className="flex flex-col">
                 <span className="font-medium">End of Workflow</span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-muted-foreground text-xs">
                   Marks the completion of your workflow
                 </span>
               </div>
@@ -148,7 +147,7 @@ export function WorkflowBlockItem({
             <ContextMenuItem
               onClick={handleDelete}
               disabled={isExecuting}
-              className="rounded-lg cursor-pointer"
+              className="cursor-pointer rounded-lg"
             >
               <Trash2 className="size-4" /> Delete
             </ContextMenuItem>
@@ -168,35 +167,35 @@ export function WorkflowBlockItem({
         <ContextMenuTrigger asChild>
           <div
             className={cn(
-              "border-2 px-3 py-4 rounded-3xl shadow-sm cursor-pointer bg-background select-none",
-              isSelected && "border-cyan-500 dark:border-cyan-700 border-4",
-              isExecuting && "px-6"
+              "cursor-pointer select-none rounded-3xl border-2 bg-background px-3 py-4 shadow-sm",
+              isSelected && "border-4 border-cyan-500 dark:border-cyan-700",
+              isExecuting && "px-6",
             )}
             onClick={() => selectBlock(block.id)}
           >
             <div className="flex items-center gap-1.5">
               {isDraggable && (
                 <div
-                  className="cursor-grab p-1 touch-none h-full"
+                  className="h-full cursor-grab touch-none p-1"
                   {...attributes}
                   {...listeners}
                 >
                   <GripVertical className="size-4 text-muted-foreground" />
                 </div>
               )}
-              <section className="flex-1 flex items-center gap-2">
+              <section className="flex flex-1 items-center gap-2">
                 {getBlockIcon(block.type)}
                 <div className="flex-1">
-                  <div className="flex justify-between items-start">
+                  <div className="flex items-start justify-between">
                     <div>
                       <h3 className="font-medium">
                         {getBlockTitle(block.type)}
                       </h3>
-                      <p className="text-xs text-muted-foreground line-clamp-1">
+                      <p className="line-clamp-1 text-muted-foreground text-xs">
                         {getBlockDescription(block.type)}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1 text-xs px-2 py-0.5 bg-cyan-100/80 text-cyan-900 dark:bg-cyan-700/15 dark:text-cyan-400 rounded-full">
+                    <div className="flex items-center gap-1 rounded-full bg-cyan-100/80 px-2 py-0.5 text-cyan-900 text-xs dark:bg-cyan-700/15 dark:text-cyan-400">
                       {block.duration}min
                     </div>
                   </div>
@@ -209,7 +208,7 @@ export function WorkflowBlockItem({
           <ContextMenuItem
             onClick={handleEdit}
             disabled={isExecuting}
-            className="rounded-t-lg text-sm curosr-pointer"
+            className="curosr-pointer rounded-t-lg text-sm"
           >
             <Edit3 className="size-4" />
             Edit Block
@@ -218,7 +217,7 @@ export function WorkflowBlockItem({
           <ContextMenuItem
             onClick={handleDelete}
             disabled={isExecuting}
-            className="rounded-b-lg text-sm curosr-pointer"
+            className="curosr-pointer rounded-b-lg text-sm"
           >
             <Trash2 className="size-4" />
             Delete
@@ -227,11 +226,11 @@ export function WorkflowBlockItem({
       </ContextMenu>
 
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="sm:max-w-[425px] p-0 rounded-3xl">
-          <DialogHeader className="p-6 border-b">
+        <DialogContent className="rounded-3xl p-0 sm:max-w-[425px]">
+          <DialogHeader className="border-b p-6">
             <DialogTitle>Edit {getBlockTitle(block.type)}</DialogTitle>
           </DialogHeader>
-          <div className="space-y-4 py-4 px-6">
+          <div className="space-y-4 px-6 py-4">
             {block.type === "focus" && (
               <>
                 <div className="space-y-2">
@@ -308,7 +307,7 @@ export function WorkflowBlockItem({
                       <Label
                         key={option.value}
                         htmlFor={`r${option.value}`}
-                        className={`flex items-center gap-2.5 rounded-2xl border-2 py-4 px-6 cursor-pointer transition-all hover:bg-accent ${
+                        className={`flex cursor-pointer items-center gap-2.5 rounded-2xl border-2 px-6 py-4 transition-all hover:bg-accent ${
                           String(block.duration) === String(option.value)
                             ? "border-cyan-500 bg-cyan-50/80 dark:border-cyan-400 dark:bg-cyan-700/20"
                             : "hover:bg-muted/40"
@@ -334,7 +333,7 @@ export function WorkflowBlockItem({
                           <p className="font-medium text-lg">
                             {option.value} minutes
                           </p>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-muted-foreground text-sm">
                             {option.description}
                           </p>
                         </div>
@@ -345,7 +344,7 @@ export function WorkflowBlockItem({
               </>
             )}
           </div>
-          <div className="flex justify-end border-t px-6 pb-6 pt-4">
+          <div className="flex justify-end border-t px-6 pt-4 pb-6">
             <Button
               className="w-full"
               onClick={() => setIsEditDialogOpen(false)}

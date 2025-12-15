@@ -1,9 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import { playSound, preloadSounds } from "@/lib/sounds";
 import { useTimerStore } from "@/stores/use-timer";
 import { useWorkflowStore } from "@/stores/use-workflow";
-import { useEffect } from "react";
 
 export function WorkflowExecutor() {
   const { blocks, currentBlockIndex, isExecuting, stopExecution } =

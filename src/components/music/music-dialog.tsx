@@ -1,8 +1,12 @@
 "use client";
 
-import {MusicPlayer} from "@/components/music/music-player";
-import {TrackList} from "@/components/music/track-list";
-import {buttonVariants} from "@/components/ui/button";
+import { Disc3, Play, Search } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { MusicPlayer } from "@/components/music/music-player";
+import { TrackList } from "@/components/music/track-list";
+import { buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
@@ -10,20 +14,16 @@ import {
   ResponsiveDialogTitle,
   ResponsiveDialogTrigger,
 } from "@/components/ui/responsive-dialog";
-import {Input} from "@/components/ui/input";
-import {Skeleton} from "@/components/ui/skeleton";
-import {searchMusic} from "@/lib/music-services";
-import {cn} from "@/lib/utils";
-import {useMusicStore} from "@/stores/use-music";
-import {usePanelStore} from "@/stores/use-side-panel";
-import {Disc3, Play, Search} from "lucide-react";
-import Image from "next/image";
-import {useEffect, useRef, useState} from "react";
-import {MiniPlayer} from "./mini-player";
-import {YouTubePlayer} from "./youtube-player";
+import { Skeleton } from "@/components/ui/skeleton";
+import { searchMusic } from "@/lib/music-services";
+import { cn } from "@/lib/utils";
+import { useMusicStore } from "@/stores/use-music";
+import { usePanelStore } from "@/stores/use-side-panel";
+import { MiniPlayer } from "./mini-player";
+import { YouTubePlayer } from "./youtube-player";
 
 export function AudioElement() {
-  const {currentTrack, isPlaying, isLooping, nextTrack} = useMusicStore();
+  const { currentTrack, isPlaying, isLooping, nextTrack } = useMusicStore();
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -55,17 +55,17 @@ export function AudioElement() {
 }
 
 function SearchResults() {
-  const {searchResults, setCurrentTrack, isLoading} = useMusicStore();
+  const { searchResults, setCurrentTrack, isLoading } = useMusicStore();
 
   if (isLoading) {
     return (
       <div className="space-y-2">
-        {Array.from({length: 3}).map((_, i) => (
+        {Array.from({ length: 3 }).map((_, i) => (
           <div key={i} className="flex items-center gap-3 p-2">
-            <Skeleton className="size-11"/>
+            <Skeleton className="size-11" />
             <div className="flex-1 space-y-2">
-              <Skeleton className="h-4 w-[200px]"/>
-              <Skeleton className="h-3 w-[160px]"/>
+              <Skeleton className="h-4 w-[200px]" />
+              <Skeleton className="h-3 w-[160px]" />
             </div>
           </div>
         ))}
@@ -75,7 +75,7 @@ function SearchResults() {
 
   if (searchResults.length === 0) {
     return (
-      <div className="text-center py-8 text-muted-foreground">
+      <div className="py-8 text-center text-muted-foreground">
         No results found
       </div>
     );
@@ -86,7 +86,7 @@ function SearchResults() {
       {searchResults.map((track) => (
         <div
           key={track.id}
-          className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer group"
+          className="group flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-muted/50"
           onClick={() => setCurrentTrack(track)}
         >
           <div className="relative size-11 flex-shrink-0">
@@ -97,16 +97,15 @@ function SearchResults() {
               width={44}
               height={44}
             />
-            <div
-              className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <Play className="size-6 text-white"/>
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+              <Play className="size-6 text-white" />
             </div>
           </div>
-          <div className="flex-1 min-w-0 max-w-[calc(100%-5rem)]">
-            <h3 className="font-medium truncate text-sm leading-5">
+          <div className="min-w-0 max-w-[calc(100%-5rem)] flex-1">
+            <h3 className="truncate font-medium text-sm leading-5">
               {track.title}
             </h3>
-            <p className="text-xs text-muted-foreground truncate leading-4">
+            <p className="truncate text-muted-foreground text-xs leading-4">
               {track.artist}
             </p>
           </div>
@@ -117,8 +116,8 @@ function SearchResults() {
 }
 
 export function MusicDialog() {
-  const {openPanel, setOpenPanel} = usePanelStore();
-  const {setSearchQuery, searchQuery, setSearchResults, setIsLoading} =
+  const { openPanel, setOpenPanel } = usePanelStore();
+  const { setSearchQuery, searchQuery, setSearchResults, setIsLoading } =
     useMusicStore();
   const [activeTab, setActiveTab] = useState<"playlist" | "search">("playlist");
   const searchTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -150,25 +149,25 @@ export function MusicDialog() {
 
   return (
     <>
-      <AudioElement/>
-      <YouTubePlayer/>
+      <AudioElement />
+      <YouTubePlayer />
       <ResponsiveDialog
         open={openPanel === "music"}
         onOpenChange={(open) => setOpenPanel(open ? "music" : null)}
       >
         <ResponsiveDialogTrigger asChild className="sm:hidden">
-          <button className={cn(buttonVariants({variant: "ghost"}))}>
-            <Disc3 className="size-4"/>
+          <button className={cn(buttonVariants({ variant: "ghost" }))}>
+            <Disc3 className="size-4" />
             <p className="sr-only">Music</p>
           </button>
         </ResponsiveDialogTrigger>
-        <ResponsiveDialogContent className="p-0 gap-0 max-sm:rounded-t-3xl sm:rounded-3xl">
+        <ResponsiveDialogContent className="gap-0 p-0 max-sm:rounded-t-3xl sm:rounded-3xl">
           <ResponsiveDialogHeader className="p-6 pb-0 text-left">
-            <ResponsiveDialogTitle className="text-lg tracking-tight mb-2">
+            <ResponsiveDialogTitle className="mb-2 text-lg tracking-tight">
               BeatsFlōw Music
             </ResponsiveDialogTitle>
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground"/>
+              <Search className="absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search on YouTube..."
                 className="pl-10"
@@ -176,42 +175,42 @@ export function MusicDialog() {
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </div>
-            <div className="flex items-center gap-2 mt-2">
+            <div className="mt-2 flex items-center gap-2">
               <button
                 onClick={() => setActiveTab("playlist")}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer",
+                  "relative cursor-pointer px-4 py-2 font-medium text-sm transition-colors",
                   activeTab === "playlist"
                     ? "text-foreground"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground",
                 )}
               >
                 Playlist
                 {activeTab === "playlist" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"/>
+                  <div className="absolute right-0 bottom-0 left-0 h-0.5 bg-primary" />
                 )}
               </button>
               <button
                 onClick={() => setActiveTab("search")}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer",
+                  "relative cursor-pointer px-4 py-2 font-medium text-sm transition-colors",
                   activeTab === "search"
                     ? "text-foreground"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground",
                 )}
               >
                 YouTube Search
                 {activeTab === "search" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"/>
+                  <div className="absolute right-0 bottom-0 left-0 h-0.5 bg-primary" />
                 )}
               </button>
             </div>
           </ResponsiveDialogHeader>
-          <div className="p-2 py-0 border-t">
-            <MusicPlayer/>
+          <div className="border-t p-2 py-0">
+            <MusicPlayer />
           </div>
-          <div className="p-6 border-t max-h-[400px] overflow-y-auto">
-            {activeTab === "playlist" ? <TrackList/> : <SearchResults/>}
+          <div className="max-h-[400px] overflow-y-auto border-t p-6">
+            {activeTab === "playlist" ? <TrackList /> : <SearchResults />}
           </div>
         </ResponsiveDialogContent>
       </ResponsiveDialog>
@@ -219,4 +218,4 @@ export function MusicDialog() {
   );
 }
 
-export {MiniPlayer};
+export { MiniPlayer };

@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff863c2d-d4e4-46fe-8c38-260185dbed05" name="Changes" comment="feat(sounds): add cancel sound &amp; update session sound">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sounds/workflow_end.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/public/sounds/workflow_end.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/music/music-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/music/music-dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/music/music-player.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/music/music-player.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/site-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/site-header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biome.jsonc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/alert-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/alert-dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/context-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/context-menu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ui/dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workflow/circular-timer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/circular-timer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workflow/workflow-block-item.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/workflow-block-item.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workflow/workflow-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/workflow-button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workflow/workflow-panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workflow/workflow-panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/dropdown-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/dropdown-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/label.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/label.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/radio-group.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/radio-group.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/select.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/sheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/sheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/slider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/slider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/tooltip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/tooltip.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +31,10 @@
     <option name="groupingKeys">
       <option value="directory" />
     </option>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="94" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -75,9 +85,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/mouss/WebstormProjects/beatsflow/public/sounds",
+    "git-widget-placeholder": "vercel/react-server-components-cve-vu-u16o00",
+    "last_opened_file_path": "C:/Users/mouss/WebstormProjects/beatsflow",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,7 +125,7 @@
       <recent name="C:\Users\mouss\WebstormProjects\beatsflow\src\components\chatbot" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.lint:write">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -125,8 +136,19 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="lint:write" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint:write" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.lint:write" />
         <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>

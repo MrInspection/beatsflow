@@ -20,7 +20,7 @@ interface WorkflowState {
   addBlock: (type: WorkflowBlockType) => void;
   updateBlock: (
     id: string,
-    updates: Partial<Omit<WorkflowBlock, "id">>
+    updates: Partial<Omit<WorkflowBlock, "id">>,
   ) => void;
   deleteBlock: (id: string) => void;
   moveBlock: (fromIndex: number, toIndex: number) => void;
@@ -111,14 +111,14 @@ export const useWorkflowStore = create<WorkflowState>()(
           if (updates.duration !== undefined) {
             validatedUpdates.duration = Math.min(
               Math.max(updates.duration, 5),
-              50
+              50,
             );
           }
         } else if (block.type === "break") {
           if (updates.duration !== undefined) {
             validatedUpdates.duration = Math.min(
               Math.max(updates.duration, 3),
-              30
+              30,
             );
           }
         } else if (block.type === "deep-work") {
@@ -132,7 +132,7 @@ export const useWorkflowStore = create<WorkflowState>()(
 
         set({
           blocks: blocks.map((block) =>
-            block.id === id ? { ...block, ...validatedUpdates } : block
+            block.id === id ? { ...block, ...validatedUpdates } : block,
           ),
         });
       },
@@ -225,6 +225,6 @@ export const useWorkflowStore = create<WorkflowState>()(
     }),
     {
       name: "workflow-storage",
-    }
-  )
+    },
+  ),
 );

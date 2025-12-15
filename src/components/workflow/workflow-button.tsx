@@ -1,24 +1,19 @@
-import {Button} from "@/components/ui/button";
-import {useWorkflowStore} from "@/stores/use-workflow";
-import {Pause, Play} from "lucide-react";
-import {useState} from "react";
+import { Pause, Play } from "lucide-react";
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import {playSound} from "@/lib/sounds";
+import { Button } from "@/components/ui/button";
+import { playSound } from "@/lib/sounds";
+import { useWorkflowStore } from "@/stores/use-workflow";
 
 export function WorkflowButton() {
-  const {
-    blocks,
-    startExecution,
-    isExecuting,
-    stopExecution,
-    hasEndBlock,
-  } = useWorkflowStore();
+  const { blocks, startExecution, isExecuting, stopExecution, hasEndBlock } =
+    useWorkflowStore();
   const canExecuteWorkflow = blocks.length >= 2 && hasEndBlock();
   const [isStopDialogOpen, setIsStopDialogOpen] = useState(false);
 
@@ -28,7 +23,7 @@ export function WorkflowButton() {
 
   const confirmStopExecution = () => {
     stopExecution();
-    playSound("workflowCancel")
+    playSound("workflowCancel");
     setIsStopDialogOpen(false);
   };
 
@@ -48,27 +43,27 @@ export function WorkflowButton() {
       >
         {isExecuting ? (
           <>
-            <Pause className="size-4"/>
+            <Pause className="size-4" />
             <span>Stop Workflow</span>
           </>
         ) : (
           <>
-            <Play className="size-4"/>
+            <Play className="size-4" />
             <span>Start Workflow</span>
           </>
         )}
       </Button>
 
       <AlertDialog open={isStopDialogOpen} onOpenChange={setIsStopDialogOpen}>
-        <AlertDialogContent className="p-0 rounded-3xl gap-0">
-          <AlertDialogHeader className="p-6 border-b text-left">
+        <AlertDialogContent className="gap-0 rounded-3xl p-0">
+          <AlertDialogHeader className="border-b p-6 text-left">
             <AlertDialogTitle>Stop Workflow</AlertDialogTitle>
             <AlertDialogDescription>
-              Hold on! You’re on a roll and making solid progress. Are you sure you want to stop your productivity
-              workflow now?
+              Hold on! You’re on a roll and making solid progress. Are you sure
+              you want to stop your productivity workflow now?
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <div className="flex justify-end items-center gap-2 px-6 py-4">
+          <div className="flex items-center justify-end gap-2 px-6 py-4">
             <Button
               variant="outline"
               onClick={() => setIsStopDialogOpen(false)}

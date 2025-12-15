@@ -23,7 +23,7 @@ export default function HomePage() {
   };
 
   return (
-    <section className="container mx-auto flex items-center justify-center h-[calc(100vh-56px)] relative">
+    <section className="container relative mx-auto flex h-[calc(100vh-56px)] items-center justify-center">
       <CircularTimer onComplete={handleTimerComplete} />
       {/* Single instance of WorkflowExecutor */}
       {isExecuting && <WorkflowExecutor />}

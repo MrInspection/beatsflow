@@ -1,14 +1,6 @@
 "use client";
 
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { useMusicStore } from "@/stores/use-music";
-import {
   Pause,
   Play,
   Repeat,
@@ -17,6 +9,14 @@ import {
   SkipForward,
 } from "lucide-react";
 import Image from "next/image";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { useMusicStore } from "@/stores/use-music";
 
 export function MusicPlayer({ className }: { className?: string }) {
   const {
@@ -36,35 +36,39 @@ export function MusicPlayer({ className }: { className?: string }) {
       <div className={cn("px-6 py-4", className)}>
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-3">
-            <div className="relative size-11 flex-shrink-0 rounded-lg overflow-hidden bg-pink-100 flex items-center justify-center">
+            <div className="relative flex size-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg bg-pink-100">
               <Image
-                src={currentTrack?.cover || "/placeholder.svg?height=80&width=80"}
+                src={
+                  currentTrack?.cover || "/placeholder.svg?height=80&width=80"
+                }
                 alt={currentTrack?.title || "???"}
-                className="w-full h-full rounded object-cover"
+                className="h-full w-full rounded object-cover"
                 loading="lazy"
                 width={80}
                 height={80}
               />
             </div>
-            <div className="flex-1 min-w-0 max-w-[190px]">
-              <h3 className="font-medium truncate text-sm leading-5">
+            <div className="min-w-0 max-w-[190px] flex-1">
+              <h3 className="truncate font-medium text-sm leading-5">
                 {currentTrack?.title || "No track selected"}
               </h3>
-              <p className="text-xs text-muted-foreground truncate leading-4">
+              <p className="truncate text-muted-foreground text-xs leading-4">
                 {currentTrack?.artist || "Select a track to play"}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1 justify-end flex-shrink-0">
+          <div className="flex flex-shrink-0 items-center justify-end gap-1">
             <TooltipProvider delayDuration={300}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
                     onClick={toggleShuffle}
                     className={cn(
-                      "p-1.5 rounded-full hover:bg-muted cursor-pointer",
-                      isShuffling ? "text-cyan-600 dark:text-cyan-400" : "text-muted-foreground"
+                      "cursor-pointer rounded-full p-1.5 hover:bg-muted",
+                      isShuffling
+                        ? "text-cyan-600 dark:text-cyan-400"
+                        : "text-muted-foreground",
                     )}
                   >
                     <Shuffle className="size-4" />
@@ -77,7 +81,7 @@ export function MusicPlayer({ className }: { className?: string }) {
                 <TooltipTrigger asChild>
                   <button
                     onClick={previousTrack}
-                    className="p-1.5 rounded-full hover:bg-muted text-muted-foreground group hover:text-foreground cursor-pointer"
+                    className="group cursor-pointer rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
                     disabled={!currentTrack}
                   >
                     <SkipBack className="size-4 fill-muted-foreground group-hover:fill-foreground" />
@@ -90,10 +94,10 @@ export function MusicPlayer({ className }: { className?: string }) {
                   <button
                     onClick={togglePlay}
                     className={cn(
-                      "p-2 rounded-full cursor-pointer",
+                      "cursor-pointer rounded-full p-2",
                       currentTrack
                         ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                        : "bg-muted text-muted-foreground fill-muted-foreground"
+                        : "bg-muted fill-muted-foreground text-muted-foreground",
                     )}
                   >
                     {isPlaying ? (
@@ -109,7 +113,7 @@ export function MusicPlayer({ className }: { className?: string }) {
                 <TooltipTrigger asChild>
                   <button
                     onClick={nextTrack}
-                    className="p-1.5 rounded-full hover:bg-muted text-muted-foreground group hover:text-foreground cursor-pointer"
+                    className="group cursor-pointer rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
                     disabled={!currentTrack}
                   >
                     <SkipForward className="size-4 fill-muted-foreground group-hover:fill-foreground" />
@@ -122,8 +126,10 @@ export function MusicPlayer({ className }: { className?: string }) {
                   <button
                     onClick={toggleLoop}
                     className={cn(
-                      "p-1.5 rounded-full hover:bg-muted cursor-pointer",
-                      isLooping ? "text-cyan-600 dark:text-cyan-400" : "text-muted-foreground"
+                      "cursor-pointer rounded-full p-1.5 hover:bg-muted",
+                      isLooping
+                        ? "text-cyan-600 dark:text-cyan-400"
+                        : "text-muted-foreground",
                     )}
                   >
                     <Repeat className="size-4" />
