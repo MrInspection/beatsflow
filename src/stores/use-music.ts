@@ -1,5 +1,5 @@
-import { playlist } from "@/data/playlist";
 import { create } from "zustand";
+import { playlist } from "@/data/playlist";
 
 export type MusicSource = "spotify" | "soundcloud" | "youtube";
 
@@ -74,7 +74,7 @@ export const useMusicStore = create<MusicState>((set, get) => ({
     if (isShuffling) {
       // Pick a random track that's not the current one
       const availableTracks = tracks.filter(
-        (track) => track.id !== currentTrack.id
+        (track) => track.id !== currentTrack.id,
       );
       if (availableTracks.length) {
         const randomIndex = Math.floor(Math.random() * availableTracks.length);
@@ -88,7 +88,7 @@ export const useMusicStore = create<MusicState>((set, get) => ({
 
     // Normal sequential playback
     const currentIndex = tracks.findIndex(
-      (track) => track.id === currentTrack.id
+      (track) => track.id === currentTrack.id,
     );
     const nextIndex = (currentIndex + 1) % tracks.length;
     set({
@@ -102,7 +102,7 @@ export const useMusicStore = create<MusicState>((set, get) => ({
     if (!tracks.length || !currentTrack) return;
 
     const currentIndex = tracks.findIndex(
-      (track) => track.id === currentTrack.id
+      (track) => track.id === currentTrack.id,
     );
     const prevIndex = (currentIndex - 1 + tracks.length) % tracks.length;
     set({

@@ -1,4 +1,9 @@
-export type SoundType = "workflowStart" | "workflowEnd" | "sessionStart" | "sessionEnd" | "workflowCancel"
+export type SoundType =
+  | "workflowStart"
+  | "workflowEnd"
+  | "sessionStart"
+  | "sessionEnd"
+  | "workflowCancel";
 
 // Map of sound URLs
 const soundMap: Record<SoundType, string> = {
@@ -7,9 +12,9 @@ const soundMap: Record<SoundType, string> = {
   sessionStart: "/sounds/session_start.ogg",
   sessionEnd: "/sounds/session_end.ogg",
   workflowCancel: "/sounds/workflow_cancelled.ogg",
-}
+};
 
-const audioCache: Record<string, HTMLAudioElement> = {}
+const audioCache: Record<string, HTMLAudioElement> = {};
 
 /**
  * Play a sound effect
@@ -18,22 +23,22 @@ const audioCache: Record<string, HTMLAudioElement> = {}
  */
 export function playSound(soundType: SoundType, volume = 0.7): void {
   try {
-    let audio = audioCache[soundType]
+    let audio = audioCache[soundType];
 
     if (!audio) {
-      const soundUrl = soundMap[soundType]
-      audio = new Audio(soundUrl)
-      audioCache[soundType] = audio
+      const soundUrl = soundMap[soundType];
+      audio = new Audio(soundUrl);
+      audioCache[soundType] = audio;
     }
 
-    audio.currentTime = 0
-    audio.volume = volume
+    audio.currentTime = 0;
+    audio.volume = volume;
 
     audio.play().catch((error) => {
-      console.warn(`Failed to play sound: ${error.message}`)
-    })
+      console.warn(`Failed to play sound: ${error.message}`);
+    });
   } catch (error) {
-    console.error("Error playing sound:", error)
+    console.error("Error playing sound:", error);
   }
 }
 
@@ -42,15 +47,14 @@ export function playSound(soundType: SoundType, volume = 0.7): void {
  */
 export function preloadSounds(): void {
   Object.keys(soundMap).forEach((key) => {
-    const soundType = key as SoundType
-    const soundUrl = soundMap[soundType]
+    const soundType = key as SoundType;
+    const soundUrl = soundMap[soundType];
 
     if (!audioCache[soundType]) {
-      const audio = new Audio()
-      audio.src = soundUrl
-      audio.preload = "auto"
-      audioCache[soundType] = audio
+      const audio = new Audio();
+      audio.src = soundUrl;
+      audio.preload = "auto";
+      audioCache[soundType] = audio;
     }
-  })
+  });
 }
-

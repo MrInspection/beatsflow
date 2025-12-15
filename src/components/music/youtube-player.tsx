@@ -1,8 +1,8 @@
 "use client";
 
-import { useMusicStore } from "@/stores/use-music";
 import { useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
+import { useMusicStore } from "@/stores/use-music";
 
 export function YouTubePlayer() {
   const { currentTrack, isPlaying, isLooping } = useMusicStore();

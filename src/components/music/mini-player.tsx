@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { useMusicStore } from "@/stores/use-music";
 import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { useMusicStore } from "@/stores/use-music";
 
 export function MiniPlayer({ className }: { className?: string }) {
   const { currentTrack, isPlaying, togglePlay, nextTrack, previousTrack } =
@@ -14,40 +14,40 @@ export function MiniPlayer({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-3 p-2 rounded-2xl bg-background border shadow-sm w-full sm:w-80",
-        className
+        "flex w-full items-center gap-3 rounded-2xl border bg-background p-2 shadow-sm sm:w-80",
+        className,
       )}
     >
       <div className="relative size-8 flex-shrink-0">
         <Image
           src={currentTrack.cover || "/placeholder.svg"}
           alt={currentTrack.title}
-          className="w-full h-full rounded-md object-cover"
+          className="h-full w-full rounded-md object-cover"
           width={80}
           height={80}
         />
       </div>
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         <h3
-          className="font-medium text-xs line-clamp-1"
+          className="line-clamp-1 font-medium text-xs"
           title={currentTrack.title}
         >
           {currentTrack.title}
         </h3>
-        <p className="text-[10px] text-muted-foreground truncate line-clamp-1">
+        <p className="line-clamp-1 truncate text-[10px] text-muted-foreground">
           {currentTrack.artist}
         </p>
       </div>
       <div className="flex items-center gap-1">
         <button
           onClick={previousTrack}
-          className="p-1.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground"
+          className="rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <SkipBack className="size-4" />
         </button>
         <button
           onClick={togglePlay}
-          className="p-1.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
+          className="cursor-pointer rounded-full bg-primary p-1.5 text-primary-foreground hover:bg-primary/90"
         >
           {isPlaying ? (
             <Pause className="size-4 fill-background" />
@@ -57,7 +57,7 @@ export function MiniPlayer({ className }: { className?: string }) {
         </button>
         <button
           onClick={nextTrack}
-          className="p-1.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer"
+          className="cursor-pointer rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <SkipForward className="size-4" />
         </button>

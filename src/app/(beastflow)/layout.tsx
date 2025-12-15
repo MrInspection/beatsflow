@@ -1,18 +1,18 @@
 "use client";
 
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import { MiniPlayer } from "@/components/music/mini-player";
+import { SidePanel } from "@/components/side-panel";
 import SiteHeader from "@/components/site-header";
 import { WorkflowPanel } from "@/components/workflow/workflow-panel";
-import { SidePanel } from "@/components/side-panel";
-import { MiniPlayer } from "@/components/music/mini-player";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
+    <div className="flex h-screen flex-col overflow-hidden">
       <SiteHeader />
-      <main className="flex relative dark:bg-black overflow-hidden flex-1">
-        <section className="flex-1 h-screen bg-background xl:border-r relative">
-          <MiniPlayer className="absolute right-4 left-4 top-4  z-10 w-fit" />
+      <main className="relative flex flex-1 overflow-hidden dark:bg-black">
+        <section className="relative h-screen flex-1 bg-background xl:border-r">
+          <MiniPlayer className="absolute top-4 right-4 left-4 z-10 w-fit" />
           {children}
         </section>
         <WorkflowPanel />

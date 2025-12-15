@@ -1,13 +1,5 @@
 "use client";
 
-import { BackgroundLines } from "@/components/ui/background-lines";
-import { Button } from "@/components/ui/button";
-import { AnimatedCircularProgressBar } from "@/components/workflow/animated-circular-progress-bar";
-import { playSound, preloadSounds } from "@/lib/sounds";
-import { cn } from "@/lib/utils";
-import { usePanelStore } from "@/stores/use-side-panel";
-import { useTimerStore } from "@/stores/use-timer";
-import { useWorkflowStore } from "@/stores/use-workflow";
 import {
   Brain,
   Coffee,
@@ -23,6 +15,14 @@ import {
   VolumeX,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { BackgroundLines } from "@/components/ui/background-lines";
+import { Button } from "@/components/ui/button";
+import { AnimatedCircularProgressBar } from "@/components/workflow/animated-circular-progress-bar";
+import { playSound, preloadSounds } from "@/lib/sounds";
+import { cn } from "@/lib/utils";
+import { usePanelStore } from "@/stores/use-side-panel";
+import { useTimerStore } from "@/stores/use-timer";
+import { useWorkflowStore } from "@/stores/use-workflow";
 
 interface CircularTimerProps {
   className?: string;
@@ -164,13 +164,13 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
   const renderTimerCenter = () => {
     if (isExecuting) {
       return (
-        <div className="border flex items-center justify-center size-64 sm:size-84 p-4 rounded-full shadow-sm bg-background">
+        <div className="flex size-64 items-center justify-center rounded-full border bg-background p-4 shadow-sm sm:size-84">
           <div className="flex flex-col items-center justify-center">
-            <div className="flex items-center gap-2 text-base font-medium">
+            <div className="flex items-center gap-2 font-medium text-base">
               {getIconComponent()}
               <span>{label || "Timer"}</span>
             </div>
-            <div className="text-5xl sm:text-7xl font-mono font-semibold mt-2">
+            <div className="mt-2 font-mono font-semibold text-5xl sm:text-7xl">
               {formattedTime}
             </div>
           </div>
@@ -180,16 +180,16 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
 
     if (blocks.length === 0) {
       return (
-        <div className="border flex items-center justify-center size-60 sm:size-84 p-4 rounded-full shadow-sm bg-background">
+        <div className="flex size-60 items-center justify-center rounded-full border bg-background p-4 shadow-sm sm:size-84">
           <div className="flex flex-col items-center justify-center gap-2">
-            <GitBranch className="max-sm:size-6 size-8 text-muted-foreground mb-2" />
+            <GitBranch className="mb-2 size-8 text-muted-foreground max-sm:size-6" />
             <p className="font-medium max-sm:text-base">No Workflow</p>
-            <p className="text-muted-foreground text-xs sm:text-sm text-center max-w-prose">
+            <p className="max-w-prose text-center text-muted-foreground text-xs sm:text-sm">
               Create your work session by adding time blocks to your workflow.
             </p>
             <Button
               onClick={() => setOpenPanel("workflow")}
-              className="flex items-center gap-2 rounded-full mt-2.5 xl:hidden"
+              className="mt-2.5 flex items-center gap-2 rounded-full xl:hidden"
             >
               Create Workflow
             </Button>
@@ -200,35 +200,35 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
 
     // Has workflow but not executing
     return (
-      <div className="border flex items-center justify-center size-64 sm:size-84 p-4 rounded-full shadow-sm bg-background">
+      <div className="flex size-64 items-center justify-center rounded-full border bg-background p-4 shadow-sm sm:size-84">
         <div className="flex flex-col items-center justify-center gap-2">
           {!canExecuteWorkflow ? (
-            <Frown className="size-8 text-muted-foreground mb-2-sm:hidden" />
+            <Frown className="mb-2-sm:hidden size-8 text-muted-foreground" />
           ) : (
-            <Smile className="size-8 text-muted-foreground mb-2" />
+            <Smile className="mb-2 size-8 text-muted-foreground" />
           )}
           <p className="font-medium max-sm:text-base">
             {!canExecuteWorkflow ? "You're not ready" : "Let's get started"}
           </p>
-          <p className="text-muted-foreground max-sm:text-xs text-sm text-center max-w-[80%]">
+          <p className="max-w-[80%] text-center text-muted-foreground text-sm max-sm:text-xs">
             {!canExecuteWorkflow
               ? "Craft your work session by adding time blocks to your workflow."
               : "You have created your work session, let the real work begin!"}
           </p>
           <Button
             onClick={handleStartWorkflow}
-            className={cn("flex items-center gap-2 rounded-full mt-2")}
+            className={cn("mt-2 flex items-center gap-2 rounded-full")}
             disabled={!canExecuteWorkflow}
           >
             <Play className="size-4 fill-background" /> Start Workflow
           </Button>
           {!canExecuteWorkflow && blocks.length > 0 && (
-            <p className="text-xs text-muted-foreground mt-2 max-sm:hidden">
+            <p className="mt-2 text-muted-foreground text-xs max-sm:hidden">
               {blocks.length < 2
                 ? "Need at least 2 steps"
                 : !hasEndBlock()
-                ? "An End block is required"
-                : ""}
+                  ? "An End block is required"
+                  : ""}
             </p>
           )}
         </div>
@@ -241,7 +241,7 @@ export function CircularTimer({ className, onComplete }: CircularTimerProps) {
     if (!isExecuting) return null;
 
     return (
-      <div className="flex gap-2 mt-8 border rounded-full p-2 bg-background z-20 shadow-sm">
+      <div className="z-20 mt-8 flex gap-2 rounded-full border bg-background p-2 shadow-sm">
         {isRunning ? (
           <Button
             onClick={pauseTimer}

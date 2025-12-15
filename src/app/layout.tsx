@@ -1,7 +1,7 @@
-import type {Metadata} from "next";
-import {Inter} from "next/font/google";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import {ThemeProvider} from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,17 +9,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "BeatsFlōw",
-  description: "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
-  keywords: [
-    "Moussax",
-    "MrInspection"
-  ],
+  description:
+    "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
+  keywords: ["Moussax", "MrInspection"],
   creator: "MrInspection",
   openGraph: {
     url: "https://beatsflow.vercel.app",
     type: "website",
     title: "BeatsFlōw",
-    description: "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
+    description:
+      "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
     siteName: "BeatsFlōw",
     images: [
       {
@@ -33,27 +32,30 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "BeatsFlōw",
-    description: "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
+    description:
+      "Supercharge your productivity with a workflow editor, productivity timers, music player, and ambient sounds.",
     images: ["https://beatsflow.vercel.app/opengraph-image.png"],
     creator: "@MrInspection",
   },
 };
 
-export default function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-    <body className={inter.className + "antialiased"}>
-    <div className="flex flex-col min-h-screen">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-      {children}
-      </ThemeProvider>
-    </div>
-    </body>
+      <body className={inter.className + "antialiased"}>
+        <div className="flex min-h-screen flex-col">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </div>
+      </body>
     </html>
   );
 }

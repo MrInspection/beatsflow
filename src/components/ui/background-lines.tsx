@@ -1,7 +1,7 @@
 "use client";
-import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import React from "react";
+import type React from "react";
+import { cn } from "@/lib/utils";
 
 export const BackgroundLines = ({
   children,
@@ -16,10 +16,7 @@ export const BackgroundLines = ({
 }) => {
   return (
     <div
-      className={cn(
-        "h-[20rem] md:h-screen w-full bg-background",
-        className
-      )}
+      className={cn("h-[20rem] w-full bg-background md:h-screen", className)}
     >
       <SVG svgOptions={svgOptions} />
       {children}
@@ -98,7 +95,7 @@ const SVG = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0 h-full w-full"
     >
       {paths.map((path, idx) => (
         <motion.path
@@ -112,7 +109,7 @@ const SVG = ({
           transition={{
             duration: svgOptions?.duration || 10,
             ease: "linear",
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             repeatType: "loop",
             delay: Math.floor(Math.random() * 10),
             repeatDelay: Math.floor(Math.random() * 10 + 2),
@@ -134,7 +131,7 @@ const SVG = ({
           transition={{
             duration: svgOptions?.duration || 10,
             ease: "linear",
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             repeatType: "loop",
             delay: Math.floor(Math.random() * 10),
             repeatDelay: Math.floor(Math.random() * 10 + 2),
