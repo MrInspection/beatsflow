@@ -20,7 +20,6 @@ import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
-  ContextMenuSeparator,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import {
@@ -126,7 +125,7 @@ export function WorkflowBlockItem({
     return (
       <div className="w-full">
         <ContextMenu>
-          <ContextMenuTrigger asChild>
+          <ContextMenuTrigger>
             <div
               className={cn(
                 "inline-flex w-full cursor-pointer select-none items-center gap-3 rounded-3xl border-2 bg-background px-6 py-4 shadow-sm",
@@ -157,6 +156,7 @@ export function WorkflowBlockItem({
     );
   }
 
+  // @ts-expect-error
   return (
     <div
       ref={setNodeRef}
@@ -164,7 +164,7 @@ export function WorkflowBlockItem({
       className="w-full"
     >
       <ContextMenu>
-        <ContextMenuTrigger asChild>
+        <ContextMenuTrigger>
           <div
             className={cn(
               "cursor-pointer select-none rounded-3xl border-2 bg-background px-3 py-4 shadow-sm",
@@ -204,21 +204,12 @@ export function WorkflowBlockItem({
             </div>
           </div>
         </ContextMenuTrigger>
-        <ContextMenuContent className="rounded-xl">
-          <ContextMenuItem
-            onClick={handleEdit}
-            disabled={isExecuting}
-            className="curosr-pointer rounded-t-lg text-sm"
-          >
+        <ContextMenuContent>
+          <ContextMenuItem onClick={handleEdit} disabled={isExecuting}>
             <Edit3 className="size-4" />
             Edit Block
           </ContextMenuItem>
-          <ContextMenuSeparator />
-          <ContextMenuItem
-            onClick={handleDelete}
-            disabled={isExecuting}
-            className="curosr-pointer rounded-b-lg text-sm"
-          >
+          <ContextMenuItem onClick={handleDelete} disabled={isExecuting}>
             <Trash2 className="size-4" />
             Delete
           </ContextMenuItem>
@@ -226,7 +217,7 @@ export function WorkflowBlockItem({
       </ContextMenu>
 
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="rounded-3xl p-0 sm:max-w-[425px]">
+        <DialogContent className="rounded-3xl p-0 sm:max-w-106.25">
           <DialogHeader className="border-b p-6">
             <DialogTitle>Edit {getBlockTitle(block.type)}</DialogTitle>
           </DialogHeader>
@@ -243,7 +234,8 @@ export function WorkflowBlockItem({
                       step={5}
                       value={[block.duration]}
                       onValueChange={(values) =>
-                        updateBlock(block.id, { duration: values[0] })
+                        // @ts-expect-error will be fixed in a newer version of beatsflow
+                        updateBlock(block.id, { duration: values[0]! })
                       }
                       className="flex-1"
                     />
@@ -266,7 +258,8 @@ export function WorkflowBlockItem({
                     step={1}
                     value={[block.duration]}
                     onValueChange={(values) =>
-                      updateBlock(block.id, { duration: values[0] })
+                      // @ts-expect-error will be fixed in a newer version of beatsflow
+                      updateBlock(block.id, { duration: values[0]! })
                     }
                     className="flex-1"
                   />

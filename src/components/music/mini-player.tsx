@@ -18,7 +18,7 @@ export function MiniPlayer({ className }: { className?: string }) {
         className,
       )}
     >
-      <div className="relative size-8 flex-shrink-0">
+      <div className="relative size-8 shrink-0">
         <Image
           src={currentTrack.cover || "/placeholder.svg"}
           alt={currentTrack.title}

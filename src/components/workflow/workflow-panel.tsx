@@ -27,7 +27,7 @@ import { usePanelStore } from "@/stores/use-side-panel";
 
 export function WorkflowPanel() {
   return (
-    <section className="flex h-screen w-[500px] flex-col overflow-hidden bg-muted/30 max-xl:hidden dark:bg-muted/15">
+    <section className="flex h-screen w-125 flex-col overflow-hidden bg-muted/30 max-xl:hidden dark:bg-muted/15">
       <div className="z-20 inline-flex w-full items-center justify-between border-b px-6 py-3">
         <div className="inline-flex items-center gap-2">
           <Workflow className="size-5 text-muted-foreground" />
@@ -50,13 +50,15 @@ export function WorkflowPanelMobile() {
       open={openPanel === "workflow"}
       onOpenChange={(open) => setOpenPanel(open ? "workflow" : null)}
     >
-      <SheetTrigger asChild>
-        <Button className="px-0 sm:hidden" variant="ghost" size="icon">
-          <Workflow className="size-4" />
-          <span className="sr-only">Workflow Editor</span>
-        </Button>
+      <SheetTrigger
+        render={
+          <Button className="px-0 sm:hidden" variant="ghost" size="icon" />
+        }
+      >
+        <Workflow className="size-4" />
+        <span className="sr-only">Workflow Editor</span>
       </SheetTrigger>
-      <SheetContent className="gap-0 overflow-hidden p-0 max-sm:w-full md:max-w-[500px]">
+      <SheetContent className="gap-0 overflow-hidden p-0 max-sm:w-full md:max-w-125">
         <SheetHeader className="p-6">
           <SheetTitle className="mb-2 text-lg tracking-tight">
             Workflōw Editor
@@ -74,18 +76,18 @@ export function WorkflowPanelMobile() {
 export function WorkflowHelpButton() {
   return (
     <Dialog>
-      <DialogTrigger>
-        <section className="absolute right-5 bottom-4">
-          <div className="relative flex flex-col gap-2">
-            <Button
-              className="relative rounded-full"
-              variant="outline"
-              size="icon"
-            >
-              <QuestionMarkIcon className="size-3.75" />
-            </Button>
-          </div>
-        </section>
+      <DialogTrigger
+        render={
+          <Button
+            className="relative rounded-full"
+            variant="outline"
+            size="icon"
+          />
+        }
+      >
+        <Button className="relative rounded-full" variant="outline" size="icon">
+          <QuestionMarkIcon className="size-3.75" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="gap-0 rounded-3xl p-0">
         <DialogHeader className="p-8 text-left">

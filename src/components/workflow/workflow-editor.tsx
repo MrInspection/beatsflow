@@ -149,16 +149,11 @@ export function WorkflowEditor() {
             <>
               {blocks.length > 0 && <div className="h-6 w-px border" />}
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="rounded-full" disabled={isExecuting}>
-                    <Plus className="size-4" />
-                  </Button>
+                <DropdownMenuTrigger render={<Button disabled={isExecuting} />}>
+                  <Plus className="size-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="mt-1 rounded-2xl">
-                  <DropdownMenuItem
-                    onClick={() => addBlock("focus")}
-                    className="rounded-t-xl"
-                  >
+                <DropdownMenuContent className="min-w-54" align="center">
+                  <DropdownMenuItem onClick={() => addBlock("focus")}>
                     <Timer className="size-4" />
                     Focus Session
                   </DropdownMenuItem>
@@ -171,10 +166,7 @@ export function WorkflowEditor() {
                     Deep Work Session
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={() => addBlock("end")}
-                    className="rounded-b-xl"
-                  >
+                  <DropdownMenuItem onClick={() => addBlock("end")}>
                     <Trophy className="size-4" />
                     End Workflow
                   </DropdownMenuItem>

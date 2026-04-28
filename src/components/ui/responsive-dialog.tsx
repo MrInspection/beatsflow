@@ -189,12 +189,12 @@ const ResponsiveDialogFooter = ({
 
 export {
   ResponsiveDialog,
-  ResponsiveDialogTrigger,
+  ResponsiveDialogBody,
   ResponsiveDialogClose,
   ResponsiveDialogContent,
   ResponsiveDialogDescription,
+  ResponsiveDialogFooter,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
-  ResponsiveDialogBody,
-  ResponsiveDialogFooter,
+  ResponsiveDialogTrigger,
 };

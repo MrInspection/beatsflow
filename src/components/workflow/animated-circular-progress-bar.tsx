@@ -104,7 +104,7 @@ export function AnimatedCircularProgressBar({
         {children || (
           <span
             data-current-value={currentPercent}
-            className="fade-in animate-in delay-[var(--delay)] duration-[var(--transition-length)] ease-linear"
+            className="fade-in animate-in delay-(--delay) duration-(--transition-length) ease-linear"
           >
             {currentPercent}
           </span>

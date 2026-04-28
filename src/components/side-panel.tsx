@@ -1,7 +1,7 @@
 "use client";
 
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { Disc3, Sparkles, Workflow } from "lucide-react";
+import { Disc3, Workflow } from "lucide-react";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -11,13 +11,9 @@ export function SidePanel() {
   const { setOpenPanel } = usePanelStore();
 
   return (
-    <section className="flex h-screen w-12 flex-col gap-2 overflow-hidden border-l p-2 max-sm:hidden">
-      <Button className="flex h-auto flex-col" variant="ghost" disabled>
-        <Sparkles className="size-4" />
-        <p className="[writing-mode:vertical-lr]">BeatsAI</p>
-      </Button>
+    <section className="flex h-screen w-12 flex-col gap-4 overflow-hidden border-l p-2 max-sm:hidden">
       <Button
-        className="h-auto flex-col max-xl:flex xl:hidden"
+        className="h-auto flex-col px-2 max-xl:flex xl:hidden"
         variant="ghost"
         onClick={() => setOpenPanel("workflow")}
       >

@@ -9,6 +9,7 @@ import {
   SkipForward,
 } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -59,9 +60,9 @@ export function MusicPlayer({ className }: { className?: string }) {
           </div>
 
           <div className="flex flex-shrink-0 items-center justify-end gap-1">
-            <TooltipProvider delayDuration={300}>
-              <Tooltip>
-                <TooltipTrigger asChild>
+            <Tooltip>
+              <TooltipTrigger
+                render={
                   <button
                     onClick={toggleShuffle}
                     className={cn(
@@ -70,27 +71,31 @@ export function MusicPlayer({ className }: { className?: string }) {
                         ? "text-cyan-600 dark:text-cyan-400"
                         : "text-muted-foreground",
                     )}
-                  >
-                    <Shuffle className="size-4" />
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>Shuffle</TooltipContent>
-              </Tooltip>
+                  />
+                }
+              >
+                <Shuffle className="size-4" />
+              </TooltipTrigger>
+              <TooltipContent>Shuffle</TooltipContent>
+            </Tooltip>
 
-              <Tooltip>
-                <TooltipTrigger asChild>
+            <Tooltip>
+              <TooltipTrigger
+                render={
                   <button
                     onClick={previousTrack}
                     className="group cursor-pointer rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
                     disabled={!currentTrack}
-                  >
-                    <SkipBack className="size-4 fill-muted-foreground group-hover:fill-foreground" />
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>Previous</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
+                  />
+                }
+              >
+                <SkipBack className="size-4 fill-muted-foreground group-hover:fill-foreground" />
+              </TooltipTrigger>
+              <TooltipContent>Previous</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger
+                render={
                   <button
                     onClick={togglePlay}
                     className={cn(
@@ -99,30 +104,34 @@ export function MusicPlayer({ className }: { className?: string }) {
                         ? "bg-primary text-primary-foreground hover:bg-primary/90"
                         : "bg-muted fill-muted-foreground text-muted-foreground",
                     )}
-                  >
-                    {isPlaying ? (
-                      <Pause className="size-4 fill-background" />
-                    ) : (
-                      <Play className="size-4 fill-background" />
-                    )}
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>{isPlaying ? "Pause" : "Play"}</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
+                  />
+                }
+              >
+                {isPlaying ? (
+                  <Pause className="size-4 fill-background" />
+                ) : (
+                  <Play className="size-4 fill-background" />
+                )}
+              </TooltipTrigger>
+              <TooltipContent>{isPlaying ? "Pause" : "Play"}</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger
+                render={
                   <button
                     onClick={nextTrack}
                     className="group cursor-pointer rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
                     disabled={!currentTrack}
-                  >
-                    <SkipForward className="size-4 fill-muted-foreground group-hover:fill-foreground" />
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>Next</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
+                  />
+                }
+              >
+                <SkipForward className="size-4 fill-muted-foreground group-hover:fill-foreground" />
+              </TooltipTrigger>
+              <TooltipContent>Next</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger
+                render={
                   <button
                     onClick={toggleLoop}
                     className={cn(
@@ -131,13 +140,13 @@ export function MusicPlayer({ className }: { className?: string }) {
                         ? "text-cyan-600 dark:text-cyan-400"
                         : "text-muted-foreground",
                     )}
-                  >
-                    <Repeat className="size-4" />
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>Repeat</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+                  />
+                }
+              >
+                <Repeat className="size-4" />
+              </TooltipTrigger>
+              <TooltipContent>Repeat</TooltipContent>
+            </Tooltip>
           </div>
         </div>
       </div>
