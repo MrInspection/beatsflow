@@ -3,11 +3,16 @@
 import {
   Background,
   BackgroundVariant,
-  type Edge, type Node,
+  type Edge,
+  type Node,
   ReactFlow,
   useEdgesState,
   useNodesState,
 } from "@xyflow/react";
+import { useState } from "react";
+import { CanvasActionbar } from "@/features/editor/components/canvas-actionbar";
+import { CanvasControls } from "@/features/editor/components/canvas-controls";
+import { NodeDetailsSheet } from "@/features/editor/components/details/node-details-sheet";
 import {
   BreakNode,
   type BreakNodeType,
@@ -24,11 +29,7 @@ import {
   TaskNode,
   type TaskNodeType,
 } from "@/features/editor/components/nodes/task-node";
-import {CanvasControls} from "@/features/editor/components/canvas-controls";
-import {useState} from "react";
-import {cn} from "@/lib/utils";
-import {NodeDetailsSheet} from "@/features/editor/components/details/node-details-sheet";
-import {CanvasActionbar} from "@/features/editor/components/canvas-actionbar";
+import { cn } from "@/lib/utils";
 
 const nodeTypes = {
   focus: FocusNode,
@@ -114,29 +115,33 @@ const initialEdges: Edge[] = [
   },
 ];
 
-export function WorkflowCanvas({className}: {className?: string}) {
+export function WorkflowCanvas({ className }: { className?: string }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const [sheetOpen, setSheetOpen] = useState(false);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
 
-  const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null
+  const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
 
   function handleNodeClick(_: React.MouseEvent, node: Node) {
-    setSelectedNodeId(node.id)
-    setSheetOpen(true)
+    setSelectedNodeId(node.id);
+    setSheetOpen(true);
   }
 
   function handleUpdateNode(id: string, data: Record<string, unknown>) {
     setNodes((prev) =>
-      prev.map((node) => (node.id === id ? { ...node, data: { ...node.data, ...data } } : node))
-    )
+      prev.map((node) =>
+        node.id === id ? { ...node, data: { ...node.data, ...data } } : node,
+      ),
+    );
   }
 
   function handleDeleteNode(id: string) {
-    setNodes((prev) => prev.filter((node) => node.id !== id))
-    setEdges((prev) => prev.filter((edge) => edge.source !== id && edge.target !== id))
+    setNodes((prev) => prev.filter((node) => node.id !== id));
+    setEdges((prev) =>
+      prev.filter((edge) => edge.source !== id && edge.target !== id),
+    );
   }
 
   return (
@@ -158,15 +163,19 @@ export function WorkflowCanvas({className}: {className?: string}) {
         proOptions={{ hideAttribution: true }}
         defaultEdgeOptions={{
           type: "smoothstep",
-          style: { stroke: "var(--muted-foreground)", opacity: 0.5, strokeWidth: 1.5 },
-          animated: true
+          style: {
+            stroke: "var(--muted-foreground)",
+            opacity: 0.5,
+            strokeWidth: 1.5,
+          },
+          animated: true,
         }}
       >
         <Background
           variant={BackgroundVariant.Dots}
           gap={24}
           size={1}
-          className="bg-neutral-100 dark:bg-muted/10 rounded-4xl"
+          className="rounded-l-4xl bg-neutral-100 dark:bg-muted/10"
         />
         <CanvasControls />
         <CanvasActionbar />
@@ -181,7 +190,7 @@ export function WorkflowCanvas({className}: {className?: string}) {
         }}
         onUpdate={handleUpdateNode}
         onDelete={handleDeleteNode}
-        />
+      />
     </div>
   );
 }

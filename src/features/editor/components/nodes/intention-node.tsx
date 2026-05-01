@@ -5,7 +5,7 @@ import { PencilLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 export type IntentionNodeData = {
   prompt: string;
@@ -28,7 +28,10 @@ export function IntentionNode({
       <div className="flex items-center gap-2 p-4 py-3">
         <PencilLine className="size-5 text-muted-foreground" />
         <div className="font-medium">Set Intention</div>
-        <Badge className="ml-auto bg-indigo-100/80 dark:bg-purple-800/25 dark:text-purple-400" variant="secondary">
+        <Badge
+          className="ml-auto bg-indigo-100/80 dark:bg-purple-800/25 dark:text-purple-400"
+          variant="secondary"
+        >
           Prompt
         </Badge>
       </div>

@@ -35,7 +35,10 @@ export function BreakNode({ data, selected }: NodeProps<BreakNodeType>) {
       <div className="flex items-center gap-2 p-4 py-3">
         <Coffee className="size-5 text-muted-foreground" />
         <div className="font-medium">{data.label}</div>
-        <Badge className="ml-auto bg-cyan-100/80 dark:bg-cyan-800/25 dark:text-cyan-400" variant="secondary">
+        <Badge
+          className="ml-auto bg-cyan-100/80 dark:bg-cyan-800/25 dark:text-cyan-400"
+          variant="secondary"
+        >
           Break
         </Badge>
       </div>

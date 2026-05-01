@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 export type FocusNodeData = {
   label: string;
@@ -37,7 +37,10 @@ export function FocusNode({ data, selected }: NodeProps<FocusNodeType>) {
       <div className="flex items-center gap-2 p-4 py-3">
         <Zap className="size-5 text-muted-foreground" />
         <div className="font-medium">{data.label}</div>
-        <Badge className="ml-auto bg-pink-100/80 dark:bg-pink-800/25 dark:text-pink-400" variant="secondary">
+        <Badge
+          className="ml-auto bg-pink-100/80 dark:bg-pink-800/25 dark:text-pink-400"
+          variant="secondary"
+        >
           Focus
         </Badge>
       </div>
