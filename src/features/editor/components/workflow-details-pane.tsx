@@ -1,5 +1,6 @@
 "use client";
 
+import { Panel } from "@xyflow/react";
 import {
   CopyIcon,
   GripVertical,
@@ -39,8 +40,12 @@ export function WorkflowDetailsPane() {
   const [duration, setDuration] = useState(20);
 
   return (
-    <div className="rounded-r-4xl bg-neutral-100 p-4 dark:border dark:border-l-0 dark:bg-muted/10">
-      <aside className="flex h-full w-90 flex-1 shrink-0 flex-col overflow-hidden rounded-2xl border bg-background shadow-xs">
+    <Panel
+      position="top-right"
+      style={{ margin: 0, height: "100%" }}
+      className="p-4"
+    >
+      <aside className="flex h-full w-90 flex-1 shrink-0 flex-col overflow-hidden rounded-2xl border bg-background shadow-sm">
         <div className="flex items-center gap-3 p-4">
           <div className="flex size-10 items-center justify-center rounded-lg bg-muted">
             <ListTodo className="size-6 text-muted-foreground" />
@@ -61,9 +66,20 @@ export function WorkflowDetailsPane() {
           <div className="space-y-2">
             <div className="flex items-baseline justify-between">
               <Label>Duration</Label>
-              <span className="font-bold text-xl tabular-nums">{duration}m</span>
+              <span className="font-bold text-xl tabular-nums">
+                {duration}m
+              </span>
             </div>
-            <Slider className="mt-3" defaultValue={[5, 60]} max={60} step={5} value={duration} onValueChange={(value) => setDuration(Array.isArray(value) ? value[0] : value)} />
+            <Slider
+              className="mt-3"
+              defaultValue={[5, 60]}
+              max={60}
+              step={5}
+              value={duration}
+              onValueChange={(value) =>
+                setDuration(Array.isArray(value) ? value[0] : value)
+              }
+            />
             <div className="mt-3 flex items-center justify-between">
               <span className="text-muted-foreground text-sm">5m (MIN)</span>
               <span className="text-muted-foreground text-sm">60m (MAX)</span>
@@ -110,7 +126,7 @@ export function WorkflowDetailsPane() {
           </Button>
         </div>
       </aside>
-    </div>
+    </Panel>
   );
 }
 

@@ -10,9 +10,6 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import { useState } from "react";
-import { CanvasActionbar } from "@/features/editor/components/canvas-actionbar";
-import { CanvasControls } from "@/features/editor/components/canvas-controls";
-import { NodeDetailsSheet } from "@/features/editor/components/details/node-details-sheet";
 import {
   BreakNode,
   type BreakNodeType,
@@ -29,7 +26,10 @@ import {
   TaskNode,
   type TaskNodeType,
 } from "@/features/editor/components/nodes/task-node";
+import { WorkflowDetailsPane } from "@/features/editor/components/workflow-details-pane";
 import { cn } from "@/lib/utils";
+import { CanvasActionbar } from "./controls/canvas-actionbar";
+import { CanvasControls } from "./controls/canvas-controls";
 
 const nodeTypes = {
   focus: FocusNode,
@@ -175,22 +175,12 @@ export function WorkflowCanvas({ className }: { className?: string }) {
           variant={BackgroundVariant.Dots}
           gap={24}
           size={1}
-          className="rounded-l-4xl bg-neutral-100 dark:bg-muted/10"
+          className="rounded-4xl bg-neutral-100 dark:bg-muted/10"
         />
         <CanvasControls />
         <CanvasActionbar />
+        <WorkflowDetailsPane />
       </ReactFlow>
-
-      <NodeDetailsSheet
-        node={selectedNode}
-        open={sheetOpen}
-        onOpenChange={(open) => {
-          setSheetOpen(open);
-          if (!open) setSelectedNodeId(null);
-        }}
-        onUpdate={handleUpdateNode}
-        onDelete={handleDeleteNode}
-      />
     </div>
   );
 }

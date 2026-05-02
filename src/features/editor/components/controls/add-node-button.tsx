@@ -111,7 +111,7 @@ export function AddNodeButton() {
       <DropdownMenuTrigger render={<Button variant="secondary" />}>
         <Plus className="size-4" /> Add block
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="mt-4 w-72 p-2" align="center">
+      <DropdownMenuContent className="mb-4 w-72 p-2" align="center">
         {BLOCK_DEFINITIONS.map((block) => {
           const Icon = block.icon;
           return (
