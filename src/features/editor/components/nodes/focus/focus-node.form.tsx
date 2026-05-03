@@ -54,14 +54,14 @@ export function FocusNodeForm({
           <Slider
             className="mt-3"
             min={5}
-            max={60}
+            max={120}
             step={5}
             value={[data.durationMinutes]}
             onValueChange={(value) => onUpdate(id, { durationMinutes: value })}
           />
           <div className="mt-3 flex items-center justify-between">
             <span className="text-muted-foreground text-sm">5m (MIN)</span>
-            <span className="text-muted-foreground text-sm">60m (MAX)</span>
+            <span className="text-muted-foreground text-sm">120m (MAX)</span>
           </div>
         </div>
 
