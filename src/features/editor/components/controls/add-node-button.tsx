@@ -10,6 +10,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useCallback, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -17,10 +18,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { BreakNodeData } from "@/features/editor/components/nodes/break-node";
-import type { FocusNodeData } from "@/features/editor/components/nodes/focus-node";
-import type { IntentionNodeData } from "@/features/editor/components/nodes/intention-node";
-import type { TaskNodeData } from "@/features/editor/components/nodes/task-node";
+import type { BreakNodeData } from "@/features/editor/types/break-node.types";
+import type { FocusNodeData } from "@/features/editor/types/focus-node.types";
+import type { IntentionNodeData } from "@/features/editor/types/intention-node.types";
+import type { TaskNodeData } from "@/features/editor/types/task-node.types";
+import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import { useWorkflowStore } from "../../store/use-workflow.store";
 
 type BlockDefinition = {
   type: "focus" | "break" | "task" | "intention";
@@ -77,7 +80,8 @@ const BLOCK_DEFINITIONS: BlockDefinition[] = [
 ];
 
 function useAddNode() {
-  const { addNodes, screenToFlowPosition } = useReactFlow();
+  const { screenToFlowPosition } = useReactFlow();
+  const addNode = useWorkflowStore((state) => state.addNode);
 
   return useCallback(
     (block: BlockDefinition) => {
@@ -91,14 +95,20 @@ function useAddNode() {
 
       const position = screenToFlowPosition({ x: centerX, y: centerY });
 
-      addNodes({
+      const node = {
         id: `${block.type}-${Date.now()}`,
         type: block.type,
         position,
         data: block.defaultData,
-      });
+      } as WorkflowNode;
+
+      const result = addNode(node);
+
+      if (!result.success) {
+        toast.error(result.reason);
+      }
     },
-    [addNodes, screenToFlowPosition],
+    [addNode, screenToFlowPosition],
   );
 }
 

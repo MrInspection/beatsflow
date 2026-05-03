@@ -1,35 +1,29 @@
 "use client";
 
 import {
+  applyEdgeChanges,
+  applyNodeChanges,
   Background,
   BackgroundVariant,
+  type Connection,
   type Edge,
+  type EdgeChange,
   type Node,
+  type NodeChange,
   ReactFlow,
-  useEdgesState,
-  useNodesState,
 } from "@xyflow/react";
-import { useState } from "react";
-import {
-  BreakNode,
-  type BreakNodeType,
-} from "@/features/editor/components/nodes/break-node";
-import {
-  FocusNode,
-  type FocusNodeType,
-} from "@/features/editor/components/nodes/focus-node";
-import {
-  IntentionNode,
-  type IntentionNodeType,
-} from "@/features/editor/components/nodes/intention-node";
-import {
-  TaskNode,
-  type TaskNodeType,
-} from "@/features/editor/components/nodes/task-node";
+import type React from "react";
+import { useCallback } from "react";
 import { WorkflowDetailsPane } from "@/features/editor/components/workflow-details-pane";
+import type { WorkflowNode } from "@/features/editor/types/workflow.types";
 import { cn } from "@/lib/utils";
+import { useWorkflowStore } from "../store/use-workflow.store";
 import { CanvasActionbar } from "./controls/canvas-actionbar";
 import { CanvasControls } from "./controls/canvas-controls";
+import { BreakNode } from "./nodes/break/break-node";
+import { FocusNode } from "./nodes/focus/focus-node";
+import { IntentionNode } from "./nodes/intention/intention-node";
+import { TaskNode } from "./nodes/task/task-node";
 
 const nodeTypes = {
   focus: FocusNode,
@@ -38,110 +32,47 @@ const nodeTypes = {
   intention: IntentionNode,
 };
 
-type WorkflowNode =
-  | FocusNodeType
-  | BreakNodeType
-  | TaskNodeType
-  | IntentionNodeType;
-
-const initialNodes: Node[] = [
-  {
-    id: "intention-1",
-    type: "intention",
-    position: { x: 0, y: 0 },
-    data: {
-      prompt: "What do you want to accomplish today?",
-      answer: "",
-    },
-  },
-  {
-    id: "focus-1",
-    type: "focus",
-    position: { x: 0, y: 220 },
-    data: {
-      label: "Deep Work",
-      durationMinutes: 25,
-      intention: "Design the onboarding flow for the dashboard",
-    },
-  },
-  {
-    id: "break-1",
-    type: "break",
-    position: { x: 0, y: 480 },
-    data: {
-      label: "Short Break",
-      durationMinutes: 5,
-    },
-  },
-  {
-    id: "task-1",
-    type: "task",
-    position: { x: 0, y: 660 },
-    data: {
-      label: "Review PRs",
-      durationMinutes: 20,
-      advanceCondition: "timer",
-      tasks: [
-        { id: "t1", label: "Merge PR#25 from @MrInspection", completed: false },
-        {
-          id: "t2",
-          label: "Fix issue #15 on payment gateway",
-          completed: true,
-        },
-        { id: "t3", label: "Generate specs.md with Claude", completed: false },
-      ],
-    },
-  },
-] satisfies WorkflowNode[];
-
-const initialEdges: Edge[] = [
-  {
-    id: "e-intention-focus",
-    source: "intention-1",
-    target: "focus-1",
-    type: "smoothstep",
-  },
-  {
-    id: "e-focus-break",
-    source: "focus-1",
-    target: "break-1",
-    type: "smoothstep",
-  },
-  {
-    id: "e-break-task",
-    source: "break-1",
-    target: "task-1",
-    type: "smoothstep",
-  },
-];
-
 export function WorkflowCanvas({ className }: { className?: string }) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const {
+    nodes,
+    edges,
+    selectedNodeId,
+    setSelectedNodeId,
+    setNodes,
+    setEdges,
+    updateNode,
+    deleteNode,
+    addEdge,
+  } = useWorkflowStore();
 
-  const [sheetOpen, setSheetOpen] = useState(false);
-  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const selectedNode = (nodes.find((n) => n.id === selectedNodeId) ??
+    null) as WorkflowNode | null;
 
-  const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
+  const handleNodesChange = useCallback(
+    (changes: NodeChange<WorkflowNode>[]) => {
+      setNodes(applyNodeChanges(changes, nodes) as WorkflowNode[]);
+    },
+    [nodes, setNodes],
+  );
+
+  const handleEdgesChange = useCallback(
+    (changes: EdgeChange[]) => {
+      setEdges(applyEdgeChanges(changes, edges));
+    },
+    [edges, setEdges],
+  );
 
   function handleNodeClick(_: React.MouseEvent, node: Node) {
     setSelectedNodeId(node.id);
-    setSheetOpen(true);
   }
 
-  function handleUpdateNode(id: string, data: Record<string, unknown>) {
-    setNodes((prev) =>
-      prev.map((node) =>
-        node.id === id ? { ...node, data: { ...node.data, ...data } } : node,
-      ),
-    );
-  }
-
-  function handleDeleteNode(id: string) {
-    setNodes((prev) => prev.filter((node) => node.id !== id));
-    setEdges((prev) =>
-      prev.filter((edge) => edge.source !== id && edge.target !== id),
-    );
+  function handleConnect(connection: Connection) {
+    const edge: Edge = {
+      ...connection,
+      id: `e-${connection.source}-${connection.target}`,
+      type: "smoothstep",
+    };
+    addEdge(edge);
   }
 
   return (
@@ -149,16 +80,15 @@ export function WorkflowCanvas({ className }: { className?: string }) {
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
+        onNodesChange={handleNodesChange}
+        onEdgesChange={handleEdgesChange}
         nodeTypes={nodeTypes}
         nodesDraggable={true}
         nodesConnectable={true}
         elementsSelectable={true}
-        onPaneClick={() => {
-          setSheetOpen(false);
-          setSelectedNodeId(null);
-        }}
+        onNodeClick={handleNodeClick}
+        onPaneClick={() => setSelectedNodeId(null)}
+        onConnect={handleConnect}
         fitView
         proOptions={{ hideAttribution: true }}
         defaultEdgeOptions={{
@@ -179,7 +109,11 @@ export function WorkflowCanvas({ className }: { className?: string }) {
         />
         <CanvasControls />
         <CanvasActionbar />
-        <WorkflowDetailsPane />
+        <WorkflowDetailsPane
+          selectedNode={selectedNode}
+          onUpdate={updateNode}
+          onDelete={deleteNode}
+        />
       </ReactFlow>
     </div>
   );
