@@ -46,10 +46,13 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, "antialiased")}>
-        <div className="flex min-h-screen flex-col">
-          <Providers>{children}</Providers>
-        </div>
+      <body
+        className={cn(inter.className, "antialiased")}
+        suppressHydrationWarning
+      >
+        <Providers>
+          <main className="flex min-h-screen flex-col">{children}</main>
+        </Providers>
       </body>
     </html>
   );
