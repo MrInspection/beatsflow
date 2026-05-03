@@ -1,43 +1,22 @@
-"use client";
-
 import { Panel } from "@xyflow/react";
-import {
-  CopyIcon,
-  GripVertical,
-  ListTodo,
-  PlusIcon,
-  TrashIcon,
-} from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { BreakNodeForm } from "@/features/editor/components/nodes/break/break-node.form";
+import { FocusNodeForm } from "@/features/editor/components/nodes/focus/focus-node.form";
+import { IntentionNodeForm } from "@/features/editor/components/nodes/intention/intention-node.form";
+import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import { TaskNodeForm } from "./nodes/task/task-node.form";
 
-export function WorkflowDetailsPane() {
-  const ADVANCE_CONDITIONS = [
-    { label: "Timer ends", value: "timer" },
-    { label: "All tasks completed", value: "all-tasks" },
-    { label: "Any task completed", value: "any-task" },
-  ] as const;
+interface WorkflowDetailsPaneProps {
+  selectedNode: WorkflowNode | null;
+  onUpdate: (id: string, data: Record<string, unknown>) => void;
+  onDelete: (id: string) => void;
+}
 
-  const [duration, setDuration] = useState(20);
+export function WorkflowDetailsPane({
+  selectedNode,
+  onUpdate,
+  onDelete,
+}: WorkflowDetailsPaneProps) {
+  if (!selectedNode) return null;
 
   return (
     <Panel
@@ -45,137 +24,50 @@ export function WorkflowDetailsPane() {
       style={{ margin: 0, height: "100%" }}
       className="p-4"
     >
-      <aside className="flex h-full w-90 flex-1 shrink-0 flex-col overflow-hidden rounded-2xl border bg-background shadow-sm">
-        <div className="flex items-center gap-3 p-4">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-muted">
-            <ListTodo className="size-6 text-muted-foreground" />
-          </div>
-          <div>
-            <div className="font-medium">Task Node</div>
-            <p className="text-muted-foreground text-xs">
-              Checklist while a time limit
-            </p>
-          </div>
-        </div>
-
-        <div className="flex-1 space-y-6 overflow-y-auto border-t p-4 py-5">
-          <div className="space-y-2">
-            <Label>Title</Label>
-            <Input placeholder="E.g. Review PRs" />
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-baseline justify-between">
-              <Label>Duration</Label>
-              <span className="font-bold text-xl tabular-nums">
-                {duration}m
-              </span>
-            </div>
-            <Slider
-              className="mt-3"
-              defaultValue={[5, 60]}
-              max={60}
-              step={5}
-              value={duration}
-              onValueChange={(value) =>
-                setDuration(Array.isArray(value) ? value[0] : value)
-              }
-            />
-            <div className="mt-3 flex items-center justify-between">
-              <span className="text-muted-foreground text-sm">5m (MIN)</span>
-              <span className="text-muted-foreground text-sm">60m (MAX)</span>
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label>Advances when</Label>
-            <Select items={ADVANCE_CONDITIONS}>
-              <SelectTrigger className="w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Condition</SelectLabel>
-                  {ADVANCE_CONDITIONS.map((item) => (
-                    <SelectItem key={item.value} value={item.value}>
-                      {item.label}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Label>Tasks</Label>
-            <div className="mt-3 space-y-2">
-              {Array.from({ length: 4 }).map((_, index) => (
-                <TaskItem key={index} />
-              ))}
-            </div>
-
-            <Button
-              className="mt-2 w-full border-dashed"
-              variant="outline"
-              size="sm"
-            >
-              <PlusIcon className="size-4" /> Add task
-            </Button>
-          </div>
-        </div>
-        <div className="border-t p-4">
-          <Button className="w-full" variant="destructive">
-            Delete Node
-          </Button>
-        </div>
+      <aside className="fade-in slide-in-from-right-10 flex h-full w-90 flex-1 shrink-0 animate-in flex-col overflow-hidden rounded-2xl border bg-popover shadow-sm duration-200 ease-in-out">
+        <NodeDetailsContent
+          node={selectedNode}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
       </aside>
     </Panel>
   );
 }
 
-function TaskItem() {
-  const [checked, setChecked] = useState(false);
+interface NodeDetailsContentProps {
+  node: WorkflowNode;
+  onUpdate: (id: string, data: Record<string, unknown>) => void;
+  onDelete: (id: string) => void;
+}
 
-  return (
-    <div className="flex items-center rounded-full bg-input/50 px-2">
-      <Checkbox
-        className="size-5 rounded-full"
-        onCheckedChange={setChecked}
-        checked={checked}
-      />
-      <Input
-        className={cn(
-          "mr-2 h-8 rounded-none bg-transparent px-2 text-xs",
-          checked && "text-muted-foreground line-through",
-        )}
-        placeholder="Enter task name"
-      />
-      <div className="ml-auto flex items-center">
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="ghost" size="icon-xs" />}>
-            <CopyIcon
-              className="size-4 text-muted-foreground"
-              aria-hidden="true"
-            />
-            <span className="sr-only">Duplicate</span>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Duplicate</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="ghost" size="icon-xs" />}>
-            <TrashIcon
-              className="size-4 text-muted-foreground"
-              aria-hidden="true"
-            />
-            <span className="sr-only">Duplicate</span>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Delete</p>
-          </TooltipContent>
-        </Tooltip>
-        <Button variant="ghost" size="icon-xs" className="cursor-grab">
-          <GripVertical className="size-4 text-muted-foreground" />
-        </Button>
-      </div>
-    </div>
-  );
+function NodeDetailsContent({
+  node,
+  onUpdate,
+  onDelete,
+}: NodeDetailsContentProps) {
+  switch (node.type) {
+    case "task":
+      return (
+        <TaskNodeForm node={node} onUpdate={onUpdate} onDelete={onDelete} />
+      );
+    case "intention":
+      return (
+        <IntentionNodeForm
+          node={node}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
+      );
+    case "break":
+      return (
+        <BreakNodeForm node={node} onUpdate={onUpdate} onDelete={onDelete} />
+      );
+    case "focus":
+      return (
+        <FocusNodeForm node={node} onUpdate={onUpdate} onDelete={onDelete} />
+      );
+    default:
+      return null;
+  }
 }
