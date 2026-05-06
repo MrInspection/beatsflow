@@ -18,7 +18,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { searchMusic } from "@/lib/music-services";
 import { cn } from "@/lib/utils";
 import { useMusicStore } from "@/stores/use-music";
-import { usePanelStore } from "@/stores/use-side-panel";
 import { MiniPlayer } from "./mini-player";
 import { YouTubePlayer } from "./youtube-player";
 
@@ -116,7 +115,6 @@ function SearchResults() {
 }
 
 export function MusicDialog() {
-  const { openPanel, setOpenPanel } = usePanelStore();
   const { setSearchQuery, searchQuery, setSearchResults, setIsLoading } =
     useMusicStore();
   const [activeTab, setActiveTab] = useState<"playlist" | "search">("playlist");
@@ -151,10 +149,7 @@ export function MusicDialog() {
     <>
       <AudioElement />
       <YouTubePlayer />
-      <ResponsiveDialog
-        open={openPanel === "music"}
-        onOpenChange={(open) => setOpenPanel(open ? "music" : null)}
-      >
+      <ResponsiveDialog>
         <ResponsiveDialogTrigger asChild className="sm:hidden">
           <button className={cn(buttonVariants({ variant: "ghost" }))}>
             <Disc3 className="size-4" />

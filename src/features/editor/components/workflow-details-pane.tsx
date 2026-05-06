@@ -1,4 +1,5 @@
 import { Panel } from "@xyflow/react";
+import { Activity } from "react";
 import { BreakNodeForm } from "@/features/editor/components/nodes/break/break-node.form";
 import { FocusNodeForm } from "@/features/editor/components/nodes/focus/focus-node.form";
 import { IntentionNodeForm } from "@/features/editor/components/nodes/intention/intention-node.form";
@@ -16,21 +17,23 @@ export function WorkflowDetailsPane({
   onUpdate,
   onDelete,
 }: WorkflowDetailsPaneProps) {
-  if (!selectedNode) return null;
-
   return (
     <Panel
       position="top-right"
       style={{ margin: 0, height: "100%" }}
       className="p-4"
     >
-      <aside className="fade-in slide-in-from-right-10 flex h-full w-90 flex-1 shrink-0 animate-in flex-col overflow-hidden rounded-2xl border bg-popover shadow-sm duration-200 ease-in-out">
-        <NodeDetailsContent
-          node={selectedNode}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />
-      </aside>
+      <Activity mode={selectedNode ? "visible" : "hidden"}>
+        <aside className="fade-in slide-in-from-right-10 flex h-full w-90 flex-1 shrink-0 animate-in flex-col overflow-hidden rounded-2xl border bg-popover shadow-sm duration-150 ease-in-out">
+          {selectedNode && (
+            <NodeDetailsContent
+              node={selectedNode}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
+            />
+          )}
+        </aside>
+      </Activity>
     </Panel>
   );
 }

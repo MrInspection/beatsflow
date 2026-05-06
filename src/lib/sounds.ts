@@ -2,7 +2,7 @@ export type SoundType =
   | "workflow-start"
   | "workflow-end"
   | "session-start"
-  | "session-end"
+  | "session-end";
 
 const soundMap: Record<SoundType, string> = {
   "workflow-start": "/sfx/workflow-start.ogg",
