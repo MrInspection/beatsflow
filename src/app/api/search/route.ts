@@ -1,6 +1,5 @@
+/*
 import { NextResponse } from "next/server";
-import type { Track } from "@/stores/use-music";
-
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
 export async function GET(request: Request) {
@@ -37,7 +36,7 @@ export async function GET(request: Request) {
       );
     }
 
-    /* eslint-disable @typescript-eslint/no-explicit-any */
+    /!* eslint-disable @typescript-eslint/no-explicit-any *!/
     const tracks: Track[] = data.items.map((item: any) => ({
       id: `youtube-${item.id.videoId}`,
       title: item.snippet.title,
@@ -56,3 +55,4 @@ export async function GET(request: Request) {
     );
   }
 }
+*/
