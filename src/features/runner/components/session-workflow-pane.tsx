@@ -11,7 +11,7 @@ export function SessionWorkflowPane() {
     <>
       <Button
         variant="outline"
-        className="flex size-full w-12 items-center justify-center rounded-xl bg-neutral-100 dark:border dark:bg-muted/10"
+        className="flex size-full w-12 items-center justify-center rounded-xl border shadow-sm"
         onClick={() => setMode(mode === "visible" ? "hidden" : "visible")}
         hidden={mode === "visible"}
       >
@@ -21,8 +21,8 @@ export function SessionWorkflowPane() {
         />
       </Button>
       <Activity mode={mode}>
-        <div className="size-full w-120 rounded-4xl bg-neutral-100 dark:border dark:bg-muted/10">
-          <div className="flex items-center gap-2 border-b p-4">
+        <div className="size-full w-120 rounded-4xl border bg-background shadow-sm">
+          <div className="flex h-10 items-center gap-2 border-b p-2">
             <Button
               variant="ghost"
               size="icon"
