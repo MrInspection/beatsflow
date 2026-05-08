@@ -23,7 +23,7 @@ import type { FocusNodeData } from "@/features/editor/types/focus-node.types";
 import type { IntentionNodeData } from "@/features/editor/types/intention-node.types";
 import type { TaskNodeData } from "@/features/editor/types/task-node.types";
 import type { WorkflowNode } from "@/features/editor/types/workflow.types";
-import { useWorkflowStore } from "../../store/use-workflow.store";
+import { useWorkflowStore } from "../../store/workflow.store";
 
 type BlockDefinition = {
   type: "focus" | "break" | "task" | "intention";

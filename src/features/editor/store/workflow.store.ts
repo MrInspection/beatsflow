@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { WorkflowNode } from "@/features/editor/types/workflow.types";
 
-interface UseWorkflowStore {
+interface WorkflowStore {
   workflowId: string;
   workflowName: string;
   nodes: WorkflowNode[];
@@ -12,59 +12,68 @@ interface UseWorkflowStore {
 
   setWorkflowName: (name: string) => void;
   setSelectedNodeId: (id: string | null) => void;
-  setNodes: (nodes: WorkflowNode[]) => void;
-  setEdges: (edges: Edge[]) => void;
   addNode: (node: WorkflowNode) => { success: boolean; reason?: string };
-  updateNode: (id: string, data: Record<string, unknown>) => void;
+  updateNodeData: (id: string, data: Record<string, unknown>) => void;
+  updateNodePosition: (id: string, position: { x: number; y: number }) => void;
   deleteNode: (id: string) => void;
   addEdge: (edge: Edge) => void;
   deleteEdge: (id: string) => void;
   resetWorkflow: () => void;
 }
 
-const DEFAULT_NODES: WorkflowNode[] = [];
-const DEFAULT_EDGES: Edge[] = [];
-
 function generateWorkflowId(): string {
   return `workflow-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
-export const useWorkflowStore = create<UseWorkflowStore>()(
+function createDefaultState() {
+  return {
+    workflowId: generateWorkflowId(),
+    workflowName: "",
+    nodes: [] as WorkflowNode[],
+    edges: [] as Edge[],
+    selectedNodeId: null,
+  };
+}
+
+export const useWorkflowStore = create<WorkflowStore>()(
   persist(
     (set, get) => ({
-      workflowId: generateWorkflowId(),
-      workflowName: "",
-      nodes: DEFAULT_NODES,
-      edges: DEFAULT_EDGES,
-      selectedNodeId: null,
+      ...createDefaultState(),
 
       setWorkflowName: (name) => set({ workflowName: name }),
       setSelectedNodeId: (id) => set({ selectedNodeId: id }),
-      setNodes: (nodes) => set({ nodes }),
-      setEdges: (edges) => set({ edges }),
 
       addNode: (node) => {
         if (node.type === "intention") {
-          const hasIntentionNode = get().nodes.some(
-            (n) => n.type === "intention",
+          const alreadyHasIntentionNode = get().nodes.some(
+            (existingNode) => existingNode.type === "intention",
           );
-          if (hasIntentionNode) {
+          if (alreadyHasIntentionNode) {
             return {
               success: false,
               reason: "Only one Intention node is allowed per workflow.",
             };
           }
         }
-        set((state) => ({ nodes: [...state.nodes, node] as WorkflowNode[] }));
+        set((state) => ({
+          nodes: [...state.nodes, node] as WorkflowNode[],
+        }));
         return { success: true };
       },
 
-      updateNode: (id, data) =>
+      updateNodeData: (id, data) =>
         set((state) => ({
           nodes: state.nodes.map((node) =>
             node.id === id
               ? { ...node, data: { ...node.data, ...data } }
               : node,
+          ) as WorkflowNode[],
+        })),
+
+      updateNodePosition: (id, position) =>
+        set((state) => ({
+          nodes: state.nodes.map((node) =>
+            node.id === id ? { ...node, position } : node,
           ) as WorkflowNode[],
         })),
 
@@ -78,21 +87,24 @@ export const useWorkflowStore = create<UseWorkflowStore>()(
             state.selectedNodeId === id ? null : state.selectedNodeId,
         })),
 
-      addEdge: (edge) => set((state) => ({ edges: [...state.edges, edge] })),
+      addEdge: (edge) => {
+        const { edges } = get();
+        const isDuplicate = edges.some(
+          (existingEdge) =>
+            existingEdge.source === edge.source &&
+            existingEdge.target === edge.target,
+        );
+        const isSelfConnection = edge.source === edge.target;
+        if (isDuplicate || isSelfConnection) return;
+        set((state) => ({ edges: [...state.edges, edge] }));
+      },
 
       deleteEdge: (id) =>
         set((state) => ({
           edges: state.edges.filter((edge) => edge.id !== id),
         })),
 
-      resetWorkflow: () =>
-        set({
-          workflowId: generateWorkflowId(),
-          workflowName: "",
-          nodes: DEFAULT_NODES,
-          edges: DEFAULT_EDGES,
-          selectedNodeId: null,
-        }),
+      resetWorkflow: () => set(createDefaultState()),
     }),
     {
       name: "beatsflow-workflow",

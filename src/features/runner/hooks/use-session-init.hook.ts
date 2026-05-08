@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useWorkflowStore } from "@/features/editor/store/use-workflow.store";
+import { useWorkflowStore } from "@/features/editor/store/workflow.store";
 import { useSessionStore } from "@/features/runner/store/session.store";
 
 export function useSessionInit() {

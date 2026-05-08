@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { AddNodeButton } from "@/features/editor/components/controls/add-node-button";
-import { useWorkflowStore } from "../../store/use-workflow.store";
+import { useWorkflowStore } from "../../store/workflow.store";
 
 export function CanvasActionbar() {
   const router = useRouter();
