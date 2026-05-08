@@ -15,11 +15,7 @@ export function SessionHeader() {
             Jolly Pink Rock
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="destructive" size="sm">
-            Stop Workflow
-          </Button>
-        </div>
+        <div className="flex items-center gap-2"></div>
       </div>
     </header>
   );
