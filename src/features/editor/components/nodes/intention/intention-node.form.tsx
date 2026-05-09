@@ -45,6 +45,7 @@ export function IntentionNodeForm({
           <Label>Your answer</Label>
           <Textarea
             value={data.answer}
+            readOnly
             placeholder="Tell us what are you going to tackle"
             onChange={(e) => onUpdate(id, { answer: e.target.value })}
           />
