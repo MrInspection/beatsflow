@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  AlertTriangle,
-  CheckCircle,
-  Info,
-  Settings2,
-  SquareCheck,
-} from "lucide-react";
+import { AlertTriangle, CheckCircle, Info, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TasksListWidget } from "@/features/runner/components/widgets/tasks-list.widget";
 import {
   getRunnableNodes,
   useSessionStore,
@@ -107,9 +102,9 @@ export function SessionStage() {
             <Settings2 className="size-5" />
           </Button>
           <p className="text-muted-foreground">"{WORKFLOW_QUOTE}"</p>
-          <Button variant="ghost">
-            <SquareCheck className="size-5" />
-          </Button>
+          <div className="size-auto shrink-0">
+            <TasksListWidget />
+          </div>
         </div>
       </div>
     </div>
