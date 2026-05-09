@@ -1,6 +1,14 @@
 "use client";
 
-import { AlertTriangle, CheckCircle, Info, Settings2 } from "lucide-react";
+import {
+  type AlertTriangle,
+  CheckCheck,
+  Handshake,
+  HeartPulse,
+  Info,
+  ListChecks,
+  Settings2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TasksListWidget } from "@/features/runner/components/widgets/tasks-list.widget";
 import {
@@ -11,8 +19,6 @@ import { cn } from "@/lib/utils";
 import { AnnouncementBanner } from "./dialogs/announcement-banner";
 import { MusicPlayerWidget } from "./widgets/music-player.widget";
 import { SessionTimerRing } from "./widgets/session-timer-ring";
-
-const WORKFLOW_QUOTE = "Life begins at the end of your comfort zone";
 
 type BannerState = {
   label: string;
@@ -31,7 +37,7 @@ function useSessionBanner(): BannerState {
   if (status === "paused") {
     return {
       label: "Take a breath. Hit resume whenever you're ready.",
-      icon: AlertTriangle,
+      icon: HeartPulse,
       variant: "warning",
       isVanished: false,
     };
@@ -40,7 +46,7 @@ function useSessionBanner(): BannerState {
   if (status === "completed") {
     return {
       label: "You did it. That's a wrap on this session.",
-      icon: CheckCircle,
+      icon: Handshake,
       variant: "success",
       isVanished: false,
     };
@@ -51,7 +57,7 @@ function useSessionBanner(): BannerState {
     if (advanceCondition === "all-tasks") {
       return {
         label: `Finish every task in "${label}" to move forward.`,
-        icon: Info,
+        icon: ListChecks,
         variant: "default",
         isVanished: false,
       };
@@ -59,7 +65,7 @@ function useSessionBanner(): BannerState {
     if (advanceCondition === "any-task") {
       return {
         label: `Knock out one task in "${label}" and you're free to move on.`,
-        icon: Info,
+        icon: CheckCheck,
         variant: "default",
         isVanished: false,
       };
@@ -67,7 +73,7 @@ function useSessionBanner(): BannerState {
   }
 
   return {
-    label: "Processing your intention...",
+    label: "Processing...",
     icon: Info,
     variant: "default",
     isVanished: true,
@@ -98,10 +104,9 @@ export function SessionStage() {
           <SessionTimerRing />
         </div>
         <div className="flex items-center justify-between gap-2">
-          <Button variant="ghost">
+          <Button variant="ghost" className="opacity-0">
             <Settings2 className="size-5" />
           </Button>
-          <p className="text-muted-foreground">"{WORKFLOW_QUOTE}"</p>
           <div className="size-auto shrink-0">
             <TasksListWidget />
           </div>

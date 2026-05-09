@@ -2,13 +2,23 @@ export type SoundType =
   | "workflow-start"
   | "workflow-end"
   | "session-start"
-  | "session-end";
+  | "session-end"
+  | "task-complete"
+  | "workflow-cancelled"
+  | "timer-paused"
+  | "timer-resume"
+  | "session-restart";
 
 const soundMap: Record<SoundType, string> = {
   "workflow-start": "/sfx/workflow-start.ogg",
   "workflow-end": "/sfx/workflow-end.ogg",
   "session-start": "/sfx/session-start.ogg",
   "session-end": "/sfx/session-end.ogg",
+  "task-complete": "/sfx/task-complete.ogg",
+  "workflow-cancelled": "/sfx/workflow-cancelled.ogg",
+  "timer-paused": "/sfx/timer-paused.ogg",
+  "timer-resume": "/sfx/timer-resume.ogg",
+  "session-restart": "/sfx/session-restart.ogg",
 };
 
 const audioCache: Record<string, HTMLAudioElement> = {};
@@ -18,7 +28,7 @@ const audioCache: Record<string, HTMLAudioElement> = {};
  * @param soundType The type of sound to play
  * @param volume Volume level (0-1)
  */
-export function playSound(soundType: SoundType, volume = 0.7): void {
+export function playSound(soundType: SoundType, volume = 0.7) {
   try {
     let audio = audioCache[soundType];
 
@@ -42,7 +52,7 @@ export function playSound(soundType: SoundType, volume = 0.7): void {
 /**
  * Preload all sounds to avoid delay when playing
  */
-export function preloadSounds(): void {
+export function preloadSounds() {
   Object.keys(soundMap).forEach((key) => {
     const soundType = key as SoundType;
     const soundUrl = soundMap[soundType];

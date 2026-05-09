@@ -15,6 +15,16 @@ export function useSessionTimer() {
 
   const prevBlockIndexRef = useRef(currentBlockIndex);
   const prevStatusRef = useRef(status);
+  const pendingSoundTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+
+  function cancelPendingSounds() {
+    if (pendingSoundTimeoutRef.current) {
+      clearTimeout(pendingSoundTimeoutRef.current);
+      pendingSoundTimeoutRef.current = null;
+    }
+  }
 
   useEffect(() => {
     if (status !== "running") return;
@@ -26,11 +36,15 @@ export function useSessionTimer() {
     if (prevBlockIndexRef.current === currentBlockIndex) return;
     prevBlockIndexRef.current = currentBlockIndex;
 
-    if (status === "completed") return;
+    if (status === "completed" || status === "idle") return;
 
+    cancelPendingSounds();
     playSound("session-end");
-    const timeout = setTimeout(() => playSound("session-start"), 600);
-    return () => clearTimeout(timeout);
+    pendingSoundTimeoutRef.current = setTimeout(() => {
+      playSound("session-start");
+    }, 600);
+
+    return cancelPendingSounds;
   }, [currentBlockIndex, status]);
 
   useEffect(() => {
@@ -43,13 +57,31 @@ export function useSessionTimer() {
       (previousStatus === "intention" || previousStatus === "idle")
     ) {
       playSound("workflow-start");
+      return;
+    }
+
+    if (status === "paused" && previousStatus === "running") {
+      playSound("timer-paused");
+      return;
+    }
+
+    if (status === "running" && previousStatus === "paused") {
+      playSound("timer-resume");
+      return;
     }
 
     if (status === "completed") {
+      cancelPendingSounds();
       playSound("workflow-end");
+      return;
+    }
+
+    if (status === "idle") {
+      cancelPendingSounds();
     }
   }, [status]);
 
+  // Document title
   useEffect(() => {
     const runnableNodes = getRunnableNodes(nodes);
     const currentNode = runnableNodes[currentBlockIndex];

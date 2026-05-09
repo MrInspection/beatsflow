@@ -1,6 +1,7 @@
 "use client";
 
-import { Pause, Play, RotateCcw, SkipForward } from "lucide-react";
+import { ArrowLeft, Pause, Play, RotateCcw, SkipForward } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { AnimatedArcProgressBar } from "@/components/ui/animated-arc-progress-bar";
 import { Button } from "@/components/ui/button";
 import type { BreakNodeType } from "@/features/editor/types/break-node.types";
@@ -14,6 +15,7 @@ import {
   formatSeconds,
   getNodeColors,
 } from "@/features/runner/utils/session.utils";
+import { playSound } from "@/lib/sounds";
 
 type TimedNode = FocusNodeType | BreakNodeType | TaskNodeType;
 
@@ -26,63 +28,103 @@ export function SessionTimerRing() {
   const resume = useSessionStore((state) => state.resume);
   const skipBlock = useSessionStore((state) => state.skipBlock);
   const restartBlock = useSessionStore((state) => state.restartBlock);
+  const resetSession = useSessionStore((state) => state.resetSession);
+  const router = useRouter();
 
-  const currentNode = getRunnableNodes(nodes)[currentBlockIndex] as
-    | TimedNode
-    | undefined;
-  if (!currentNode) return null;
+  const runnableNodes = getRunnableNodes(nodes);
+  const currentNode = runnableNodes[currentBlockIndex] as TimedNode | undefined;
+  const isCompleted = status === "completed";
 
-  const totalSeconds = currentNode.data.durationMinutes * 60;
-  const colors = getNodeColors(currentNode.type);
+  // On completion show the last block's ring frozen at full
+  const displayNode = isCompleted
+    ? (runnableNodes[runnableNodes.length - 1] as TimedNode | undefined)
+    : currentNode;
+
+  if (!displayNode) return null;
+
+  const totalSeconds = displayNode.data.durationMinutes * 60;
+  const colors = getNodeColors(displayNode.type);
   const isRunning = status === "running";
-  const blockLabel = currentNode.data.label || currentNode.type;
+  const blockLabel = displayNode.data.label || displayNode.type;
   const typeLabel =
-    currentNode.type.charAt(0).toUpperCase() + currentNode.type.slice(1);
+    displayNode.type.charAt(0).toUpperCase() + displayNode.type.slice(1);
+
+  function handlePauseResume() {
+    if (isRunning) {
+      pause();
+    } else {
+      resume();
+    }
+  }
+
+  function handleRestart() {
+    playSound("session-restart");
+    restartBlock();
+  }
+
+  function handleBackToEditor() {
+    resetSession();
+    router.push("/");
+  }
 
   return (
     <AnimatedArcProgressBar
       max={totalSeconds}
-      value={totalSeconds - secondsRemaining}
+      value={isCompleted ? totalSeconds : totalSeconds - secondsRemaining}
       min={0}
       gaugePrimaryColor={colors.primary}
       gaugeSecondaryColor={colors.secondary}
-      className="size-148"
+      className="size-160"
     >
       <div className="mt-4 flex flex-col items-center justify-center gap-4">
         <div className="text-muted-foreground text-xl">{blockLabel}</div>
         <h3 className="text-9xl tabular-nums">
-          {formatSeconds(secondsRemaining)}
+          {isCompleted ? "00:00" : formatSeconds(secondsRemaining)}
         </h3>
-        <p className="-mt-2 text-4xl">{typeLabel} Timer</p>
+        <p className="-mt-2 text-4xl">
+          {isCompleted ? "Session Complete" : `${typeLabel} Timer`}
+        </p>
         <div className="mt-2 flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-12"
-            onClick={restartBlock}
-          >
-            <RotateCcw className="size-5" />
-          </Button>
-          <Button
-            variant="secondary"
-            size="icon"
-            className="size-16"
-            onClick={isRunning ? pause : resume}
-          >
-            {isRunning ? (
-              <Pause className="size-8 fill-current" />
-            ) : (
-              <Play className="size-8 fill-current" />
-            )}
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-12"
-            onClick={skipBlock}
-          >
-            <SkipForward className="size-5 fill-current" />
-          </Button>
+          {isCompleted ? (
+            <Button
+              variant="secondary"
+              className="px-6"
+              onClick={handleBackToEditor}
+            >
+              <ArrowLeft className="size-5" /> Back to Editor
+            </Button>
+          ) : (
+            <>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-12"
+                onClick={handleRestart}
+              >
+                <RotateCcw className="size-5" />
+              </Button>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="size-16"
+                onClick={handlePauseResume}
+              >
+                {isRunning ? (
+                  <Pause className="size-8 fill-current" />
+                ) : (
+                  <Play className="size-8 fill-current" />
+                )}
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-12"
+                onClick={skipBlock}
+              >
+                <SkipForward className="size-5 fill-current" />
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </AnimatedArcProgressBar>

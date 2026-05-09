@@ -16,6 +16,7 @@ import {
   getRunnableNodes,
   useSessionStore,
 } from "@/features/runner/store/session.store";
+import { playSound } from "@/lib/sounds";
 
 export function TasksListWidget() {
   const nodes = useSessionStore((state) => state.nodes);
@@ -65,7 +66,10 @@ export function TasksListWidget() {
                     id={task.id}
                     checked={isCompleted}
                     disabled={!isSessionRunning || isCompleted}
-                    onCheckedChange={() => completeTask(task.id)}
+                    onCheckedChange={() => {
+                      playSound("task-complete", 0.4);
+                      completeTask(task.id);
+                    }}
                   />
                   <Label
                     htmlFor={task.id}

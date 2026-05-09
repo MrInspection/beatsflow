@@ -1,6 +1,6 @@
 "use client";
 
-import { Slash, XIcon } from "lucide-react";
+import { ArrowLeft, Slash, XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   AlertDialog,
@@ -15,11 +15,26 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useSessionStore } from "@/features/runner/store/session.store";
+import { playSound } from "@/lib/sounds";
 
 export function SessionHeader() {
   const workflowName = useSessionStore((state) => state.workflowName);
-  const { resetSession } = useSessionStore();
+  const status = useSessionStore((state) => state.status);
+  const resetSession = useSessionStore((state) => state.resetSession);
   const router = useRouter();
+
+  const isCompleted = status === "completed";
+
+  function handleEndSession() {
+    playSound("workflow-cancelled", 1);
+    resetSession();
+    router.push("/");
+  }
+
+  function handleBackToEditor() {
+    resetSession();
+    router.push("/");
+  }
 
   return (
     <header>
@@ -32,42 +47,44 @@ export function SessionHeader() {
           </div>
         </div>
         <div>
-          <AlertDialog>
-            <AlertDialogTrigger
-              render={
-                <Button
-                  variant="default"
-                  className="bg-destructive hover:bg-destructive/80"
-                />
-              }
-            >
-              <XIcon className="size-4" /> End Session
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>End this session?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  {" "}
-                  Your progress won't be saved. You'll be taken back to the
-                  editor.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel variant="secondary">
-                  Keep Going
-                </AlertDialogCancel>
-                <AlertDialogAction
-                  variant="destructive"
-                  onClick={() => {
-                    resetSession();
-                    router.push("/");
-                  }}
-                >
-                  End Session
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          {isCompleted ? (
+            <Button variant="outline" onClick={handleBackToEditor}>
+              <ArrowLeft className="size-4" /> Back to Editor
+            </Button>
+          ) : (
+            <AlertDialog>
+              <AlertDialogTrigger
+                render={
+                  <Button
+                    variant="default"
+                    className="bg-destructive hover:bg-destructive/80"
+                  />
+                }
+              >
+                <XIcon className="size-4" /> End Session
+              </AlertDialogTrigger>
+              <AlertDialogContent size="sm">
+                <AlertDialogHeader>
+                  <AlertDialogTitle>End this session?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Your progress won't be saved. You'll be taken back to the
+                    editor.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel variant="secondary">
+                    Keep Going
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    variant="destructive"
+                    onClick={handleEndSession}
+                  >
+                    End Session
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
         </div>
       </div>
     </header>
