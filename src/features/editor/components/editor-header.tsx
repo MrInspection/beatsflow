@@ -13,24 +13,68 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { WORKFLOW_PRESETS } from "@/features/editor/data/workflow.presets";
+import {
+  WORKFLOW_PRESETS,
+  type WorkflowPreset,
+} from "@/features/editor/data/workflow.presets";
 import { useWorkflowStore } from "../store/workflow.store";
+
+type SavedCustomPreset = {
+  id: string;
+  name: string;
+  nodes: WorkflowPreset["nodes"];
+  edges: WorkflowPreset["edges"];
+  savedAt: string;
+};
+
+function loadCustomPresets(): SavedCustomPreset[] {
+  try {
+    return JSON.parse(localStorage.getItem("beatsflow-custom-presets") ?? "[]");
+  } catch {
+    return [];
+  }
+}
 
 export function EditorHeader() {
   const { workflowName, setWorkflowName, resetWorkflow } = useWorkflowStore();
+  const customPresets = loadCustomPresets();
+
+  const allPresetItems = [
+    ...WORKFLOW_PRESETS.map((preset) => ({
+      label: preset.label,
+      value: preset.value,
+    })),
+    ...customPresets.map((preset) => ({
+      label: preset.name,
+      value: preset.id,
+    })),
+  ];
 
   function handleLoadPreset(value: string | null) {
     if (!value) return;
-    const preset = WORKFLOW_PRESETS.find((p) => p.value === value);
-    if (!preset) return;
 
-    // Single atomic reset + load — no flash between two setState calls
-    resetWorkflow();
-    useWorkflowStore.setState({
-      workflowName: preset.label,
-      nodes: preset.nodes,
-      edges: preset.edges,
-    });
+    const builtInPreset = WORKFLOW_PRESETS.find(
+      (preset) => preset.value === value,
+    );
+    if (builtInPreset) {
+      resetWorkflow();
+      useWorkflowStore.setState({
+        workflowName: builtInPreset.label,
+        nodes: builtInPreset.nodes,
+        edges: builtInPreset.edges,
+      });
+      return;
+    }
+
+    const customPreset = customPresets.find((preset) => preset.id === value);
+    if (customPreset) {
+      resetWorkflow();
+      useWorkflowStore.setState({
+        workflowName: customPreset.name,
+        nodes: customPreset.nodes,
+        edges: customPreset.edges,
+      });
+    }
   }
 
   function handleShare() {
@@ -63,11 +107,9 @@ export function EditorHeader() {
     }
 
     const name = workflowName.trim() || "Untitled Workflow";
-    const savedPresets = JSON.parse(
-      localStorage.getItem("beatsflow-custom-presets") ?? "[]",
-    );
+    const existingPresets = loadCustomPresets();
 
-    const newPreset = {
+    const newPreset: SavedCustomPreset = {
       id: `custom-${Date.now()}`,
       name,
       nodes,
@@ -77,7 +119,7 @@ export function EditorHeader() {
 
     localStorage.setItem(
       "beatsflow-custom-presets",
-      JSON.stringify([...savedPresets, newPreset]),
+      JSON.stringify([...existingPresets, newPreset]),
     );
 
     toast.success(`"${name}" saved as a preset.`);
@@ -93,23 +135,33 @@ export function EditorHeader() {
             className="h-8 min-w-52"
             placeholder="Untitled Workflow"
             value={workflowName}
-            onChange={(e) => setWorkflowName(e.target.value)}
+            onChange={(event) => setWorkflowName(event.target.value)}
           />
         </div>
         <div className="flex items-center gap-2">
-          <Select items={WORKFLOW_PRESETS} onValueChange={handleLoadPreset}>
+          <Select items={allPresetItems} onValueChange={handleLoadPreset}>
             <SelectTrigger className="w-52">
               <SelectValue placeholder="Load a preset" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel>Preset</SelectLabel>
+                <SelectLabel>Built-in</SelectLabel>
                 {WORKFLOW_PRESETS.map((preset) => (
                   <SelectItem key={preset.value} value={preset.value}>
                     {preset.label}
                   </SelectItem>
                 ))}
               </SelectGroup>
+              {customPresets.length > 0 && (
+                <SelectGroup>
+                  <SelectLabel>Saved</SelectLabel>
+                  {customPresets.map((preset) => (
+                    <SelectItem key={preset.id} value={preset.id}>
+                      {preset.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              )}
             </SelectContent>
           </Select>
           <Button variant="secondary" onClick={handleShare}>
