@@ -26,11 +26,8 @@ export type WorkflowBlockModel = {
   typeLabel: string;
   durationMinutes: number;
   status: BlockStatus;
-
   secondsRemainingLabel: string | null;
-
   taskProgress: WorkflowTaskProgressModel | null;
-
   tasks: WorkflowTaskModel[] | null;
 };
 
@@ -78,40 +75,27 @@ export function deriveSessionWorkflowModel(
         answer: intentionAnswer.trim() || null,
       }
     : null;
-
   const runnableNodes = getRunnableNodes(nodes);
 
   const blocks: WorkflowBlockModel[] = runnableNodes.map((node, index) => {
     const status = deriveBlockStatus(index, currentBlockIndex, sessionStatus);
-
     const isActive = status === "active";
-
     const label =
       node.type === "intention"
         ? "Intention"
-        : ((
-            node.data as {
-              label?: string;
-            }
-          ).label ?? node.type);
+        : ((node.data as { label?: string }).label ?? node.type);
 
     const durationMinutes =
       node.type === "intention"
         ? 0
-        : ((
-            node.data as {
-              durationMinutes?: number;
-            }
-          ).durationMinutes ?? 0);
+        : ((node.data as { durationMinutes?: number }).durationMinutes ?? 0);
 
     const typeLabel = node.type.charAt(0).toUpperCase() + node.type.slice(1);
-
     const secondsRemainingLabel = isActive
       ? formatSeconds(secondsRemaining)
       : null;
 
     let taskProgress: WorkflowTaskProgressModel | null = null;
-
     let tasks: WorkflowTaskModel[] | null = null;
 
     if (node.type === "task") {

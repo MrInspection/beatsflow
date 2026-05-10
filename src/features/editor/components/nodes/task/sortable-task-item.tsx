@@ -14,17 +14,19 @@ import {
 import type { TaskItem } from "@/features/editor/types/task-node.types";
 import { cn } from "@/lib/utils";
 
+interface SortableTaskItemProps {
+  task: TaskItem;
+  onUpdate: (taskId: string, changes: Partial<TaskItem>) => void;
+  onDelete: (taskId: string) => void;
+  onDuplicate: (taskId: string) => void;
+}
+
 export function SortableTaskItem({
   task,
   onUpdate,
   onDelete,
   onDuplicate,
-}: {
-  task: TaskItem;
-  onUpdate: (taskId: string, changes: Partial<TaskItem>) => void;
-  onDelete: (taskId: string) => void;
-  onDuplicate: (taskId: string) => void;
-}) {
+}: SortableTaskItemProps) {
   const {
     attributes,
     listeners,
@@ -106,7 +108,7 @@ export function SortableTaskItem({
         <Button
           variant="ghost"
           size="icon-xs"
-          className="cursor-grab"
+          className={cn(isDragging ? "cursor-grabbing" : "cursor-grab")}
           {...attributes}
           {...listeners}
         >

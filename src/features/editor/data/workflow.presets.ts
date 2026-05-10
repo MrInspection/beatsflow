@@ -27,7 +27,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "focus-1",
         type: "focus",
-        position: { x: 300, y: 240 },
+        position: { x: 300, y: 320 },
         data: {
           label: "Deep Work",
           durationMinutes: 25,
@@ -37,7 +37,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "break-1",
         type: "break",
-        position: { x: 300, y: 480 },
+        position: { x: 300, y: 620 },
         data: {
           label: "Short Break",
           durationMinutes: 5,
@@ -76,7 +76,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "focus-1",
         type: "focus",
-        position: { x: 300, y: 240 },
+        position: { x: 300, y: 320 },
         data: {
           label: "Deep Work Sprint",
           durationMinutes: 90,
@@ -86,7 +86,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "break-1",
         type: "break",
-        position: { x: 300, y: 480 },
+        position: { x: 300, y: 620 },
         data: {
           label: "Recovery Break",
           durationMinutes: 20,
@@ -125,7 +125,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "focus-1",
         type: "focus",
-        position: { x: 300, y: 240 },
+        position: { x: 300, y: 320 },
         data: {
           label: "Focused Review",
           durationMinutes: 30,
@@ -135,7 +135,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "task-1",
         type: "task",
-        position: { x: 300, y: 480 },
+        position: { x: 300, y: 620 },
         data: {
           label: "Plan Next Steps",
           durationMinutes: 20,
@@ -150,7 +150,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "break-1",
         type: "break",
-        position: { x: 300, y: 720 },
+        position: { x: 300, y: 1080 },
         data: {
           label: "Recharge",
           durationMinutes: 10,
@@ -195,7 +195,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "task-1",
         type: "task",
-        position: { x: 300, y: 240 },
+        position: { x: 300, y: 320 },
         data: {
           label: "Morning Tasks",
           durationMinutes: 15,
@@ -210,7 +210,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "focus-1",
         type: "focus",
-        position: { x: 300, y: 480 },
+        position: { x: 300, y: 780 },
         data: {
           label: "First Focus Block",
           durationMinutes: 45,
@@ -220,7 +220,7 @@ export const WORKFLOW_PRESETS: WorkflowPreset[] = [
       {
         id: "break-1",
         type: "break",
-        position: { x: 300, y: 720 },
+        position: { x: 300, y: 1080 },
         data: {
           label: "Short Break",
           durationMinutes: 10,
