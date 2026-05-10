@@ -1,8 +1,5 @@
 import { useEffect, useRef } from "react";
-import {
-  getRunnableNodes,
-  useSessionStore,
-} from "@/features/runner/store/session.store";
+import { useSessionStore } from "@/features/runner/store/session.store";
 import { formatSeconds } from "@/features/runner/utils/session.utils";
 import { playSound } from "@/lib/sounds";
 
@@ -11,7 +8,7 @@ export function useSessionTimer() {
   const tick = useSessionStore((state) => state.tick);
   const currentBlockIndex = useSessionStore((state) => state.currentBlockIndex);
   const secondsRemaining = useSessionStore((state) => state.secondsRemaining);
-  const nodes = useSessionStore((state) => state.nodes);
+  const runnableNodes = useSessionStore((state) => state.runnableNodes);
 
   const prevBlockIndexRef = useRef(currentBlockIndex);
   const prevStatusRef = useRef(status);
@@ -81,9 +78,7 @@ export function useSessionTimer() {
     }
   }, [status]);
 
-  // Document title
   useEffect(() => {
-    const runnableNodes = getRunnableNodes(nodes);
     const currentNode = runnableNodes[currentBlockIndex];
     const typeLabel = currentNode?.type ?? "session";
     const formatted = formatSeconds(secondsRemaining);
@@ -99,7 +94,7 @@ export function useSessionTimer() {
     }
 
     document.title = "BeatsFlōw";
-  }, [secondsRemaining, status, currentBlockIndex, nodes]);
+  }, [secondsRemaining, status, currentBlockIndex, runnableNodes]);
 
   useEffect(() => {
     return () => {

@@ -1,17 +1,14 @@
 import type { TaskNodeType } from "@/features/editor/types/task-node.types";
-
-import {
-  getRunnableNodes,
-  useSessionStore,
-} from "@/features/runner/store/session.store";
+import { useSessionStore } from "@/features/runner/store/session.store";
 
 export function useTasksListModel() {
-  const nodes = useSessionStore((state) => state.nodes);
+  const runnableNodes = useSessionStore((state) => state.runnableNodes);
   const currentBlockIndex = useSessionStore((state) => state.currentBlockIndex);
   const completedTaskIds = useSessionStore((state) => state.completedTaskIds);
   const completeTask = useSessionStore((state) => state.completeTask);
   const status = useSessionStore((state) => state.status);
-  const currentNode = getRunnableNodes(nodes)[currentBlockIndex];
+
+  const currentNode = runnableNodes[currentBlockIndex];
   const isTaskBlock = currentNode?.type === "task";
 
   if (!isTaskBlock) {
@@ -19,7 +16,6 @@ export function useTasksListModel() {
   }
 
   const taskNode = currentNode as TaskNodeType;
-
   const tasks = taskNode.data.tasks.map((task) => ({
     id: task.id,
     label: task.label,

@@ -2,8 +2,6 @@ import type { IntentionNodeType } from "@/features/editor/types/intention-node.t
 import type { TaskNodeType } from "@/features/editor/types/task-node.types";
 import type { WorkflowNode } from "@/features/editor/types/workflow.types";
 import type { SessionStatus } from "@/features/runner/store/session.store";
-
-import { getRunnableNodes } from "@/features/runner/store/session.store";
 import { formatSeconds } from "@/features/runner/utils/session.utils";
 
 export type BlockStatus = "completed" | "active" | "upcoming";
@@ -50,16 +48,15 @@ function deriveBlockStatus(
   if (sessionStatus === "completed" || index < currentBlockIndex) {
     return "completed";
   }
-
   if (index === currentBlockIndex) {
     return "active";
   }
-
   return "upcoming";
 }
 
 export function deriveSessionWorkflowModel(
   nodes: WorkflowNode[],
+  runnableNodes: WorkflowNode[],
   currentBlockIndex: number,
   secondsRemaining: number,
   completedTaskIds: string[],
@@ -76,7 +73,6 @@ export function deriveSessionWorkflowModel(
         answer: intentionAnswer.trim() || null,
       }
     : null;
-  const runnableNodes = getRunnableNodes(nodes);
 
   const blocks: WorkflowBlockModel[] = runnableNodes.map((node, index) => {
     const status = deriveBlockStatus(index, currentBlockIndex, sessionStatus);
@@ -101,13 +97,11 @@ export function deriveSessionWorkflowModel(
 
     if (node.type === "task") {
       const taskNode = node as TaskNodeType;
-
       tasks = taskNode.data.tasks.map((task) => ({
         id: task.id,
         label: task.label,
         completed: completedTaskIds.includes(task.id),
       }));
-
       taskProgress = {
         completed: tasks.filter((task) => task.completed).length,
         total: tasks.length,
@@ -128,8 +122,5 @@ export function deriveSessionWorkflowModel(
     };
   });
 
-  return {
-    intention,
-    blocks,
-  };
+  return { intention, blocks };
 }

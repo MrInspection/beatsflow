@@ -1,15 +1,12 @@
 import type { TaskNodeType } from "@/features/editor/types/task-node.types";
 import type { SessionBannerModel } from "@/features/runner/components/session-stage/banners/session-banner.types";
 import { SESSION_BANNER_CONTENT } from "@/features/runner/components/session-stage/banners/session-banner-content";
-import {
-  getRunnableNodes,
-  useSessionStore,
-} from "@/features/runner/store/session.store";
+import { useSessionStore } from "@/features/runner/store/session.store";
 
 export function useSessionBanner(): SessionBannerModel {
   const status = useSessionStore((state) => state.status);
   const currentBlockIndex = useSessionStore((state) => state.currentBlockIndex);
-  const nodes = useSessionStore((state) => state.nodes);
+  const runnableNodes = useSessionStore((state) => state.runnableNodes);
 
   if (status === "paused") {
     return {
@@ -25,11 +22,10 @@ export function useSessionBanner(): SessionBannerModel {
     };
   }
 
-  const currentNode = getRunnableNodes(nodes)[currentBlockIndex];
+  const currentNode = runnableNodes[currentBlockIndex];
 
   if (currentNode?.type === "task" && status === "running") {
     const taskNode = currentNode as TaskNodeType;
-
     const { advanceCondition, label } = taskNode.data;
 
     if (advanceCondition === "all-tasks") {

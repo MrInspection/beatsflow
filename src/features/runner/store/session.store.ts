@@ -17,11 +17,13 @@ interface SessionStore {
   workflowName: string;
   nodes: WorkflowNode[];
   edges: Edge[];
+  runnableNodes: WorkflowNode[];
   status: SessionStatus;
   currentBlockIndex: number;
   secondsRemaining: number;
   intentionAnswer: string;
   completedTaskIds: string[];
+  preCompletedTaskIds: string[];
   lastAdvanceReason: BlockAdvanceReason;
 
   initSession: (
@@ -43,7 +45,7 @@ interface SessionStore {
   resetSession: () => void;
 }
 
-export function getRunnableNodes(nodes: WorkflowNode[]): WorkflowNode[] {
+function deriveRunnableNodes(nodes: WorkflowNode[]): WorkflowNode[] {
   return nodes.filter((node) => node.type !== "intention");
 }
 
@@ -53,19 +55,26 @@ function getBlockDurationSeconds(node: WorkflowNode | undefined): number {
   return typedNode.data.durationMinutes * 60;
 }
 
-function getPreCompletedTaskIds(nodes: WorkflowNode[]): string[] {
+function derivePreCompletedTaskIds(nodes: WorkflowNode[]): string[] {
   const preCompletedIds: string[] = [];
   nodes.forEach((node) => {
     if (node.type === "task") {
       const taskNode = node as TaskNodeType;
       taskNode.data.tasks.forEach((task) => {
-        if (task.completed) {
-          preCompletedIds.push(task.id);
-        }
+        if (task.completed) preCompletedIds.push(task.id);
       });
     }
   });
   return preCompletedIds;
+}
+
+function getTaskIdsForBlock(
+  runnableNodes: WorkflowNode[],
+  blockIndex: number,
+): string[] {
+  const node = runnableNodes[blockIndex];
+  if (!node || node.type !== "task") return [];
+  return (node as TaskNodeType).data.tasks.map((task) => task.id);
 }
 
 function shouldTaskAdvance(
@@ -90,26 +99,30 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
   workflowName: "",
   nodes: [],
   edges: [],
+  runnableNodes: [],
   status: "idle",
   currentBlockIndex: 0,
   secondsRemaining: 0,
   intentionAnswer: "",
   completedTaskIds: [],
+  preCompletedTaskIds: [],
   lastAdvanceReason: "none",
 
   initSession: (workflowName, nodes, edges) => {
+    const runnableNodes = deriveRunnableNodes(nodes);
+    const preCompletedTaskIds = derivePreCompletedTaskIds(nodes);
     const hasIntention = nodes.some((node) => node.type === "intention");
-    const runnableNodes = getRunnableNodes(nodes);
-    const preCompletedTaskIds = getPreCompletedTaskIds(nodes);
     set({
       workflowName,
       nodes,
       edges,
+      runnableNodes,
       status: hasIntention ? "intention" : "running",
       currentBlockIndex: 0,
       secondsRemaining: getBlockDurationSeconds(runnableNodes[0]),
       intentionAnswer: "",
       completedTaskIds: preCompletedTaskIds,
+      preCompletedTaskIds,
       lastAdvanceReason: "none",
     });
   },
@@ -117,19 +130,20 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
   setIntentionAnswer: (answer) => set({ intentionAnswer: answer }),
 
   confirmIntention: () => {
-    const runnableNodes = getRunnableNodes(get().nodes);
-    const preCompletedTaskIds = getPreCompletedTaskIds(get().nodes);
+    const { runnableNodes, nodes } = get();
+    const preCompletedTaskIds = derivePreCompletedTaskIds(nodes);
     set({
       status: "running",
       currentBlockIndex: 0,
       secondsRemaining: getBlockDurationSeconds(runnableNodes[0]),
       completedTaskIds: preCompletedTaskIds,
+      preCompletedTaskIds,
       lastAdvanceReason: "none",
     });
   },
 
   startBlock: (index) => {
-    const runnableNodes = getRunnableNodes(get().nodes);
+    const { runnableNodes } = get();
     const node = runnableNodes[index];
     if (!node) return;
     set({
@@ -140,13 +154,7 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
   },
 
   tick: () => {
-    const {
-      status,
-      secondsRemaining,
-      nodes,
-      currentBlockIndex,
-      completedTaskIds,
-    } = get();
+    const { status, secondsRemaining } = get();
     if (status !== "running") return;
 
     if (secondsRemaining <= 1) {
@@ -155,14 +163,7 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
       return;
     }
 
-    const nextSeconds = secondsRemaining - 1;
-    set({ secondsRemaining: nextSeconds });
-
-    const currentNode = getRunnableNodes(nodes)[currentBlockIndex];
-    if (currentNode && shouldTaskAdvance(currentNode, completedTaskIds)) {
-      set({ status: "paused", secondsRemaining: 0 });
-      get().advanceBlock("tasks");
-    }
+    set({ secondsRemaining: secondsRemaining - 1 });
   },
 
   pause: () => set({ status: "paused" }),
@@ -174,25 +175,46 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
   },
 
   restartBlock: () => {
-    const runnableNodes = getRunnableNodes(get().nodes);
-    const node = runnableNodes[get().currentBlockIndex];
+    const {
+      runnableNodes,
+      currentBlockIndex,
+      preCompletedTaskIds,
+      completedTaskIds,
+    } = get();
+    const node = runnableNodes[currentBlockIndex];
     if (!node) return;
+
+    const currentBlockTaskIds = getTaskIdsForBlock(
+      runnableNodes,
+      currentBlockIndex,
+    );
+    const otherBlocksCompletedTaskIds = completedTaskIds.filter(
+      (id) => !currentBlockTaskIds.includes(id),
+    );
+    const preMarkedInCurrentBlock = preCompletedTaskIds.filter((id) =>
+      currentBlockTaskIds.includes(id),
+    );
+
     set({
       secondsRemaining: getBlockDurationSeconds(node),
-      completedTaskIds: [],
+      completedTaskIds: [
+        ...otherBlocksCompletedTaskIds,
+        ...preMarkedInCurrentBlock,
+      ],
       status: "running",
     });
   },
 
   completeTask: (taskId) => {
-    const { completedTaskIds, status, nodes, currentBlockIndex } = get();
+    const { completedTaskIds, status, runnableNodes, currentBlockIndex } =
+      get();
     if (completedTaskIds.includes(taskId)) return;
 
     const updatedCompletedTaskIds = [...completedTaskIds, taskId];
     set({ completedTaskIds: updatedCompletedTaskIds });
 
     if (status !== "running") return;
-    const currentNode = getRunnableNodes(nodes)[currentBlockIndex];
+    const currentNode = runnableNodes[currentBlockIndex];
     if (
       currentNode &&
       shouldTaskAdvance(currentNode, updatedCompletedTaskIds)
@@ -203,13 +225,10 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
   },
 
   advanceBlock: (reason) => {
-    const { nodes, currentBlockIndex } = get();
-    const runnableNodes = getRunnableNodes(nodes);
-    const isLastBlock = currentBlockIndex + 1 >= runnableNodes.length;
-
+    const { runnableNodes, currentBlockIndex } = get();
     set({ lastAdvanceReason: reason });
 
-    if (isLastBlock) {
+    if (currentBlockIndex + 1 >= runnableNodes.length) {
       get().completeSession();
       return;
     }
@@ -224,11 +243,13 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
       workflowName: "",
       nodes: [],
       edges: [],
+      runnableNodes: [],
       status: "idle",
       currentBlockIndex: 0,
       secondsRemaining: 0,
       intentionAnswer: "",
       completedTaskIds: [],
+      preCompletedTaskIds: [],
       lastAdvanceReason: "none",
     }),
 }));

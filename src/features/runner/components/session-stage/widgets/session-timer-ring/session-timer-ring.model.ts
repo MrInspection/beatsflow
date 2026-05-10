@@ -4,10 +4,7 @@ import { useRouter } from "next/navigation";
 import type { BreakNodeType } from "@/features/editor/types/break-node.types";
 import type { FocusNodeType } from "@/features/editor/types/focus-node.types";
 import type { TaskNodeType } from "@/features/editor/types/task-node.types";
-import {
-  getRunnableNodes,
-  useSessionStore,
-} from "@/features/runner/store/session.store";
+import { useSessionStore } from "@/features/runner/store/session.store";
 import {
   formatSeconds,
   getNodeColors,
@@ -17,7 +14,7 @@ import { playSound } from "@/lib/sounds";
 type TimedNode = FocusNodeType | BreakNodeType | TaskNodeType;
 
 export function useSessionTimerRingModel() {
-  const nodes = useSessionStore((state) => state.nodes);
+  const runnableNodes = useSessionStore((state) => state.runnableNodes);
   const currentBlockIndex = useSessionStore((state) => state.currentBlockIndex);
   const secondsRemaining = useSessionStore((state) => state.secondsRemaining);
   const status = useSessionStore((state) => state.status);
@@ -28,7 +25,6 @@ export function useSessionTimerRingModel() {
   const resetSession = useSessionStore((state) => state.resetSession);
 
   const router = useRouter();
-  const runnableNodes = getRunnableNodes(nodes);
   const currentNode = runnableNodes[currentBlockIndex] as TimedNode | undefined;
   const isCompleted = status === "completed";
 
@@ -45,7 +41,6 @@ export function useSessionTimerRingModel() {
   const isRunning = status === "running";
   const colors = getNodeColors(displayNode.type);
   const blockLabel = displayNode.data.label || displayNode.type;
-
   const typeLabel =
     displayNode.type.charAt(0).toUpperCase() + displayNode.type.slice(1);
 
