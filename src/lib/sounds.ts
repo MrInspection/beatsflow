@@ -7,7 +7,8 @@ export type SoundType =
   | "workflow-cancelled"
   | "timer-paused"
   | "timer-resume"
-  | "session-restart";
+  | "session-restart"
+  | "champion";
 
 const soundMap: Record<SoundType, string> = {
   "workflow-start": "/sfx/workflow-start.ogg",
@@ -19,6 +20,7 @@ const soundMap: Record<SoundType, string> = {
   "timer-paused": "/sfx/timer-paused.ogg",
   "timer-resume": "/sfx/timer-resume.ogg",
   "session-restart": "/sfx/session-restart.ogg",
+  champion: "/sfx/champion.ogg",
 };
 
 const audioCache: Record<string, HTMLAudioElement> = {};

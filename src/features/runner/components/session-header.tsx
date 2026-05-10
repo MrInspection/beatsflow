@@ -33,6 +33,7 @@ export function SessionHeader() {
 
   function handleBackToEditor() {
     resetSession();
+    playSound("champion", 1);
     router.push("/");
   }
 

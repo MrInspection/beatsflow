@@ -64,6 +64,7 @@ export function useSessionTimerRingModel() {
 
   function handleBackToEditor() {
     resetSession();
+    playSound("champion", 1);
     router.push("/");
   }
 
