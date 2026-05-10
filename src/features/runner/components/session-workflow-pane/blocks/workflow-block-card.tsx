@@ -39,6 +39,7 @@ export function WorkflowBlockCard({ block, isLast }: WorkflowBlockCardProps) {
             secondsRemainingLabel={block.secondsRemainingLabel}
             completedTasks={block.taskProgress?.completed}
             totalTasks={block.taskProgress?.total}
+            isRunning={block.isRunning}
           />
         )}
       </div>

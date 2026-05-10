@@ -29,6 +29,7 @@ export type WorkflowBlockModel = {
   secondsRemainingLabel: string | null;
   taskProgress: WorkflowTaskProgressModel | null;
   tasks: WorkflowTaskModel[] | null;
+  isRunning: boolean;
 };
 
 export type IntentionModel = {
@@ -123,6 +124,7 @@ export function deriveSessionWorkflowModel(
       secondsRemainingLabel,
       taskProgress,
       tasks,
+      isRunning: isActive && sessionStatus === "running",
     };
   });
 
