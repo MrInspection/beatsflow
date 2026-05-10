@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { AddNodeButton } from "@/features/editor/components/controls/add-node-button";
+import type { TaskNodeType } from "@/features/editor/types/task-node.types";
 import { useWorkflowStore } from "../../store/workflow.store";
 
 export function CanvasActionbar() {
@@ -14,8 +15,7 @@ export function CanvasActionbar() {
 
   function handleExecute() {
     const hasIntention = nodes.some((node) => node.type === "intention");
-    const hasAtLeastOneBlock =
-      nodes.filter((node) => node.type !== "intention").length > 0;
+    const hasAtLeastOneBlock = nodes.some((node) => node.type !== "intention");
 
     if (!hasIntention) {
       toast.error("Add an Intention node before starting your session.");
@@ -24,6 +24,18 @@ export function CanvasActionbar() {
 
     if (!hasAtLeastOneBlock) {
       toast.error("Add at least one Focus, Break, or Task block.");
+      return;
+    }
+
+    const emptyTaskNode = nodes.find(
+      (node) =>
+        node.type === "task" && (node as TaskNodeType).data.tasks.length === 0,
+    ) as TaskNodeType | undefined;
+
+    if (emptyTaskNode) {
+      toast.error(
+        `"${emptyTaskNode.data.label}" has no tasks. Add at least one task before running.`,
+      );
       return;
     }
 
