@@ -1,28 +1,46 @@
 ## BeatsFlōw
 
-A small music app with a collection of relaxing tracks and ambient effects to unwind and boost productivity. Check out the live demo [here](https://beatsflow.vercel.app).
+A powerful workflow-based productivity timer and music player to unwind and boost your productivity.
+Check out the live demo of BeatsFlōw [here](https://beatsflow.vercel.app).
 
-![](/public/opengraph-image.png)
+This project is licensed under the MIT License.
 
-## Features
-- Workflow Editor : Create your own work session with ease
-- Productivity Timers : Time-management method to improve focus and productivity
-- Music Player : Enjoy your favorite tracks with a personalized playlist + YouTube search
-- Theme Toggle : Choose your preferred color scheme
+![](/public/beatsflow-editor.png)
 
-## Technologies Used
-- **Next.js** : A React framework for server-side rendering and static website generation
-- **Tailwind CSS** : A utility-first CSS framework for rapid UI development
-- **Zustand** : A state management library for React applications
-- **React-icons** : A collection of icons for React
+### Features
+- 🧮 Workflow Editor: Craft your custom flow with the canvas editor
+- 🎧 Beats with the flow: Bring your favorite tracks to your flow without ads with our YouTbe integration.
+- ⏱️ Manage your workflow with BeatsFlow Timer
+- 🎼 Sounds effects during the execution of your flow
 
-### How to run this project ?
+### Technologies Used
+- **Next.js** as the frontend framework
+- **TailwindCSS** for styling with base UI components
+- **Zustand** for global state management
+- **React Flow** for the workflow editor
+- **React YouTube & YouTube API** for the music player
+
+### How to run this project?
+
+This project relies on `pnpm` as the package manager. Install it by running `npm install -g pnpm`.
+
 To run this project on your local environment, follow the following steps :
 - Clone the repository to your local machine or download the source code.
 - Run the command `pnpm install` in the project directory to install the **required** dependencies
 - Create a `.env` file in the root directory of the project and add the following content:
+
 ```dotenv
 YOUTUBE_API_KEY=YOUR_YOUTUBE_API_KEY
 ```
-- Run the command `pnpm run start` to start the `production build` of the project.
+- Run the command `pnpm preview` to build `production build` of the project. It will start a local production server.
 - Open your internet browser and go to the following address: [http://localhost:3000](http://localhost:3000)
+
+## User Interfaces
+
+### BeatsFlow Editor
+
+![](/public/beatsflow-editor.png)
+
+### BeatsFlow Timer
+
+![](/public/beatsflow-runner.png)
