@@ -1,6 +1,7 @@
 "use client";
 
 import { Save, Share, Slash } from "lucide-react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,7 +38,11 @@ function loadCustomPresets(): SavedCustomPreset[] {
 
 export function EditorHeader() {
   const { workflowName, setWorkflowName, resetWorkflow } = useWorkflowStore();
-  const customPresets = loadCustomPresets();
+  const [customPresets, setCustomPresets] = useState<SavedCustomPreset[]>([]);
+
+  useEffect(() => {
+    setCustomPresets(loadCustomPresets());
+  }, []);
 
   const allPresetItems = [
     ...WORKFLOW_PRESETS.map((preset) => ({
@@ -117,11 +122,13 @@ export function EditorHeader() {
       savedAt: new Date().toISOString(),
     };
 
+    const updatedPresets = [...existingPresets, newPreset];
     localStorage.setItem(
       "beatsflow-custom-presets",
-      JSON.stringify([...existingPresets, newPreset]),
+      JSON.stringify(updatedPresets),
     );
 
+    setCustomPresets(updatedPresets);
     toast.success(`"${name}" saved as a preset.`);
   }
 
