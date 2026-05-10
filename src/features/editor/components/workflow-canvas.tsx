@@ -12,16 +12,16 @@ import {
 } from "@xyflow/react";
 import type React from "react";
 import { useEffect } from "react";
+import { CanvasActionbar } from "@/features/editor/components/controls/canvas-actionbar";
+import { CanvasControls } from "@/features/editor/components/controls/canvas-controls";
+import { BreakNode } from "@/features/editor/components/nodes/break/break-node";
+import { FocusNode } from "@/features/editor/components/nodes/focus/focus-node";
+import { IntentionNode } from "@/features/editor/components/nodes/intention/intention-node";
+import { TaskNode } from "@/features/editor/components/nodes/task/task-node";
 import { WorkflowDetailsPane } from "@/features/editor/components/workflow-details-pane";
+import { useWorkflowStore } from "@/features/editor/store/workflow.store";
 import type { WorkflowNode } from "@/features/editor/types/workflow.types";
 import { cn } from "@/lib/utils";
-import { useWorkflowStore } from "../store/workflow.store";
-import { CanvasActionbar } from "./controls/canvas-actionbar";
-import { CanvasControls } from "./controls/canvas-controls";
-import { BreakNode } from "./nodes/break/break-node";
-import { FocusNode } from "./nodes/focus/focus-node";
-import { IntentionNode } from "./nodes/intention/intention-node";
-import { TaskNode } from "./nodes/task/task-node";
 
 const nodeTypes = {
   focus: FocusNode,
@@ -42,23 +42,39 @@ export function WorkflowCanvas({ className }: { className?: string }) {
     addEdge,
   } = useWorkflowStore();
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(storedNodes);
+  const [nodes, setNodes, onNodesChangeDefault] = useNodesState(storedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(storedEdges);
 
   const selectedNode = (nodes.find((node) => node.id === selectedNodeId) ??
     null) as WorkflowNode | null;
 
+  const handleNodesChange = (changes: any[]) => {
+    onNodesChangeDefault(changes);
+
+    const removedNodeIds = changes
+      .filter((change) => change.type === "remove")
+      .map((change) => change.id);
+
+    for (const nodeId of removedNodeIds) {
+      deleteNode(nodeId);
+    }
+  };
+
   useEffect(() => {
     setNodes((prev) => {
-      const prevIds = new Set(prev.map((n) => n.id));
-      const storedIds = new Set(storedNodes.map((n) => n.id));
-      const hasStructuralChange =
-        storedNodes.some((n) => !prevIds.has(n.id)) ||
-        prev.some((n) => !storedIds.has(n.id));
+      const prevIds = new Set(prev.map((node) => node.id));
+      const storedIds = new Set(storedNodes.map((node) => node.id));
 
-      if (!hasStructuralChange) {
+      const hasAdditions = storedNodes.some((node) => !prevIds.has(node.id));
+      const hasRemovals = prev.some((node) => !storedIds.has(node.id));
+
+      if (hasRemovals && !hasAdditions) return prev;
+
+      if (!hasAdditions && !hasRemovals) {
         return prev.map((node) => {
-          const stored = storedNodes.find((n) => n.id === node.id);
+          const stored = storedNodes.find(
+            (storedNode) => storedNode.id === node.id,
+          );
           return stored ? { ...node, data: stored.data } : node;
         }) as WorkflowNode[];
       }
@@ -93,7 +109,7 @@ export function WorkflowCanvas({ className }: { className?: string }) {
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        onNodesChange={onNodesChange}
+        onNodesChange={handleNodesChange}
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         nodesDraggable={true}
