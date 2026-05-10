@@ -21,7 +21,7 @@ export function WorkflowTimelineItem({
     <section
       className={cn(
         "relative flex items-start gap-4",
-        faded && "opacity-40",
+        faded && "opacity-70",
         className,
       )}
     >

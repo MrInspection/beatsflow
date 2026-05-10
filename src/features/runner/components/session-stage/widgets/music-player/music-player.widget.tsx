@@ -2,9 +2,10 @@ import { Play, SkipBackIcon, SkipForward } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
+// TODO : Implement music player
 export function MusicPlayerWidget() {
   return (
-    <div className="flex items-center gap-3.5 rounded-2xl bg-neutral-100 p-2 dark:bg-muted">
+    <div className="flex items-center gap-3.5 rounded-2xl bg-neutral-100 p-2 opacity-0 dark:bg-muted">
       <Image
         src="https://github.com/MrInspection.png"
         alt="Album Cover"
