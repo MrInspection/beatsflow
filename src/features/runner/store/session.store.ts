@@ -1,6 +1,7 @@
 import type { Edge } from "@xyflow/react";
 import { create } from "zustand";
 import type { IntentionNodeType } from "@/features/editor/types/intention-node.types";
+import type { TaskNodeType } from "@/features/editor/types/task-node.types";
 import type { WorkflowNode } from "@/features/editor/types/workflow.types";
 
 export type SessionStatus =
@@ -52,6 +53,21 @@ function getBlockDurationSeconds(node: WorkflowNode | undefined): number {
   return typedNode.data.durationMinutes * 60;
 }
 
+function getPreCompletedTaskIds(nodes: WorkflowNode[]): string[] {
+  const preCompletedIds: string[] = [];
+  nodes.forEach((node) => {
+    if (node.type === "task") {
+      const taskNode = node as TaskNodeType;
+      taskNode.data.tasks.forEach((task) => {
+        if (task.completed) {
+          preCompletedIds.push(task.id);
+        }
+      });
+    }
+  });
+  return preCompletedIds;
+}
+
 function shouldTaskAdvance(
   node: WorkflowNode,
   completedTaskIds: string[],
@@ -84,6 +100,7 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
   initSession: (workflowName, nodes, edges) => {
     const hasIntention = nodes.some((node) => node.type === "intention");
     const runnableNodes = getRunnableNodes(nodes);
+    const preCompletedTaskIds = getPreCompletedTaskIds(nodes);
     set({
       workflowName,
       nodes,
@@ -92,7 +109,7 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
       currentBlockIndex: 0,
       secondsRemaining: getBlockDurationSeconds(runnableNodes[0]),
       intentionAnswer: "",
-      completedTaskIds: [],
+      completedTaskIds: preCompletedTaskIds,
       lastAdvanceReason: "none",
     });
   },
@@ -101,11 +118,12 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
 
   confirmIntention: () => {
     const runnableNodes = getRunnableNodes(get().nodes);
+    const preCompletedTaskIds = getPreCompletedTaskIds(get().nodes);
     set({
       status: "running",
       currentBlockIndex: 0,
       secondsRemaining: getBlockDurationSeconds(runnableNodes[0]),
-      completedTaskIds: [],
+      completedTaskIds: preCompletedTaskIds,
       lastAdvanceReason: "none",
     });
   },
@@ -117,7 +135,6 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
     set({
       currentBlockIndex: index,
       secondsRemaining: getBlockDurationSeconds(node),
-      completedTaskIds: [],
       status: "running",
     });
   },
