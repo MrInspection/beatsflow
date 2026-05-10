@@ -5,11 +5,15 @@ export function getRunnableNodes(nodes: WorkflowNode[]): WorkflowNode[] {
 }
 
 export function formatSeconds(seconds: number): string {
-  const m = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2, "0");
-  const s = (seconds % 60).toString().padStart(2, "0");
-  return `${m}:${s}`;
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+  }
+
+  return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
 
 export type NodeColor = {
@@ -21,23 +25,23 @@ export function getNodeColors(type: WorkflowNode["type"]): NodeColor {
   switch (type) {
     case "focus":
       return {
-        primary: "var(--color-pink-500)",
-        secondary: "var(--color-pink-200)",
+        primary: "var(--primary)",
+        secondary: "var(--border)",
       };
     case "break":
       return {
-        primary: "var(--color-cyan-500)",
-        secondary: "var(--color-cyan-200)",
+        primary: "var(--primary)",
+        secondary: "var(--border)",
       };
     case "task":
       return {
-        primary: "var(--color-emerald-500)",
-        secondary: "var(--color-emerald-200)",
+        primary: "var(--color-indigo-500)",
+        secondary: "var(--border)",
       };
     default:
       return {
-        primary: "var(--color-purple-500)",
-        secondary: "var(--color-purple-200)",
+        primary: "var(--primary)",
+        secondary: "var(--border)",
       };
   }
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import { SessionStage } from "@/features/runner/components/session-stage";
-import { SessionWorkflowPane } from "@/features/runner/components/session-workflow-pane";
+import { IntentionDialog } from "@/features/runner/components/intention-dialog";
+import { SessionStage } from "@/features/runner/components/session-stage/session-stage";
+import { SessionWorkflowPane } from "@/features/runner/components/session-workflow-pane/session-workflow-pane";
 import { useSessionInit } from "@/features/runner/hooks/use-session-init.hook";
 import { useSessionTimer } from "@/features/runner/hooks/use-session-timer.hook";
 import { useSessionStore } from "@/features/runner/store/session.store";
-import { IntentionDialog } from "./dialogs/intention-dialog";
 
 export function SessionManager() {
   useSessionInit();
