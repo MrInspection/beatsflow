@@ -39,6 +39,7 @@ export function BreakNodeForm({
           <Input
             value={data.label}
             placeholder="E.g. Review PRs"
+            maxLength={30}
             onChange={(e) => onUpdate(id, { label: e.target.value })}
           />
         </div>

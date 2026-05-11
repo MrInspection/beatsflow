@@ -12,7 +12,12 @@ export function WorkflowTaskItem({ label, completed }: WorkflowTaskItemProps) {
   return (
     <div className="flex items-start gap-2">
       <Checkbox checked={completed} disabled />
-      <Label className={cn(completed && "text-muted-foreground line-through")}>
+      <Label
+        className={cn(
+          "leading-snug",
+          completed && "text-muted-foreground line-through",
+        )}
+      >
         {label}
       </Label>
     </div>

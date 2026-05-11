@@ -101,7 +101,7 @@ export function TaskNodeForm({ node, onUpdate, onDelete }: TaskNodeFormProps) {
   return (
     <>
       <NodeFormHeader
-        title="task Node"
+        title="Task Node"
         description="Checklist with a time limit"
         icon={ListTodo}
       />
@@ -112,6 +112,7 @@ export function TaskNodeForm({ node, onUpdate, onDelete }: TaskNodeFormProps) {
           <Input
             value={data.label}
             placeholder="E.g. Review PRs"
+            maxLength={30}
             onChange={(e) => onUpdate(id, { label: e.target.value })}
           />
         </div>

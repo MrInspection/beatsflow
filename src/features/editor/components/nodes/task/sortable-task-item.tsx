@@ -62,6 +62,7 @@ export function SortableTaskItem({
         )}
         value={task.label}
         placeholder="Enter task name"
+        maxLength={80}
         onChange={(e) => onUpdate(task.id, { label: e.target.value })}
       />
       <div className="ml-auto flex items-center">

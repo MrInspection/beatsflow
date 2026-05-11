@@ -29,7 +29,10 @@ export function TaskListItem({
 
       <Label
         htmlFor={id}
-        className={cn(completed && "text-muted-foreground line-through")}
+        className={cn(
+          "leading-snug",
+          completed && "text-muted-foreground line-through",
+        )}
       >
         {label}
       </Label>

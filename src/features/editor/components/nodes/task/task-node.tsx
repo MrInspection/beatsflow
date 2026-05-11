@@ -106,6 +106,7 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
               <Label
                 htmlFor={task.id}
                 className={cn(
+                  "leading-snug",
                   task.completed && "text-muted-foreground line-through",
                 )}
               >

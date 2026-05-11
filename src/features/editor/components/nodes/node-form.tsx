@@ -15,7 +15,7 @@ function NodeFormHeader({
 }) {
   return (
     <div className={cn("flex items-center gap-3 p-4", className)} {...props}>
-      <div className="flex size-10 items-center justify-center rounded-lg bg-muted">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted">
         <Icon className="size-6 text-muted-foreground" />
       </div>
       <div>
