@@ -1,7 +1,7 @@
 import type { Edge } from "@xyflow/react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 
 interface WorkflowStore {
   workflowId: string;

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import type { FocusNodeType } from "@/features/editor/types/focus-node.types";
+import type { FocusNodeType } from "@/features/shared/types/focus-node.types";
 import { cn } from "@/lib/utils";
 
 export function FocusNode({ data, selected }: NodeProps<FocusNodeType>) {

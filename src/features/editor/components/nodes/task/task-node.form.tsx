@@ -40,7 +40,7 @@ import {
   ADVANCE_CONDITIONS,
   type TaskItem,
   type TaskNodeType,
-} from "@/features/editor/types/task-node.types";
+} from "@/features/shared/types/task-node.types";
 
 interface TaskNodeFormProps {
   node: TaskNodeType;

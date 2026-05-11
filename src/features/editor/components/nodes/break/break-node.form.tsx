@@ -10,7 +10,7 @@ import {
   NodeFormFooter,
   NodeFormHeader,
 } from "@/features/editor/components/nodes/node-form";
-import type { BreakNodeType } from "@/features/editor/types/break-node.types";
+import type { BreakNodeType } from "@/features/shared/types/break-node.types";
 
 interface BreakNodeFormProps {
   node: BreakNodeType;

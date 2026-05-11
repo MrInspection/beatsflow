@@ -20,7 +20,7 @@ import { IntentionNode } from "@/features/editor/components/nodes/intention/inte
 import { TaskNode } from "@/features/editor/components/nodes/task/task-node";
 import { WorkflowDetailsPane } from "@/features/editor/components/workflow-details-pane";
 import { useWorkflowStore } from "@/features/editor/store/workflow.store";
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 import { cn } from "@/lib/utils";
 
 const nodeTypes = {

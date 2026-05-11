@@ -1,8 +1,8 @@
-import type { IntentionNodeType } from "@/features/editor/types/intention-node.types";
-import type { TaskNodeType } from "@/features/editor/types/task-node.types";
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
 import type { SessionStatus } from "@/features/runner/store/session.store";
 import { formatSeconds } from "@/features/runner/utils/session.utils";
+import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
+import type { TaskNodeType } from "@/features/shared/types/task-node.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 
 export type BlockStatus = "completed" | "active" | "upcoming";
 

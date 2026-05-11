@@ -7,7 +7,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
-import type { BreakNodeType } from "@/features/editor/types/break-node.types";
+import type { BreakNodeType } from "@/features/shared/types/break-node.types";
 import { cn } from "@/lib/utils";
 
 export function BreakNode({ data, selected }: NodeProps<BreakNodeType>) {

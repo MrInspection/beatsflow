@@ -11,7 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { TaskItem } from "@/features/editor/types/task-node.types";
+import type { TaskItem } from "@/features/shared/types/task-node.types";
 import { cn } from "@/lib/utils";
 
 interface SortableTaskItemProps {

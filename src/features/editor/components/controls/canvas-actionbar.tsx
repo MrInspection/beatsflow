@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { AddNodeButton } from "@/features/editor/components/controls/add-node-button";
-import type { TaskNodeType } from "@/features/editor/types/task-node.types";
+import type { TaskNodeType } from "@/features/shared/types/task-node.types";
 import { useWorkflowStore } from "../../store/workflow.store";
 
 export function CanvasActionbar() {

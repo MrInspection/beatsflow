@@ -1,14 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import type { BreakNodeType } from "@/features/editor/types/break-node.types";
-import type { FocusNodeType } from "@/features/editor/types/focus-node.types";
-import type { TaskNodeType } from "@/features/editor/types/task-node.types";
 import { useSessionStore } from "@/features/runner/store/session.store";
 import {
   formatSeconds,
   getNodeColors,
 } from "@/features/runner/utils/session.utils";
+import type { BreakNodeType } from "@/features/shared/types/break-node.types";
+import type { FocusNodeType } from "@/features/shared/types/focus-node.types";
+import type { TaskNodeType } from "@/features/shared/types/task-node.types";
 import { playSound } from "@/lib/sounds";
 
 type TimedNode = FocusNodeType | BreakNodeType | TaskNodeType;

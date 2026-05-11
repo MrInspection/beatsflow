@@ -20,7 +20,7 @@ import {
 import {
   ADVANCE_CONDITIONS,
   type TaskNodeType,
-} from "@/features/editor/types/task-node.types";
+} from "@/features/shared/types/task-node.types";
 import { cn } from "@/lib/utils";
 
 export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {

@@ -1,4 +1,4 @@
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 
 export function getRunnableNodes(nodes: WorkflowNode[]): WorkflowNode[] {
   return nodes.filter((node) => node.type !== "intention");

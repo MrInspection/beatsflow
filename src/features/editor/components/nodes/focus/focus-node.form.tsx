@@ -11,7 +11,7 @@ import {
   NodeFormFooter,
   NodeFormHeader,
 } from "@/features/editor/components/nodes/node-form";
-import type { FocusNodeType } from "@/features/editor/types/focus-node.types";
+import type { FocusNodeType } from "@/features/shared/types/focus-node.types";
 
 interface FocusNodeFormProps {
   node: FocusNodeType;

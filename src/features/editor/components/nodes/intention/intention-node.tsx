@@ -3,7 +3,7 @@ import { PencilLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import type { IntentionNodeType } from "@/features/editor/types/intention-node.types";
+import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
 import { cn } from "@/lib/utils";
 
 export function IntentionNode({

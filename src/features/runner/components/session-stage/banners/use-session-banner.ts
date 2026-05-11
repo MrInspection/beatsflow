@@ -1,7 +1,7 @@
-import type { TaskNodeType } from "@/features/editor/types/task-node.types";
 import type { SessionBannerModel } from "@/features/runner/components/session-stage/banners/session-banner.types";
 import { SESSION_BANNER_CONTENT } from "@/features/runner/components/session-stage/banners/session-banner-content";
 import { useSessionStore } from "@/features/runner/store/session.store";
+import type { TaskNodeType } from "@/features/shared/types/task-node.types";
 
 export function useSessionBanner(): SessionBannerModel {
   const status = useSessionStore((state) => state.status);

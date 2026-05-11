@@ -3,7 +3,7 @@ import { Activity } from "react";
 import { BreakNodeForm } from "@/features/editor/components/nodes/break/break-node.form";
 import { FocusNodeForm } from "@/features/editor/components/nodes/focus/focus-node.form";
 import { IntentionNodeForm } from "@/features/editor/components/nodes/intention/intention-node.form";
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 import { TaskNodeForm } from "./nodes/task/task-node.form";
 
 interface WorkflowDetailsPaneProps {

@@ -18,11 +18,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { BreakNodeData } from "@/features/editor/types/break-node.types";
-import type { FocusNodeData } from "@/features/editor/types/focus-node.types";
-import type { IntentionNodeData } from "@/features/editor/types/intention-node.types";
-import type { TaskNodeData } from "@/features/editor/types/task-node.types";
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import type { BreakNodeData } from "@/features/shared/types/break-node.types";
+import type { FocusNodeData } from "@/features/shared/types/focus-node.types";
+import type { IntentionNodeData } from "@/features/shared/types/intention-node.types";
+import type { TaskNodeData } from "@/features/shared/types/task-node.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 import { useWorkflowStore } from "../../store/workflow.store";
 
 type BlockDefinition = {

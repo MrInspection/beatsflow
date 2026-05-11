@@ -1,5 +1,5 @@
 import type { Edge } from "@xyflow/react";
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 
 export type WorkflowPreset = {
   value: string;

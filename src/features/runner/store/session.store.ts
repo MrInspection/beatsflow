@@ -1,8 +1,8 @@
 import type { Edge } from "@xyflow/react";
 import { create } from "zustand";
-import type { IntentionNodeType } from "@/features/editor/types/intention-node.types";
-import type { TaskNodeType } from "@/features/editor/types/task-node.types";
-import type { WorkflowNode } from "@/features/editor/types/workflow.types";
+import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
+import type { TaskNodeType } from "@/features/shared/types/task-node.types";
+import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 
 export type SessionStatus =
   | "idle"

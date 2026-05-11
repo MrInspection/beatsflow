@@ -9,7 +9,7 @@ import {
   NodeFormFooter,
   NodeFormHeader,
 } from "@/features/editor/components/nodes/node-form";
-import type { IntentionNodeType } from "@/features/editor/types/intention-node.types";
+import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
 
 interface IntentionNodeFormProps {
   node: IntentionNodeType;

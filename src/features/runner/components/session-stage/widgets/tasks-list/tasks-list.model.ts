@@ -1,5 +1,5 @@
-import type { TaskNodeType } from "@/features/editor/types/task-node.types";
 import { useSessionStore } from "@/features/runner/store/session.store";
+import type { TaskNodeType } from "@/features/shared/types/task-node.types";
 
 export function useTasksListModel() {
   const runnableNodes = useSessionStore((state) => state.runnableNodes);
