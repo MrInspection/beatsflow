@@ -9,9 +9,10 @@ interface WorkflowStore {
   nodes: WorkflowNode[];
   edges: Edge[];
   selectedNodeId: string | null;
-
   setWorkflowName: (name: string) => void;
   setSelectedNodeId: (id: string | null) => void;
+  setNodes: (nodes: WorkflowNode[]) => void;
+  setEdges: (edges: Edge[]) => void;
   addNode: (node: WorkflowNode) => { success: boolean; reason?: string };
   updateNodeData: (id: string, data: Record<string, unknown>) => void;
   updateNodePosition: (id: string, position: { x: number; y: number }) => void;
@@ -42,6 +43,8 @@ export const useWorkflowStore = create<WorkflowStore>()(
 
       setWorkflowName: (name) => set({ workflowName: name }),
       setSelectedNodeId: (id) => set({ selectedNodeId: id }),
+      setNodes: (nodes) => set({ nodes }),
+      setEdges: (edges) => set({ edges }),
 
       addNode: (node) => {
         if (node.type === "intention") {
@@ -55,9 +58,7 @@ export const useWorkflowStore = create<WorkflowStore>()(
             };
           }
         }
-        set((state) => ({
-          nodes: [...state.nodes, node] as WorkflowNode[],
-        }));
+        set((state) => ({ nodes: [...state.nodes, node] as WorkflowNode[] }));
         return { success: true };
       },
 
@@ -87,17 +88,17 @@ export const useWorkflowStore = create<WorkflowStore>()(
             state.selectedNodeId === id ? null : state.selectedNodeId,
         })),
 
-      addEdge: (edge) => {
-        const { edges } = get();
-        const isDuplicate = edges.some(
-          (existingEdge) =>
-            existingEdge.source === edge.source &&
-            existingEdge.target === edge.target,
-        );
-        const isSelfConnection = edge.source === edge.target;
-        if (isDuplicate || isSelfConnection) return;
-        set((state) => ({ edges: [...state.edges, edge] }));
-      },
+      addEdge: (edge) =>
+        set((state) => {
+          const isDuplicate = state.edges.some(
+            (existingEdge) =>
+              existingEdge.source === edge.source &&
+              existingEdge.target === edge.target,
+          );
+          const isSelfConnection = edge.source === edge.target;
+          if (isDuplicate || isSelfConnection) return state;
+          return { edges: [...state.edges, edge] };
+        }),
 
       deleteEdge: (id) =>
         set((state) => ({

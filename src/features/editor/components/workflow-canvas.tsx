@@ -1,17 +1,18 @@
 "use client";
 
 import {
+  applyEdgeChanges,
+  applyNodeChanges,
   Background,
   BackgroundVariant,
   type Connection,
   type Edge,
+  type EdgeChange,
   type Node,
+  type NodeChange,
   ReactFlow,
-  useEdgesState,
-  useNodesState,
 } from "@xyflow/react";
 import type React from "react";
-import { useEffect } from "react";
 import { CanvasActionbar } from "@/features/editor/components/controls/canvas-actionbar";
 import { CanvasControls } from "@/features/editor/components/controls/canvas-controls";
 import { BreakNode } from "@/features/editor/components/nodes/break/break-node";
@@ -32,60 +33,36 @@ const nodeTypes = {
 
 export function WorkflowCanvas({ className }: { className?: string }) {
   const {
-    nodes: storedNodes,
-    edges: storedEdges,
+    nodes,
+    edges,
     selectedNodeId,
     setSelectedNodeId,
+    setNodes,
+    setEdges,
     updateNodeData,
     updateNodePosition,
     deleteNode,
     addEdge,
   } = useWorkflowStore();
 
-  const [nodes, setNodes, onNodesChangeDefault] = useNodesState(storedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(storedEdges);
-
   const selectedNode = (nodes.find((node) => node.id === selectedNodeId) ??
     null) as WorkflowNode | null;
 
-  const handleNodesChange = (changes: any[]) => {
-    onNodesChangeDefault(changes);
-
-    const removedNodeIds = changes
+  function handleNodesChange(changes: NodeChange[]) {
+    const removedIds = changes
       .filter((change) => change.type === "remove")
       .map((change) => change.id);
 
-    for (const nodeId of removedNodeIds) {
-      deleteNode(nodeId);
+    for (const id of removedIds) {
+      deleteNode(id);
     }
-  };
 
-  useEffect(() => {
-    setNodes((prev) => {
-      const prevIds = new Set(prev.map((node) => node.id));
-      const storedIds = new Set(storedNodes.map((node) => node.id));
+    setNodes(applyNodeChanges(changes, nodes) as WorkflowNode[]);
+  }
 
-      const hasAdditions = storedNodes.some((node) => !prevIds.has(node.id));
-      const hasRemovals = prev.some((node) => !storedIds.has(node.id));
-
-      if (hasRemovals && !hasAdditions) return prev;
-
-      if (!hasAdditions && !hasRemovals) {
-        return prev.map((node) => {
-          const stored = storedNodes.find(
-            (storedNode) => storedNode.id === node.id,
-          );
-          return stored ? { ...node, data: stored.data } : node;
-        }) as WorkflowNode[];
-      }
-
-      return storedNodes;
-    });
-  }, [storedNodes, setNodes]);
-
-  useEffect(() => {
-    setEdges(storedEdges);
-  }, [storedEdges, setEdges]);
+  function handleEdgesChange(changes: EdgeChange[]) {
+    setEdges(applyEdgeChanges(changes, edges));
+  }
 
   function handleNodeClick(_: React.MouseEvent, node: Node) {
     setSelectedNodeId(node.id);
@@ -110,7 +87,7 @@ export function WorkflowCanvas({ className }: { className?: string }) {
         nodes={nodes}
         edges={edges}
         onNodesChange={handleNodesChange}
-        onEdgesChange={onEdgesChange}
+        onEdgesChange={handleEdgesChange}
         nodeTypes={nodeTypes}
         nodesDraggable={true}
         nodesConnectable={true}
