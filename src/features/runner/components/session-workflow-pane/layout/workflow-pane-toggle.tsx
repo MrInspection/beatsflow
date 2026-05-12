@@ -14,7 +14,7 @@ export function WorkflowPaneToggle({
   return (
     <Button
       variant="outline"
-      className="flex h-full w-12 items-center justify-center rounded-xl border shadow-sm"
+      className="flex h-full w-12 items-center justify-center rounded-xl border shadow-sm dark:bg-background dark:hover:bg-background/25"
       onClick={onOpen}
       aria-label="Show workflow pane"
       hidden={!hidden}

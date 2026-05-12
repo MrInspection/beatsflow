@@ -17,8 +17,8 @@ export function IntentionCard({ intention }: IntentionCardProps) {
     >
       <div className="flex flex-col gap-2 text-sm">
         <p className="font-medium">{intention.prompt}</p>
-
-        <div className="mt-1 overflow-hidden rounded-lg border-2 border-b-4 px-4 py-3">
+        <div className="mt-1 space-y-3 overflow-hidden rounded-lg border-2 border-b-4 px-4 py-3">
+          <div className="font-semibold">Your answer</div>
           <p className="text-muted-foreground">
             {intention.answer ?? "No answer provided"}
           </p>
