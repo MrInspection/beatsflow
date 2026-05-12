@@ -15,7 +15,7 @@ export function FocusNode({ data, selected }: NodeProps<FocusNodeType>) {
   return (
     <div
       className={cn(
-        "h-fit w-84 rounded-4xl border bg-background transition-shadow",
+        "h-fit w-84 overflow-hidden rounded-lg border bg-background transition-shadow",
         selected ? "border-ring shadow-md ring-3 ring-ring/30" : "",
       )}
     >
@@ -26,8 +26,8 @@ export function FocusNode({ data, selected }: NodeProps<FocusNodeType>) {
       />
 
       <div className="flex items-center gap-2 p-4 py-3">
-        <Zap className="size-5 text-muted-foreground" />
-        <div className="font-medium">
+        <Zap className="size-5 shrink-0 text-muted-foreground" />
+        <div className="min-w-0 flex-1 truncate font-medium">
           {data.label === "" ? "Untitled Node" : data.label}
         </div>
         <Badge

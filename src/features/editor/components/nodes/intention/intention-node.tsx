@@ -13,7 +13,7 @@ export function IntentionNode({
   return (
     <div
       className={cn(
-        "h-fit w-84 rounded-4xl border bg-background transition-shadow",
+        "h-fit w-84 overflow-hidden rounded-lg border bg-background transition-shadow",
         selected ? "border-ring shadow-md ring-3 ring-ring/30" : "",
       )}
     >

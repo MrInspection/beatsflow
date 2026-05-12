@@ -27,7 +27,7 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
   return (
     <div
       className={cn(
-        "h-fit w-84 rounded-4xl border bg-background transition-shadow",
+        "h-fit w-84 overflow-hidden rounded-lg border bg-background transition-shadow",
         selected ? "border-ring shadow-md ring-3 ring-ring/30" : "",
       )}
     >
@@ -37,12 +37,12 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
         className="border! size-2! border-muted-foreground bg-input!"
       />
       <div className="flex items-center gap-2 p-4 py-3">
-        <ListTodo className="size-5 text-muted-foreground" />
-        <div className="font-medium">
+        <ListTodo className="size-5 shrink-0 text-muted-foreground" />
+        <div className="min-w-0 flex-1 truncate font-medium">
           {data.label === "" ? "Untitled Node" : data.label}
         </div>
         <Badge
-          className="ml-auto bg-emerald-100/80 dark:bg-emerald-800/25 dark:text-emerald-400"
+          className="ml-auto shrink-0 bg-emerald-100/80 dark:bg-emerald-800/25 dark:text-emerald-400"
           variant="secondary"
         >
           Task
