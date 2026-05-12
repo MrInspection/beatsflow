@@ -32,6 +32,13 @@ export function WorkflowBlockCard({ block, isLast }: WorkflowBlockCardProps) {
           completed={isCompleted}
         />
 
+        {block.type === "focus" && block.intention && (
+          <div className="my-1 space-y-3 rounded-lg border-2 border-b-4 px-3 py-3">
+            <div className="font-semibold text-sm">Intention</div>
+            <p className="text-muted-foreground text-sm">{block.intention}</p>
+          </div>
+        )}
+
         {block.tasks && <WorkflowTaskList tasks={block.tasks} />}
 
         {isActive && block.secondsRemainingLabel && (

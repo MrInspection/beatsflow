@@ -1,5 +1,6 @@
 import type { SessionStatus } from "@/features/runner/store/session.store";
 import { formatSeconds } from "@/features/runner/utils/session.utils";
+import type { FocusNodeType } from "@/features/shared/types/focus-node.types";
 import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
 import type { TaskNodeType } from "@/features/shared/types/task-node.types";
 import type { WorkflowNode } from "@/features/shared/types/workflow.types";
@@ -27,6 +28,7 @@ export type WorkflowBlockModel = {
   secondsRemainingLabel: string | null;
   taskProgress: WorkflowTaskProgressModel | null;
   tasks: WorkflowTaskModel[] | null;
+  intention: string | null;
   isRunning: boolean;
 };
 
@@ -94,6 +96,12 @@ export function deriveSessionWorkflowModel(
 
     let taskProgress: WorkflowTaskProgressModel | null = null;
     let tasks: WorkflowTaskModel[] | null = null;
+    let intention: string | null = null;
+
+    if (node.type === "focus") {
+      const focusNode = node as FocusNodeType;
+      intention = focusNode.data.intention?.trim() || null;
+    }
 
     if (node.type === "task") {
       const taskNode = node as TaskNodeType;
@@ -118,6 +126,7 @@ export function deriveSessionWorkflowModel(
       secondsRemainingLabel,
       taskProgress,
       tasks,
+      intention,
       isRunning: isActive && sessionStatus === "running",
     };
   });
