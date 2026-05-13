@@ -1,15 +1,13 @@
 "use client";
 
 import { Panel, useReactFlow } from "@xyflow/react";
-import { AlertTriangle, Maximize2, Minus, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
+import { Maximize2, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   ButtonGroup,
   ButtonGroupSeparator,
 } from "@/components/ui/button-group";
-import { useWorkflowStore } from "@/features/editor/store/workflow.store";
+import { ResetWorkflowButton } from "@/features/editor/components/controls/canvas-controls/reset-workflow-button";
 
 export function CanvasControls() {
   const { zoomIn, zoomOut, fitView } = useReactFlow();
@@ -47,32 +45,5 @@ export function CanvasControls() {
         <ResetWorkflowButton />
       </ButtonGroup>
     </Panel>
-  );
-}
-
-function ResetWorkflowButton() {
-  const [isConfirmingReset, setIsConfirmingReset] = useState(false);
-  const resetWorkflow = useWorkflowStore((state) => state.resetWorkflow);
-
-  function handleClick() {
-    if (isConfirmingReset) {
-      resetWorkflow();
-      toast.success("Your canvas has been reset.");
-      setIsConfirmingReset(false);
-      return;
-    }
-
-    setIsConfirmingReset(true);
-    setTimeout(() => setIsConfirmingReset(false), 3000);
-  }
-
-  return (
-    <Button variant="ghost" size="icon-sm" onClick={handleClick}>
-      {isConfirmingReset ? (
-        <AlertTriangle className="size-4 text-destructive" />
-      ) : (
-        <Trash2 className="size-4" />
-      )}
-    </Button>
   );
 }

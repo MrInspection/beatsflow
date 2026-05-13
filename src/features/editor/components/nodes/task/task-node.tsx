@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { NodeShell } from "@/features/editor/components/nodes/shared/node-shell";
 import {
   ADVANCE_CONDITIONS,
   type TaskNodeType,
@@ -25,12 +26,7 @@ import { cn } from "@/lib/utils";
 
 export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
   return (
-    <div
-      className={cn(
-        "h-fit w-84 overflow-hidden rounded-lg border bg-background transition-shadow",
-        selected ? "border-ring shadow-md ring-3 ring-ring/30" : "",
-      )}
-    >
+    <NodeShell selected={selected}>
       <Handle
         type="target"
         position={Position.Top}
@@ -48,7 +44,6 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
           Task
         </Badge>
       </div>
-
       <div className="space-y-6 border-t p-4">
         <div className="space-y-2">
           <Label>Duration</Label>
@@ -64,7 +59,6 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
             <InputGroupAddon align="inline-end">minutes</InputGroupAddon>
           </InputGroup>
         </div>
-
         <div className="space-y-2">
           <Label>Advances when</Label>
           <Select
@@ -88,7 +82,6 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
             </SelectContent>
           </Select>
         </div>
-
         <div className="mb-1 space-y-2.5">
           <Label>Tasks</Label>
           {data.tasks.length === 0 && (
@@ -99,7 +92,6 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
               </p>
             </div>
           )}
-
           {data.tasks.map((task) => (
             <div className="flex items-start gap-2" key={task.id}>
               <Checkbox id={task.id} checked={task.completed} disabled />
@@ -116,12 +108,11 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
           ))}
         </div>
       </div>
-
       <Handle
         type="source"
         position={Position.Bottom}
         className="border! size-2! border-muted-foreground bg-input!"
       />
-    </div>
+    </NodeShell>
   );
 }

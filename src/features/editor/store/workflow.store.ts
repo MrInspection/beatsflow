@@ -3,12 +3,19 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { WorkflowNode } from "@/features/shared/types/workflow.types";
 
+interface WorkflowPresetPayload {
+  workflowName: string;
+  nodes: WorkflowNode[];
+  edges: Edge[];
+}
+
 interface WorkflowStore {
   workflowId: string;
   workflowName: string;
   nodes: WorkflowNode[];
   edges: Edge[];
   selectedNodeId: string | null;
+
   setWorkflowName: (name: string) => void;
   setSelectedNodeId: (id: string | null) => void;
   setNodes: (nodes: WorkflowNode[]) => void;
@@ -19,6 +26,7 @@ interface WorkflowStore {
   deleteNode: (id: string) => void;
   addEdge: (edge: Edge) => void;
   deleteEdge: (id: string) => void;
+  loadPreset: (preset: WorkflowPresetPayload) => void;
   resetWorkflow: () => void;
 }
 
@@ -104,6 +112,14 @@ export const useWorkflowStore = create<WorkflowStore>()(
         set((state) => ({
           edges: state.edges.filter((edge) => edge.id !== id),
         })),
+
+      loadPreset: (preset) =>
+        set({
+          ...createDefaultState(),
+          workflowName: preset.workflowName,
+          nodes: preset.nodes,
+          edges: preset.edges,
+        }),
 
       resetWorkflow: () => set(createDefaultState()),
     }),

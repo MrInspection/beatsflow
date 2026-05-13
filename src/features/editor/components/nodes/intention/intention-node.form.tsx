@@ -4,12 +4,12 @@ import { PencilLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
 import {
   NodeFormContent,
   NodeFormFooter,
   NodeFormHeader,
-} from "@/features/editor/components/nodes/node-form";
-import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
+} from "../shared/node-form";
 
 interface IntentionNodeFormProps {
   node: IntentionNodeType;

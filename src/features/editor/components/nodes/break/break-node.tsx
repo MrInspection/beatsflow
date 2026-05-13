@@ -7,36 +7,29 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
+import { NodeShell } from "@/features/editor/components/nodes/shared/node-shell";
 import type { BreakNodeType } from "@/features/shared/types/break-node.types";
-import { cn } from "@/lib/utils";
 
 export function BreakNode({ data, selected }: NodeProps<BreakNodeType>) {
   return (
-    <div
-      className={cn(
-        "h-fit w-84 overflow-hidden rounded-lg border bg-background transition-shadow",
-        selected ? "border-ring shadow-md ring-3 ring-ring/30" : "",
-      )}
-    >
+    <NodeShell selected={selected}>
       <Handle
         type="target"
         position={Position.Top}
         className="border! size-2! border-muted-foreground bg-input!"
       />
-
       <div className="flex items-center gap-2 p-4 py-3">
         <Coffee className="size-5 shrink-0 text-muted-foreground" />
         <div className="min-w-0 flex-1 truncate font-medium">
           {data.label === "" ? "Untitled Node" : data.label}
         </div>
         <Badge
-          className="ml-auto bg-cyan-100/80 dark:bg-cyan-800/25 dark:text-cyan-400"
+          className="ml-auto shrink-0 bg-cyan-100/80 dark:bg-cyan-800/25 dark:text-cyan-400"
           variant="secondary"
         >
           Break
         </Badge>
       </div>
-
       <div className="space-y-2 border-t p-4">
         <Label>Duration</Label>
         <InputGroup>
@@ -51,12 +44,11 @@ export function BreakNode({ data, selected }: NodeProps<BreakNodeType>) {
           <InputGroupAddon align="inline-end">minutes</InputGroupAddon>
         </InputGroup>
       </div>
-
       <Handle
         type="source"
         position={Position.Bottom}
         className="border! size-2! border-muted-foreground bg-input!"
       />
-    </div>
+    </NodeShell>
   );
 }

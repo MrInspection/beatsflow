@@ -1,5 +1,5 @@
-import { EditorHeader } from "@/features/editor/components/editor-header";
-import { WorkflowEditor } from "@/features/editor/components/workflow-editor";
+import {EditorHeader} from "@/features/editor/components/editor-header/editor-header";
+import {WorkflowEditor} from "@/features/editor/components/workflow-editor/workflow-editor";
 
 export default function HomePage() {
   return (

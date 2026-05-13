@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactFlowProvider } from "@xyflow/react";
-import { WorkflowCanvas } from "@/features/editor/components/workflow-canvas";
+import { WorkflowCanvas } from "@/features/editor/components/workflow-canvas/workflow-canvas";
 
 export function WorkflowEditor() {
   return (

@@ -3,31 +3,25 @@ import { PencilLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { NodeShell } from "@/features/editor/components/nodes/shared/node-shell";
 import type { IntentionNodeType } from "@/features/shared/types/intention-node.types";
-import { cn } from "@/lib/utils";
 
 export function IntentionNode({
   data,
   selected,
 }: NodeProps<IntentionNodeType>) {
   return (
-    <div
-      className={cn(
-        "h-fit w-84 overflow-hidden rounded-lg border bg-background transition-shadow",
-        selected ? "border-ring shadow-md ring-3 ring-ring/30" : "",
-      )}
-    >
+    <NodeShell selected={selected}>
       <div className="flex items-center gap-2 p-4 py-3">
-        <PencilLine className="size-5 text-muted-foreground" />
-        <div className="font-medium">Set Intention</div>
+        <PencilLine className="size-5 shrink-0 text-muted-foreground" />
+        <div className="min-w-0 flex-1 truncate font-medium">Set Intention</div>
         <Badge
-          className="ml-auto bg-indigo-100/80 dark:bg-purple-800/25 dark:text-purple-400"
+          className="ml-auto shrink-0 bg-indigo-100/80 dark:bg-purple-800/25 dark:text-purple-400"
           variant="secondary"
         >
           Prompt
         </Badge>
       </div>
-
       <div className="space-y-6 border-t p-4">
         <div className="space-y-2">
           <Label>Prompt</Label>
@@ -47,12 +41,11 @@ export function IntentionNode({
           </p>
         </div>
       </div>
-
       <Handle
         type="source"
         position={Position.Bottom}
         className="border! size-2! border-muted-foreground bg-input!"
       />
-    </div>
+    </NodeShell>
   );
 }

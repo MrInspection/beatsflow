@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
+import type { FocusNodeType } from "@/features/shared/types/focus-node.types";
 import {
   NodeFormContent,
   NodeFormFooter,
   NodeFormHeader,
-} from "@/features/editor/components/nodes/node-form";
-import type { FocusNodeType } from "@/features/shared/types/focus-node.types";
+} from "../shared/node-form";
 
 interface FocusNodeFormProps {
   node: FocusNodeType;

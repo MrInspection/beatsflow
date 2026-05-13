@@ -5,9 +5,9 @@ import { Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { AddNodeButton } from "@/features/editor/components/controls/add-node-button";
+import { AddNodeMenu } from "@/features/editor/components/controls/add-node-button/add-node-menu";
+import { useWorkflowStore } from "@/features/editor/store/workflow.store";
 import type { TaskNodeType } from "@/features/shared/types/task-node.types";
-import { useWorkflowStore } from "../../store/workflow.store";
 
 export function CanvasActionbar() {
   const router = useRouter();
@@ -45,7 +45,7 @@ export function CanvasActionbar() {
   return (
     <Panel position="bottom-center">
       <div className="flex items-center gap-1 rounded-4xl border bg-background/80 p-2 shadow-sm backdrop-blur">
-        <AddNodeButton />
+        <AddNodeMenu />
         <Button variant="ghost" onClick={handleExecute}>
           <Play className="size-4 fill-current" /> Execute Workflow
         </Button>

@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import type { BreakNodeType } from "@/features/shared/types/break-node.types";
 import {
   NodeFormContent,
   NodeFormFooter,
   NodeFormHeader,
-} from "@/features/editor/components/nodes/node-form";
-import type { BreakNodeType } from "@/features/shared/types/break-node.types";
+} from "../shared/node-form";
 
 interface BreakNodeFormProps {
   node: BreakNodeType;

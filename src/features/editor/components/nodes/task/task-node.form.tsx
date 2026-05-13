@@ -30,17 +30,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import {
-  NodeFormContent,
-  NodeFormFooter,
-  NodeFormHeader,
-} from "@/features/editor/components/nodes/node-form";
 import { SortableTaskItem } from "@/features/editor/components/nodes/task/sortable-task-item";
 import {
   ADVANCE_CONDITIONS,
   type TaskItem,
   type TaskNodeType,
 } from "@/features/shared/types/task-node.types";
+import {
+  NodeFormContent,
+  NodeFormFooter,
+  NodeFormHeader,
+} from "../shared/node-form";
 
 interface TaskNodeFormProps {
   node: TaskNodeType;
