@@ -1,6 +1,6 @@
 "use client";
 
-import { SquareCheck } from "lucide-react";
+import { ListTodo } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -22,18 +22,22 @@ export function TasksListWidget() {
 
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="ghost" />}>
-        <SquareCheck className="size-5" />
-        {model.completedCount > 0 && (
-          <span className="ml-1 text-xs tabular-nums">
-            {model.completedCount}/{model.totalCount}
-          </span>
-        )}
+      <PopoverTrigger
+        render={
+          <Button
+            variant="ghost"
+            className="h-16 flex-col gap-0.5 rounded-xl bg-neutral-100 px-4 py-2 dark:bg-muted/80"
+          />
+        }
+      >
+        <ListTodo className="size-4" />
+        <span className="mt-0.5 text-[10px] text-muted-foreground">Tasks</span>
       </PopoverTrigger>
       <PopoverContent
-        align="end"
         side="top"
-        className="mb-2 max-h-[50svh] w-80 gap-0 overflow-hidden border p-0"
+        align="center"
+        sideOffset={16}
+        className="max-h-[80svh] w-72 gap-0 overflow-hidden border p-0"
       >
         <PopoverHeader className="border-b px-6 py-5">
           <PopoverTitle>{model.title}</PopoverTitle>
