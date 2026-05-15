@@ -5,13 +5,13 @@ import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const bannerVariants = cva(
-  "flex h-10 items-center justify-center rounded-t-2xl",
+  "flex h-10 items-center justify-center rounded-t-2xl backdrop-blur-sm",
   {
     variants: {
       variant: {
         default: "bg-gray-100 text-muted-foreground dark:bg-muted",
         success:
-          "bg-blue-100/60 text-blue-900 dark:bg-blue-900/20 dark:text-blue-400",
+          "bg-blue-100/60 text-blue-900 dark:bg-blue-900/40 dark:text-blue-400",
         warning:
           "bg-orange-100/60 text-orange-900 dark:bg-orange-900/20 dark:text-orange-400",
         error:

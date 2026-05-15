@@ -1,7 +1,7 @@
+import { RunnerBackground } from "@/features/music/components/runner-background/runner-background";
 import type { SessionBannerModel } from "@/features/runner/components/session-stage/banners/session-banner.types";
 import { SessionStageBottomBar } from "@/features/runner/components/session-stage/layout/session-stage-bottom-bar";
 import { SessionStageContent } from "@/features/runner/components/session-stage/layout/session-stage-content";
-import { SessionStageTopBar } from "@/features/runner/components/session-stage/layout/session-stage-top-bar";
 import { cn } from "@/lib/utils";
 import { AnnouncementBanner } from "../../announcement-banner";
 
@@ -11,20 +11,22 @@ type SessionStageShellProps = {
 
 export function SessionStageShell({ banner }: SessionStageShellProps) {
   return (
-    <div className="flex size-full flex-col overflow-clip rounded-4xl border bg-background shadow-sm">
-      <AnnouncementBanner
-        label={banner.label}
-        icon={banner.icon}
-        variant={banner.variant}
-        isVanished={banner.isVanished}
-      />
+    <div className="relative flex size-full flex-col overflow-clip rounded-4xl border bg-background shadow-sm">
+      <RunnerBackground />
+      <div className="relative z-10 flex flex-col backdrop-blur">
+        <AnnouncementBanner
+          label={banner.label}
+          icon={banner.icon}
+          variant={banner.variant}
+          isVanished={banner.isVanished}
+        />
+      </div>
       <div
         className={cn(
-          "flex flex-1 flex-col p-4",
+          "relative z-10 flex flex-1 flex-col p-4",
           !banner.isVanished && "border-t",
         )}
       >
-        <SessionStageTopBar />
         <SessionStageContent />
         <SessionStageBottomBar />
       </div>
