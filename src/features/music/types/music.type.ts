@@ -17,6 +17,6 @@ export type AmbienceTrack = {
 export type SceneBackground = {
   id: string;
   title: string;
-  youtubeId: string;
+  videoSrc: string;
   thumbnailUrl: string;
 };
