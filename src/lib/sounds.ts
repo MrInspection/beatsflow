@@ -1,17 +1,26 @@
 export type SoundType =
-  | "workflowStart"
-  | "workflowEnd"
-  | "sessionStart"
-  | "sessionEnd"
-  | "workflowCancel";
+  | "workflow-start"
+  | "workflow-end"
+  | "session-start"
+  | "session-end"
+  | "task-complete"
+  | "workflow-cancelled"
+  | "timer-paused"
+  | "timer-resume"
+  | "session-restart"
+  | "champion";
 
-// Map of sound URLs
 const soundMap: Record<SoundType, string> = {
-  workflowStart: "/sounds/workflow_start.ogg",
-  workflowEnd: "/sounds/workflow_end.ogg",
-  sessionStart: "/sounds/session_start.ogg",
-  sessionEnd: "/sounds/session_end.ogg",
-  workflowCancel: "/sounds/workflow_cancelled.ogg",
+  "workflow-start": "/sfx/workflow-start.ogg",
+  "workflow-end": "/sfx/workflow-end.ogg",
+  "session-start": "/sfx/session-start.ogg",
+  "session-end": "/sfx/session-end.ogg",
+  "task-complete": "/sfx/task-complete.ogg",
+  "workflow-cancelled": "/sfx/workflow-cancelled.ogg",
+  "timer-paused": "/sfx/timer-paused.ogg",
+  "timer-resume": "/sfx/timer-resume.ogg",
+  "session-restart": "/sfx/session-restart.ogg",
+  champion: "/sfx/champion.ogg",
 };
 
 const audioCache: Record<string, HTMLAudioElement> = {};
@@ -21,7 +30,7 @@ const audioCache: Record<string, HTMLAudioElement> = {};
  * @param soundType The type of sound to play
  * @param volume Volume level (0-1)
  */
-export function playSound(soundType: SoundType, volume = 0.7): void {
+export function playSound(soundType: SoundType, volume = 0.7) {
   try {
     let audio = audioCache[soundType];
 
@@ -45,7 +54,7 @@ export function playSound(soundType: SoundType, volume = 0.7): void {
 /**
  * Preload all sounds to avoid delay when playing
  */
-export function preloadSounds(): void {
+export function preloadSounds() {
   Object.keys(soundMap).forEach((key) => {
     const soundType = key as SoundType;
     const soundUrl = soundMap[soundType];
