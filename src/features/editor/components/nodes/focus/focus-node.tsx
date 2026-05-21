@@ -25,7 +25,7 @@ export function FocusNode({ data, selected }: NodeProps<FocusNodeType>) {
           {data.label === "" ? "Untitled Node" : data.label}
         </div>
         <Badge
-          className="ml-auto shrink-0 bg-pink-100/80 dark:bg-pink-800/25 dark:text-pink-400"
+          className="ml-auto shrink-0 bg-pink-800/25 text-pink-400"
           variant="secondary"
         >
           Focus

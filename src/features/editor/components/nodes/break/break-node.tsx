@@ -24,7 +24,7 @@ export function BreakNode({ data, selected }: NodeProps<BreakNodeType>) {
           {data.label === "" ? "Untitled Node" : data.label}
         </div>
         <Badge
-          className="ml-auto shrink-0 bg-cyan-100/80 dark:bg-cyan-800/25 dark:text-cyan-400"
+          className="ml-auto shrink-0 bg-cyan-800/25 text-cyan-400"
           variant="secondary"
         >
           Break

@@ -38,7 +38,7 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
           {data.label === "" ? "Untitled Node" : data.label}
         </div>
         <Badge
-          className="ml-auto shrink-0 bg-emerald-100/80 dark:bg-emerald-800/25 dark:text-emerald-400"
+          className="ml-auto shrink-0 bg-emerald-800/25 text-emerald-400"
           variant="secondary"
         >
           Task
@@ -85,7 +85,7 @@ export function TaskNode({ data, selected }: NodeProps<TaskNodeType>) {
         <div className="mb-1 space-y-2.5">
           <Label>Tasks</Label>
           {data.tasks.length === 0 && (
-            <div className="flex h-36 flex-col items-center justify-center rounded-xl bg-neutral-100 p-4 dark:bg-muted/40">
+            <div className="flex h-36 flex-col items-center justify-center rounded-xl bg-muted/40 p-4">
               <div className="font-medium text-sm">No tasks</div>
               <p className="mt-1 max-w-[75%] text-center text-muted-foreground text-xs">
                 You don't have any tasks for this productivity session.

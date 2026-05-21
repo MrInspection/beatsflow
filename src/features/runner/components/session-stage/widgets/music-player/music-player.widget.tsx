@@ -215,7 +215,7 @@ export function MusicPlayerWidget() {
     <Popover open={openPopover} onOpenChange={setOpenPopover}>
       <div
         ref={barRef}
-        className="z-40 flex h-16 items-center justify-between gap-8 rounded-3xl bg-background px-3 py-2 backdrop-blur dark:bg-muted/65"
+        className="z-40 flex h-16 items-center justify-between gap-8 rounded-3xl bg-muted/65 px-3 py-2 backdrop-blur"
       >
         <div className="flex min-w-0 items-center gap-3">
           {selectedStation ? (

@@ -52,7 +52,7 @@ export function WorkflowCanvas({ className }: { className?: string }) {
           variant={BackgroundVariant.Dots}
           gap={24}
           size={1}
-          className="rounded-4xl bg-neutral-100 dark:bg-muted/20"
+          className="rounded-4xl bg-muted/20"
         />
         <CanvasControls />
         <CanvasActionbar />

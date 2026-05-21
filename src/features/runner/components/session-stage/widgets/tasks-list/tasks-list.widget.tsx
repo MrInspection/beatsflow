@@ -26,7 +26,7 @@ export function TasksListWidget() {
         render={
           <Button
             variant="ghost"
-            className="relative z-40 h-16 flex-col gap-0.5 rounded-3xl bg-neutral-100 px-4 py-2 backdrop-blur dark:bg-muted/80"
+            className="relative z-40 h-16 flex-col gap-0.5 rounded-3xl bg-muted/80 px-4 py-2 backdrop-blur"
           />
         }
       >
