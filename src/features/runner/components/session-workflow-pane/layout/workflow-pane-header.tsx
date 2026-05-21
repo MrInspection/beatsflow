@@ -12,7 +12,6 @@ export function WorkflowPaneHeader({ onClose }: WorkflowPaneHeaderProps) {
       <Button variant="ghost" size="icon" onClick={onClose}>
         <PanelRightCloseIcon className="size-5" aria-hidden="true" />
       </Button>
-
       <h4 className="font-semibold">My Workflow</h4>
     </div>
   );

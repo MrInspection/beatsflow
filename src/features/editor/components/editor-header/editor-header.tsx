@@ -39,20 +39,21 @@ export function EditorHeader() {
 
   return (
     <header>
-      <div className="mx-auto flex h-16 items-center justify-between px-8">
-        <div className="inline-flex items-center gap-2">
-          <div className="font-medium">BeatsFlōw.</div>
-          <Slash className="size-6 -rotate-30 text-muted-foreground/50" />
+      <div className="mx-auto flex h-16 items-center justify-between gap-4 px-4 md:px-8">
+        <div className="inline-flex min-w-0 items-center gap-2">
+          <div className="hidden font-medium sm:block">BeatsFlōw.</div>
+          <div className="font-medium sm:hidden">BF.</div>
+          <Slash className="size-6 shrink-0 -rotate-30 text-muted-foreground/50" />
           <Input
-            className="h-8 min-w-52"
+            className="h-8 w-32 sm:w-44 md:min-w-52"
             placeholder="Untitled Workflow"
             value={workflowName}
             onChange={(event) => setWorkflowName(event.target.value)}
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <Select items={allPresetItems} onValueChange={handleLoadPreset}>
-            <SelectTrigger className="w-52">
+            <SelectTrigger className="w-36 md:w-52">
               <SelectValue placeholder="Load a preset" />
             </SelectTrigger>
             <SelectContent>
@@ -76,11 +77,18 @@ export function EditorHeader() {
               )}
             </SelectContent>
           </Select>
-          <Button variant="secondary" onClick={handleShare}>
-            <Share className="size-4" /> Share
+          <Button
+            variant="secondary"
+            onClick={handleShare}
+            size="sm"
+            className="md:h-9"
+          >
+            <Share className="size-4" />
+            <span className="hidden sm:inline">Share</span>
           </Button>
-          <Button onClick={handleSaveAsPreset}>
-            <Save className="size-4" /> Save as Preset
+          <Button onClick={handleSaveAsPreset} size="sm" className="md:h-9">
+            <Save className="size-4" />
+            <span className="hidden sm:inline">Save as Preset</span>
           </Button>
         </div>
       </div>

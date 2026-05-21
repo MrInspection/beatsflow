@@ -16,7 +16,7 @@ export function IntentionNode({
         <PencilLine className="size-5 shrink-0 text-muted-foreground" />
         <div className="min-w-0 flex-1 truncate font-medium">Set Intention</div>
         <Badge
-          className="ml-auto shrink-0 bg-indigo-100/80 dark:bg-purple-800/25 dark:text-purple-400"
+          className="ml-auto shrink-0 bg-purple-800/25 text-purple-400"
           variant="secondary"
         >
           Prompt

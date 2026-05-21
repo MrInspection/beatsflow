@@ -19,9 +19,7 @@ export function WorkflowBlockProgress({
       <div
         className={cn(
           "flex items-center gap-1.5",
-          isRunning
-            ? "text-orange-600 dark:text-orange-400"
-            : "text-muted-foreground",
+          isRunning ? "text-orange-400" : "text-muted-foreground",
         )}
       >
         {isRunning ? (
@@ -34,7 +32,7 @@ export function WorkflowBlockProgress({
         </span>
       </div>
 
-      <div className="flex items-center gap-1.5 text-orange-600 dark:text-orange-400">
+      <div className="flex items-center gap-1.5 text-orange-400">
         <ClockIcon className="size-3.5" />
         <span className="font-semibold text-xs tabular-nums">
           {secondsRemainingLabel} left
@@ -42,7 +40,7 @@ export function WorkflowBlockProgress({
       </div>
 
       {typeof totalTasks === "number" && totalTasks > 0 && (
-        <div className="flex items-center gap-1.5 text-orange-600 dark:text-orange-400">
+        <div className="flex items-center gap-1.5 text-orange-400">
           <Scroll className="size-3.5" />
           <span className="font-semibold text-xs">
             {completedTasks}/{totalTasks} tasks

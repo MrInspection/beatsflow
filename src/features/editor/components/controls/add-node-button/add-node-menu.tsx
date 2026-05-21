@@ -21,7 +21,7 @@ export function AddNodeMenu() {
       <DropdownMenuTrigger render={<Button variant="secondary" />}>
         <Plus className="size-4" /> Add block
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="mb-4 w-72 p-2" align="center">
+      <DropdownMenuContent className="mb-4 w-72 border p-2" align="center">
         {WORKFLOW_NODE_DEFINITIONS.map((definition) => {
           const Icon = definition.icon;
           return (

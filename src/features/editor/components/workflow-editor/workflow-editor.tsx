@@ -7,7 +7,7 @@ export function WorkflowEditor() {
   return (
     <ReactFlowProvider>
       <div className="relative flex h-full overflow-hidden px-6 pt-1 pb-4">
-        <WorkflowCanvas className="rounded-4xl dark:border" />
+        <WorkflowCanvas className="rounded-4xl border" />
       </div>
     </ReactFlowProvider>
   );

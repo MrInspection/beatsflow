@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from "react";
+import { MobileGuard } from "@/components/mobile-guard";
 import Providers from "@/components/providers";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +52,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Providers>
-          <main className="flex min-h-screen flex-col">{children}</main>
+          <MobileGuard>
+            <main className="flex min-h-screen flex-col">{children}</main>
+          </MobileGuard>
         </Providers>
       </body>
     </html>

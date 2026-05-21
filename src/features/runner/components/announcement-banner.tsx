@@ -9,13 +9,10 @@ const bannerVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gray-100 text-muted-foreground dark:bg-muted",
-        success:
-          "bg-blue-100/60 text-blue-900 dark:bg-blue-900/40 dark:text-blue-400",
-        warning:
-          "bg-orange-100/60 text-orange-900 dark:bg-orange-900/20 dark:text-orange-400",
-        error:
-          "bg-red-100/60 text-red-900 dark:bg-red-900/20 dark:text-red-400",
+        default: "bg-muted text-muted-foreground",
+        success: "bg-blue-900/40 text-blue-400",
+        warning: "bg-orange-900/20 text-orange-400",
+        error: "bg-red-900/20 text-red-400",
       },
     },
     defaultVariants: {
