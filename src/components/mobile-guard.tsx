@@ -5,7 +5,7 @@ import { MobileUnsupported } from "@/components/mobile-unsupported";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function MobileGuard({ children }: PropsWithChildren) {
-  const isMobile = useMediaQuery("(max-width: 1023px)");
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   if (isMobile) return <MobileUnsupported />;
   return <>{children}</>;

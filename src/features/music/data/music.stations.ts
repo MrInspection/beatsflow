@@ -2,11 +2,11 @@ import type { MusicStation } from "@/features/music/types/music.type";
 
 export const MUSIC_STATIONS: MusicStation[] = [
   {
-    id: "lofi-hiphop",
-    title: "Lofi Hip Hop",
+    id: "abao-tokyo",
+    title: "Abao in Tokyo",
     category: "focus",
-    youtubeId: "jfKfPfyJRdk",
-    thumbnailUrl: "https://i.ytimg.com/vi/jfKfPfyJRdk/mqdefault.jpg",
+    youtubeId: "lo8WTG9Kie0",
+    thumbnailUrl: "https://i.ytimg.com/vi/lo8WTG9Kie0/mqdefault.jpg",
   },
   {
     id: "brown-noise",
@@ -14,13 +14,6 @@ export const MUSIC_STATIONS: MusicStation[] = [
     category: "focus",
     youtubeId: "RqzGzwTY-6w",
     thumbnailUrl: "https://i.ytimg.com/vi/RqzGzwTY-6w/mqdefault.jpg",
-  },
-  {
-    id: "jazz-vibes",
-    title: "Jazz Vibes",
-    category: "chill",
-    youtubeId: "HuFYqnbVbzY",
-    thumbnailUrl: "https://i.ytimg.com/vi/HuFYqnbVbzY/mqdefault.jpg",
   },
   {
     id: "lofi-jazz",
