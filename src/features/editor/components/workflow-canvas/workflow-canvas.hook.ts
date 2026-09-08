@@ -43,7 +43,7 @@ export function useWorkflowCanvasHandlers() {
     setSelectedNodeId(node.id);
   }
 
-  function handleNodeDragStop(_: React.MouseEvent, node: Node) {
+  function handleNodeDragStop(_: MouseEvent | TouchEvent, node: Node) {
     updateNodePosition(node.id, node.position);
   }
 
