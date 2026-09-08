@@ -41,9 +41,9 @@ export function EditorHeader() {
     <header>
       <div className="mx-auto flex h-16 items-center justify-between gap-4 px-4 md:px-8">
         <div className="inline-flex min-w-0 items-center gap-2">
-          <div className="hidden font-medium sm:block">BeatsFlōw.</div>
+          <div className="hidden font-medium sm:block">BeatsFlōw Editor.</div>
           <div className="font-medium sm:hidden">BF.</div>
-          <Slash className="size-6 shrink-0 -rotate-30 text-muted-foreground/50" />
+          <Slash className="size-4 shrink-0 -rotate-30 text-muted-foreground/50" />
           <Input
             className="h-8 w-32 sm:w-44 md:min-w-52"
             placeholder="Untitled Workflow"
@@ -53,7 +53,7 @@ export function EditorHeader() {
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <Select items={allPresetItems} onValueChange={handleLoadPreset}>
-            <SelectTrigger className="w-36 md:w-52">
+            <SelectTrigger className="w-36 max-lg:hidden md:w-52">
               <SelectValue placeholder="Load a preset" />
             </SelectTrigger>
             <SelectContent>
@@ -81,7 +81,7 @@ export function EditorHeader() {
             variant="secondary"
             onClick={handleShare}
             size="sm"
-            className="md:h-9"
+            className="max-lg:hidden md:h-9"
           >
             <Share className="size-4" />
             <span className="hidden sm:inline">Share</span>
